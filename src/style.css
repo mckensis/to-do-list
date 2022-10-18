@@ -1,0 +1,104 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-radius: 3rem;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+main.mainPage {
+
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+
+    place-content: center;
+
+    width: 80vw;
+    height: 80vh;
+
+    border: 1px solid red;
+    background-color: grey;
+    
+    padding: 2rem;
+}
+
+main h1 {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    text-align: center;
+    border: 1px solid purple;
+
+    padding: 2rem;
+
+
+    width: 100%;
+    height: 100%;
+}
+
+aside {
+    
+    display: grid;
+    grid-auto-rows: max-content 1fr;
+    place-items: center;
+
+    grid-row: 2;
+    border: 1px solid yellow;
+}
+
+aside h2 {
+    border: 1px solid orange;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+aside ul {
+    list-style: none;
+    align-self: start;
+
+    width: 100%;
+
+}
+
+aside ul li {
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+
+    border: 1px solid silver;
+    display: grid;
+    justify-content: center;
+}
+
+aside ul li:hover {
+    background-color: red;
+}
+
+aside ul .active {
+    background-color: orange;
+}
+
+section {
+    width: 100%;
+    height: 100%;
+    border: 1px solid blue;
+    overflow-y: scroll;
+}
+
+.activeListDisplay {
+    list-style: none;
+    padding: 2rem;
+    display: grid;
+    grid-template-rows: repeat(5, max-content);
+}
+
+.activeListDisplay li {
+    margin-bottom: 1rem;
+}

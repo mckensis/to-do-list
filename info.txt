@@ -1,0 +1,44 @@
+list (category):
+    type: array
+        properties: name of list, to-do/tasks belonging to list
+    categories:
+        custom, default, work? shopping? holiday? overdue?
+    default list:
+        displays all categories/to-dos, displays by default when site is opened
+
+each individual todo:
+    type: object, factory, constructor, class
+    properties: title, description, due date (rag rated?), priority, category, (notes, checklist?)
+
+logic:
+    modules for:
+        create new to-do
+        set to-do as complete
+        change to-do priority
+        dom stuff
+
+interface: 
+    view the different categories of to-dos and select one / default/all is selected initially
+    view the to-do's from all lists (due date (rag rated?), title)
+    expand a to-do to see / edit the details
+    delete a to-do
+
+inspo:
+    Todoist
+    Things
+    any.do
+
+webpack:
+    date-fns (can format & manipulate dates/times)
+
+web storage API:
+    
+    localstorage docs
+    data is sent/received in json format
+    can't store functions in json
+    (Keep in mind you cannot store functions in JSON, so you’ll have to figure out how to add methods back to your object properties once you fetch them. Good luck!)
+    
+    functions:
+        to save projects/to-dos to localstorage every time one is created
+        check for localstorage data when app is first loaded
+        if localstorage doesn't exist - create it
