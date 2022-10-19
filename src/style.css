@@ -1,8 +1,13 @@
+:root {
+    --main-bg-color: lightgrey;
+    --main-border-color: #048A81;
+    --main-box-shadow: 0.5rem 0.5rem 10px rgba(0,0,0,0.7);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    border-radius: 3rem;
 }
 
 body {
@@ -11,94 +16,152 @@ body {
     align-items: center;
     width: 100vw;
     height: 100vh;
+    background: url('./bg-1.jpg');
 }
 
 main.mainPage {
 
     display: grid;
     grid-template-rows: max-content 1fr;
-    grid-template-columns: 200px 1fr;
-    gap: 2rem;
+    grid-template-columns: 300px 1fr;
+    column-gap: 1.5rem;
+    row-gap: 2rem;
 
     place-content: center;
 
     width: 80vw;
-    height: 80vh;
-
-    border: 1px solid red;
-    background-color: grey;
-    
-    padding: 2rem;
+    height: 90vh;
 }
 
-main h1 {
+main.mainPage h1 {
     grid-row: 1;
     grid-column: 1 / -1;
+    font-size: 2.5rem;
     text-align: center;
-    border: 1px solid purple;
-
-    padding: 2rem;
-
-
     width: 100%;
     height: 100%;
+
+    border: 0.5rem solid var(--main-border-color);
+    background-color: var(--main-bg-color);
+    box-shadow: var(--main-box-shadow);
+    padding: 2rem;
+    border-radius: 3rem;
 }
 
-aside {
+/* Aside / Sidebar styles */
+aside.sidebar {
     
+    border: 0.5rem solid var(--main-border-color);
+    background-color: var(--main-bg-color);
+    box-shadow: var(--main-box-shadow);
+    padding: 0rem 2rem 2rem 2rem;
+    border-radius: 3rem;
+
     display: grid;
-    grid-auto-rows: max-content 1fr;
-    place-items: center;
+    grid-auto-rows: max-content max-content 1fr;
 
     grid-row: 2;
-    border: 1px solid yellow;
 }
 
-aside h2 {
-    border: 1px solid orange;
-    padding: 1rem;
-    margin-bottom: 1rem;
+aside.sidebar .containerDiv {
+    max-height: 520px;
+    overflow-y: scroll;
+    align-self: start;
 }
 
-aside ul {
+aside.sidebar h2 {
+    font-size: 2rem;
+    position: sticky;
+    background-color: var(--main-bg-color);
+    text-align: center;
+    justify-self:stretch;
+    top: 0;
+    padding-top: 1rem;
+    border-radius: 0;
+    padding-bottom: 1rem;
+    border: 2px solid var(--main-bg-color);
+}
+
+aside.sidebar ul {
     list-style: none;
     align-self: start;
-
     width: 100%;
-
 }
 
-aside ul li {
+aside.sidebar ul li {
     padding: 1rem;
     margin-bottom: 0.5rem;
 
-    border: 1px solid silver;
+    border: 1px solid var(--main-border-color);
+    font-size: 1.5rem;
     display: grid;
     justify-content: center;
 }
 
-aside ul li:hover {
+aside.sidebar ul li:hover {
     background-color: red;
 }
 
-aside ul .active {
+aside.sidebar ul li.active {
     background-color: orange;
 }
 
-section {
+aside button.addListButton {
     width: 100%;
-    height: 100%;
-    border: 1px solid blue;
-    overflow-y: scroll;
-}
-
-.activeListDisplay {
-    list-style: none;
-    padding: 2rem;
-    display: grid;
-    grid-template-rows: repeat(5, max-content);
-}
-
-.activeListDisplay li {
+    padding: 0.1rem;
+    font-size: 1.6rem;
+    border: none;
+    background-color: transparent;
     margin-bottom: 1rem;
+}
+
+aside button.addListButton:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+
+/* Main display section styles (active list section) */
+section.displaySection {
+    border: 0.5rem solid var(--main-border-color);
+    background-color: var(--main-bg-color);
+    box-shadow: var(--main-box-shadow);
+    padding: 2rem;
+    border-radius: 3rem;
+}
+
+section.displaySection .containerDiv {
+    overflow-y: scroll;
+    max-height: 600px;
+}
+
+section.displaySection ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 5rem;
+    grid-auto-rows: 5rem;
+}
+
+section.displaySection ul li {
+    display: grid;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 3px solid black;
+}
+
+section.displaySection ul li:last-child {
+    border-bottom: none;
+}
+
+.containerDiv::-webkit-scrollbar {
+    background: transparent;
+    width: 1rem;
+}
+.containerDiv::-webkit-scrollbar-thumb {
+    border-left: 0.5rem solid transparent;
+    border-bottom: 0.5rem solid transparent;
+    background-color: var(--main-border-color);
+    background-clip: padding-box;
+}
+.containerDiv::-webkit-scrollbar-thumb:hover {
+    background-color: orange;
 }
