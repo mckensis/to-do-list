@@ -1,15 +1,58 @@
-:root {
-    --main-bg-color: lightgrey;
-    --main-border-color: #048A81;
-    --main-box-shadow: 0.5rem 0.5rem 10px rgba(0,0,0,0.7);
+@font-face {
+    font-family: "Headings";
+    src: url('./fonts/font.woff2') format("woff2"),
+         url('./fonts/font.woff') format("woff");
+}
+@font-face {
+    font-family: "Sarabun";
+    src: url('./fonts/Sarabun/Sarabun-Bold.woff2') format('woff2'),
+         url('./fonts/Sarabun/Sarabun-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Sarabun";
+    src: url('./fonts/Sarabun/Sarabun-Regular.woff2') format('woff2'),
+         url('./fonts/Sarabun/Sarabun-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Sarabun";
+    src: url('./fonts/Sarabun/Sarabun-Italic.woff2') format('woff2'),
+         url('./fonts/Sarabun//Sarabun-Italic.woff') format('woff');
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Sarabun";
+    src: url('./fonts/Sarabun/Sarabun-ExtraLight.woff2') format('woff2'),
+         url('./fonts/Sarabun/Sarabun-ExtraLight.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Sarabun";
+    src: url('./fonts/Sarabun/Sarabun-Thin.woff2') format('woff2'),
+         url('./fonts/Sarabun/Sarabun-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
 }
 
+:root {
+    --main-bg-color: #F7F9F9; /* Cultured */
+    --main-border-color: #048A81; /* Celadon green */
+    --main-box-shadow: 0.75rem 0.75rem 1rem var(--box-shadow-color); /* Bistre */
+    --main-scroll-color: #8783D1;
+
+    --active-color: rgb(4, 138, 129, 0.6);
+    --box-shadow-color: rgb(51, 38, 29, 0.9);
+}
 * {
-    box-sizing: border-box;
+
     margin: 0;
     padding: 0;
 }
-
 body {
     display: flex;
     justify-content: center;
@@ -17,151 +60,155 @@ body {
     width: 100vw;
     height: 100vh;
     background: url('./bg-1.jpg');
+    font-family: "Sarabun";
 }
-
-main.mainPage {
-
+main {
     display: grid;
     grid-template-rows: max-content 1fr;
     grid-template-columns: 300px 1fr;
     column-gap: 1.5rem;
     row-gap: 2rem;
-
-    place-content: center;
-
-    width: 80vw;
-    height: 90vh;
 }
 
-main.mainPage h1 {
+header.headerSection {
+    display: grid;
+    grid-template-columns: 1fr;
     grid-row: 1;
     grid-column: 1 / -1;
-    font-size: 2.5rem;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-
+    padding-top: 1.5rem;
+    background-color: var(--main-bg-color);
     border: 0.5rem solid var(--main-border-color);
-    background-color: var(--main-bg-color);
-    box-shadow: var(--main-box-shadow);
-    padding: 2rem;
     border-radius: 3rem;
-}
-
-/* Aside / Sidebar styles */
-aside.sidebar {
-    
-    border: 0.5rem solid var(--main-border-color);
-    background-color: var(--main-bg-color);
     box-shadow: var(--main-box-shadow);
-    padding: 0rem 2rem 2rem 2rem;
-    border-radius: 3rem;
-
-    display: grid;
-    grid-auto-rows: max-content max-content 1fr;
-
-    grid-row: 2;
+}
+header.headerSection h1 {
+    place-self: center;
+    font-family: "Headings";
+    font-size: 5rem;
+    font-weight: 500;
+    letter-spacing: 0.75rem;
 }
 
-aside.sidebar .containerDiv {
-    max-height: 520px;
-    overflow-y: scroll;
-    align-self: start;
-}
-
-aside.sidebar h2 {
-    font-size: 2rem;
-    position: sticky;
-    background-color: var(--main-bg-color);
-    text-align: center;
-    justify-self:stretch;
-    top: 0;
-    padding-top: 1rem;
-    border-radius: 0;
-    padding-bottom: 1rem;
-    border: 2px solid var(--main-bg-color);
-}
-
-aside.sidebar ul {
-    list-style: none;
-    align-self: start;
-    width: 100%;
-}
-
-aside.sidebar ul li {
-    padding: 1rem;
-    margin-bottom: 0.5rem;
-
-    border: 1px solid var(--main-border-color);
-    font-size: 1.5rem;
-    display: grid;
-    justify-content: center;
-}
-
-aside.sidebar ul li:hover {
-    background-color: red;
-}
-
-aside.sidebar ul li.active {
-    background-color: orange;
-}
-
-aside button.addListButton {
-    width: 100%;
-    padding: 0.1rem;
-    font-size: 1.6rem;
-    border: none;
-    background-color: transparent;
-    margin-bottom: 1rem;
-}
-
-aside button.addListButton:hover {
-    background-color: rgba(0,0,0,0.1);
-}
-
-/* Main display section styles (active list section) */
+/* Aside / Main section styles */
+aside.sidebar,
 section.displaySection {
     border: 0.5rem solid var(--main-border-color);
     background-color: var(--main-bg-color);
     box-shadow: var(--main-box-shadow);
-    padding: 2rem;
+    padding-bottom: 2rem;
+    padding-top: 1.5rem;
     border-radius: 3rem;
+    display: grid;
+    grid-auto-rows: max-content max-content 1fr;
+}
+section.displaySection {
+    width: 60rem;
 }
 
-section.displaySection .containerDiv {
-    overflow-y: scroll;
-    max-height: 600px;
+aside.sidebar h2,
+section.displaySection h2 {
+    font-family: "Headings";
+    font-size: 4rem;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+    text-align: center;
 }
 
+aside.sidebar ul,
 section.displaySection ul {
     list-style: none;
     display: grid;
-    grid-template-columns: 1fr;
+    padding-left: 1rem;
     grid-template-rows: 5rem;
     grid-auto-rows: 5rem;
+
 }
 
+aside.sidebar ul li,
 section.displaySection ul li {
     display: grid;
     align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+aside.sidebar ul li {
+    justify-content: center;
+    font-size: 1.3rem;
+    border: 1px solid var(--main-border-color);
+    border-radius: 3rem;
+}
+
+section.displaySection ul li {
+    border-bottom: 1px solid black;
+}
+
+/* Styles for highlighting and selecting a to-do list from the sidebar */
+aside.sidebar ul li:hover {
+    background-color: var(--main-border-color);
+    color: var(--main-bg-color);
+    cursor: pointer;
+}
+aside.sidebar ul li.active {
+    background-color: var(--main-scroll-color);
+    color: var(--main-bg-color);
+}
+
+/* Container for the lists which need to scroll when they overflow */
+.containerDiv {
+    overflow-y: scroll;
+    align-self: start;
+    height: 450px;
+}
+
+.displaySection .containerDiv {
+    padding: 0;
+    margin: 0;
+}
+
+/* Button styles for adding task / list */
+button.addTaskButton,
+button.addListButton {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 0.5rem;
+    width: 80%;
+
+    place-self: center;
+    place-items: center;
+    place-content: center;
+
+    font-family: "Sarabun";
+    font-size: 2rem;
+    font-weight: 700;
+    
+    background-color: transparent;
+    border: none;
+    border-radius: 2rem;
     margin-bottom: 1rem;
-    border-bottom: 3px solid black;
+    padding-bottom: 0.5rem;
+}
+button.addTaskButton:hover,
+button.addListButton:hover {
+    background-color: rgba(0,0,0,0.1);
 }
 
-section.displaySection ul li:last-child {
-    border-bottom: none;
-}
-
+/* Scrollbar custom styles */
 .containerDiv::-webkit-scrollbar {
     background: transparent;
-    width: 1rem;
+    width: 1.25rem;
 }
+
 .containerDiv::-webkit-scrollbar-thumb {
-    border-left: 0.5rem solid transparent;
     border-bottom: 0.5rem solid transparent;
+    border-left: 0.5rem solid transparent;
     background-color: var(--main-border-color);
     background-clip: padding-box;
 }
+
 .containerDiv::-webkit-scrollbar-thumb:hover {
-    background-color: orange;
+    background-color: var(--active-color);
+}
+
+.containerDiv::-webkit-scrollbar-thumb:active {
+    background-color: var(--main-scroll-color);
 }
