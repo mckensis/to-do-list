@@ -49,7 +49,7 @@
     --box-shadow-color: rgb(51, 38, 29, 0.9);
 }
 * {
-
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -70,7 +70,7 @@ main {
     row-gap: 2rem;
 }
 
-header.headerSection {
+header {
     display: grid;
     grid-template-columns: 1fr;
     grid-row: 1;
@@ -81,7 +81,7 @@ header.headerSection {
     border-radius: 3rem;
     box-shadow: var(--main-box-shadow);
 }
-header.headerSection h1 {
+header h1 {
     place-self: center;
     font-family: "Headings";
     font-size: 5rem;
@@ -90,23 +90,22 @@ header.headerSection h1 {
 }
 
 /* Aside / Main section styles */
-aside.sidebar,
-section.displaySection {
+aside.listSection,
+section.taskSection {
     border: 0.5rem solid var(--main-border-color);
     background-color: var(--main-bg-color);
     box-shadow: var(--main-box-shadow);
-    padding-bottom: 2rem;
     padding-top: 1.5rem;
     border-radius: 3rem;
     display: grid;
-    grid-auto-rows: max-content max-content 1fr;
+    grid-template-rows: max-content max-content min-content;
+    grid-auto-rows: min-content;
 }
-section.displaySection {
+section.taskSection {
     width: 60rem;
 }
 
-aside.sidebar h2,
-section.displaySection h2 {
+h2 {
     font-family: "Headings";
     font-size: 4rem;
     font-weight: 500;
@@ -114,60 +113,118 @@ section.displaySection h2 {
     text-align: center;
 }
 
-aside.sidebar ul,
-section.displaySection ul {
+aside.listSection ul.sidebarList,
+section.taskSection ul.activeTaskList {
     list-style: none;
     display: grid;
-    padding-left: 1rem;
+    padding: 0rem 3rem;
     grid-template-rows: 5rem;
     grid-auto-rows: 5rem;
-
+    margin-left: 1.25rem;
 }
 
-aside.sidebar ul li,
-section.displaySection ul li {
+aside.listSection ul li,
+section.taskSection ul li {
     display: grid;
     align-items: center;
     margin-bottom: 0.5rem;
 }
 
-aside.sidebar ul li {
+aside.listSection ul li {
     justify-content: center;
     font-size: 1.3rem;
     border: 1px solid var(--main-border-color);
     border-radius: 3rem;
 }
 
-section.displaySection ul li {
+section.taskSection ul li {
     border-bottom: 1px solid black;
 }
 
 /* Styles for highlighting and selecting a to-do list from the sidebar */
-aside.sidebar ul li:hover {
+aside.listSection ul li.active {
     background-color: var(--main-border-color);
     color: var(--main-bg-color);
-    cursor: pointer;
+    font-weight: bold;
 }
-aside.sidebar ul li.active {
+
+aside.listSection ul li:hover {
     background-color: var(--main-scroll-color);
     color: var(--main-bg-color);
+    cursor: pointer;
+
 }
 
 /* Container for the lists which need to scroll when they overflow */
-.containerDiv {
+.listContainer,
+.taskContainer {
     overflow-y: scroll;
     align-self: start;
     height: 450px;
 }
 
-.displaySection .containerDiv {
-    padding: 0;
-    margin: 0;
+.addListForm {
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2, min-content);
+    margin-bottom: 1rem;
+    padding: 0rem 2rem;
+    gap: 0.5rem;
+}
+
+.newTaskForm {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    grid-template-rows: repeat(3, min-content);
+    padding: 0 2rem;
+    gap: 0.5rem;
+}
+
+.addListLabel,
+.addTaskLabel {
+    font-size: 0.9rem;
+    font-style: italic;
+    position: absolute;
+    padding: inherit;
+    margin-left: 0.5rem;
+    margin-top: 0.2rem;
+}
+
+input.addListInput {
+    grid-column: 1 / -1;
+}
+
+input.addListInput,
+input.addTaskInput {
+    font-size: 1.5rem;
+    width: 100%;
+    text-align: center;
+    padding: 1.5rem 0rem 0.5rem 0rem;
+}
+
+form button,
+form button {    
+    font-size: 1.5rem;
+    padding: 0 1rem;
+    display: grid;
+    place-content: center;
+    place-items: center;
+    border: none;
+    cursor: pointer;
+    background-color: var(--main-border-color);
+    color: var(--main-bg-color);
+}
+
+form button.addListCancel,
+form button.addTaskCancel {
+    background-color: red;
+    color: var(--main-bg-color);
 }
 
 /* Button styles for adding task / list */
-button.addTaskButton,
-button.addListButton {
+.addTaskButton,
+.addListButton {
     display: grid;
     grid-auto-flow: column;
     gap: 0.5rem;
@@ -181,34 +238,39 @@ button.addListButton {
     font-size: 2rem;
     font-weight: 700;
     
+    cursor: pointer;
     background-color: transparent;
     border: none;
     border-radius: 2rem;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
 }
-button.addTaskButton:hover,
-button.addListButton:hover {
+.addTaskButton:hover,
+.addListButton:hover {
     background-color: rgba(0,0,0,0.1);
 }
 
+*.hidden {
+    display: none;
+}
+
 /* Scrollbar custom styles */
-.containerDiv::-webkit-scrollbar {
+::-webkit-scrollbar {
     background: transparent;
     width: 1.25rem;
 }
 
-.containerDiv::-webkit-scrollbar-thumb {
-    border-bottom: 0.5rem solid transparent;
+::-webkit-scrollbar-thumb {
+    border-bottom: 2rem solid transparent;
     border-left: 0.5rem solid transparent;
     background-color: var(--main-border-color);
     background-clip: padding-box;
 }
 
-.containerDiv::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background-color: var(--active-color);
 }
 
-.containerDiv::-webkit-scrollbar-thumb:active {
+::-webkit-scrollbar-thumb:active {
     background-color: var(--main-scroll-color);
 }
