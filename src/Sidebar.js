@@ -1,5 +1,3 @@
-import AddNewList from './AddNewList.js';
-
 function Form() {
     const newListForm = document.createElement("form");
 
@@ -23,7 +21,7 @@ function Form() {
 
     submitButton.textContent = "✓";
     cancelButton.textContent = "❌";
-    label.textContent = "List Name";
+    label.textContent = "New List Name";
     
     newListForm.appendChild(label);
     newListForm.appendChild(inputField);
@@ -38,7 +36,7 @@ function Form() {
 //Where all current lists will be displayed and can be interacted with.
 //There is also a button that can create a new list
 function Sidebar() {
-    console.log("building sidebar...")
+    //console.log("building sidebar...")
 
     const container = document.createElement('aside');
     const header = document.createElement('h2');
@@ -52,8 +50,9 @@ function Sidebar() {
     header.textContent = "lists";
     button.textContent = "+";
 
-    button.addEventListener("click", AddNewList);
-
+    //moved to index.js to test for passing lists
+    //button.addEventListener("click", AddNewList);
+    
     container.appendChild(header);
     container.appendChild(Form());
     container.appendChild(button);

@@ -22,12 +22,16 @@ function CreateSidebarList(lists) {
         sidebarList.appendChild(listItem);
 
         listItem.addEventListener("click", (e) => {
-            (console.log("createsidebarlist.js - clicked list item: " + listItem.textContent));
+
+            console.log("CreateSidebarList.js - clicked list item: " + listItem.textContent);
+
             RemoveActiveClass(lists);
             RemoveActiveProperty(lists);
             AddActiveClass(listItem);
-
+            
             const activeList = AddActiveProperty(e, lists);
+
+            console.log("activeList is: ", activeList);
             const taskContainer = document.querySelector(".taskContainer");
 
             taskContainer.appendChild(CreateTaskList(activeList));

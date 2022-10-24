@@ -1,61 +1,68 @@
-import { Hide, Show } from './Helpers.js';
+import { Hide, Show, SetHeight, SetListInputAttributes } from './Helpers.js';
+import { CheckForBlankInput, TestForValidInput } from './Validate.js';
 import List from './List.js';
+import PopulateListSidebar from './PopulateListSidebar.js';
 
-function testInput(e) {
-    if ((e.keyCode > 64 && e.keyCode < 91) || (e.keyCode > 96 && e.keyCode < 123)) {
-        return true;
-    }
-    return false;
-}
-
-function AddNewList() {
-    console.log("clicked add new list...");
+function AddNewList(lists) {
+    //console.log("AddNewList.js - clicked add new list...");
     const button = document.querySelector(".addListButton");
     const form = document.querySelector(".addListForm");
     const input = document.querySelector(".addListInput");
     const submit = document.querySelector(".addListConfirm");
     const cancel = document.querySelector(".addListCancel");
+
     const listSection = document.querySelector(".listSection");
-    const listSectionHeight = listSection.offsetHeight;
+    const height = listSection.offsetHeight;
     
+    SetListInputAttributes(input);
+
     Hide(button);
     Show(form);
- 
-    listSection.setAttribute("style",`height:${listSectionHeight}px`);
+
+    SetHeight(listSection, height);
 
     submit.addEventListener("click", (e) => {
+        //console.log("AddNewList.js - clicked submit button!");
         e.preventDefault();
-        testInput(e);
+        e.stopImmediatePropagation();
 
-        Add();
+        if (!CheckForBlankInput(input)) {
+            return;
+        }
+
+        if (!TestForValidInput(input)) {
+            return;
+        };
         
+        Add(lists);
+    
         Hide(form);
         Show(button);
-
     });
+
     cancel.addEventListener("click", (e) => {
         e.preventDefault();
         Hide(form);
         Show(button);
     });
+
     input.focus();
     //focus the field
+
 }
 
-function Add() {
+function Add(lists) {
+
 
     const name = document.querySelector("#list_name");
-
-    if (!name.value) {
-        const inputField = document.querySelector(".addNewList");
-        inputField.focus();
-        return;
-    }
-
-    console.log("new list name: " + name.value);
     const list = new List(name.value);
-    console.log(list);
-
+    
+    lists.push(list);
+    
+    PopulateListSidebar(lists);
+    
+    //console.log("Add function, lists after PopulateListSidebar: ", lists);
+    return lists;
     //need to get this list into "lists" array and then repopulate the list display aside
 }
 

@@ -2,7 +2,7 @@
 //Where the active list will be displayed and can be interacted with.
 //There is also a button that can create a new task.
 function Section() {
-    console.log("building active list section...");
+    //console.log("building active list section...");
 
     const container = document.createElement('section');
     const header = document.createElement('h2');

@@ -24,7 +24,10 @@ function Show(element) {
 //Clears the tasks from the bottom right container in preparation to display the correct tasks
 function EmptySection(container) {
 
+    //console.log("container is: ", container);
+
     while (container.childNodes.length > 0) {
+        //console.log("removing... ", container.lastChild);
         container.removeChild(container.lastChild);
     }
     return container;
@@ -89,4 +92,15 @@ function AddActiveProperty(e, lists) {
     }
 }
 
-export { SetActiveList, ReturnActiveList, RemoveForms, RemoveActiveClass, RemoveActiveProperty, AddActiveClass, AddActiveProperty, EmptySection, Hide, Show };
+function SetHeight(section, height) {
+    section.setAttribute("style",`height:${height}px`);
+}
+
+function SetListInputAttributes(input) {
+    input.value = '';
+    input.maxLength = "15";
+    input.pattern = "[a-zA-Z0-9_]";
+}
+
+export { SetActiveList, ReturnActiveList, RemoveForms, RemoveActiveClass, RemoveActiveProperty,
+         AddActiveClass, AddActiveProperty, EmptySection, Hide, Show, SetHeight, SetListInputAttributes };

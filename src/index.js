@@ -1,49 +1,33 @@
 import './style.css';
 import CreateDOM from './createDOM.js';
-import { ReturnActiveList } from './Helpers.js';
-import CreateSidebarList from './CreateSidebarList.js';
-import CreateTaskList from './CreateTaskList';
 import createDefaultLists from './createDefaultLists.js';
+import AddNewList from './AddNewList.js';
+import PopulateListSidebar from './PopulateListSidebar.js';
+import PopulateTaskSection from './PopulateTaskSection.js';
 
 //import { format, formatDistance, formatRelative, subDays } from 'date-fns';
 //import data from './data.json';
-
 window.addEventListener("load", buildMainPage);
 
 function buildMainPage() {
-    
     //The 'lists' variable is an array which holds all lists containing tasks
-    const lists = createDefaultLists();
+    let lists = createDefaultLists();
+    
+    //console.log(lists);
 
     //Create and populate the DOM with the lists
     CreateDOM();
     PopulateListSidebar(lists);
     
-    //Get the active list and populate the task section with the active list's tasks
-    const activeList = ReturnActiveList(lists);
-    PopulateTaskSection(activeList);
+    PopulateTaskSection(lists);
     
-    //Testing
-    console.log("index.js lists: ");
-    console.table(lists); 
-    console.log("index.js activeList is: " + activeList.title);
-}
-
-function PopulateListSidebar(lists) {
-    const listContainer = document.querySelector('.listContainer');
-
-    listContainer.appendChild(CreateSidebarList(lists));
+    //console.table(lists); 
     
-    return listContainer;
-}
-
-function PopulateTaskSection(list) {
-    
-    const taskContainer = document.querySelector('.taskContainer');
-
-    taskContainer.appendChild(CreateTaskList(list));
-
-    return taskContainer;
+    //moved here from sidebar.js to test with passing lists
+    const button = document.querySelector('.addListButton');
+    button.addEventListener("click", () => {
+        AddNewList(lists);
+    });
 }
 
 //add click event for clicking on a list title

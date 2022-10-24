@@ -89,21 +89,165 @@ header h1 {
     letter-spacing: 0.75rem;
 }
 
-/* Aside / Main section styles */
-aside.listSection,
-section.taskSection {
-    border: 0.5rem solid var(--main-border-color);
-    background-color: var(--main-bg-color);
-    box-shadow: var(--main-box-shadow);
-    padding-top: 1.5rem;
-    border-radius: 3rem;
-    display: grid;
-    grid-template-rows: max-content max-content min-content;
-    grid-auto-rows: min-content;
-}
-section.taskSection {
-    width: 60rem;
-}
+                        /* Aside / Main section styles */
+                        .listSection,
+                        .taskSection {
+                            border: 0.5rem solid var(--main-border-color);
+                            background-color: var(--main-bg-color);
+                            box-shadow: var(--main-box-shadow);
+                            padding-top: 1.5rem;
+                            border-radius: 3rem;
+                            display: grid;
+                            grid-template-rows: max-content max-content min-content;
+                            grid-auto-rows: min-content;
+                            padding-bottom: 1.5rem;
+                        }
+
+                        section.taskSection {
+                            width: 60rem;
+                        }
+
+                        .taskItem {
+                            display: grid;
+                            grid-auto-flow: row;
+                            grid-template-columns: 1fr repeat(2, max-content);
+                            margin-bottom: 0.5rem;
+                            border: 1px solid black;
+                            border-radius: 1rem;
+                            gap: 0.5rem;
+                            padding: 1rem;
+                            background-color: #8783D1;
+                            place-self: stretch;
+                            justify-self: stretch;
+                            place-content: center;
+                            cursor: pointer;
+                        }
+
+                        .visibleDetails {
+                            display: grid;
+                            grid-auto-flow: row;
+                            grid-template-columns: 1fr repeat(2, max-content);
+                            grid-template-rows: repeat(2, 3rem);
+                            margin-bottom: 0.5rem;
+                            border: 1px solid black;
+                            border-radius: 1rem;
+                            gap: 0.5rem;
+                            background-color: #8783D1;
+                            place-self: stretch;
+                            justify-self: stretch;
+                            place-content: center;
+                            cursor: pointer;
+                            padding-left: 1rem;
+                            padding-right: 1rem; 
+                        }
+
+                        .visibleDetails .taskName {
+                            grid-column: 1 / -1;
+                            grid-row: 1;
+                            font-weight: bold;
+                            font-size: 1.5rem;
+                        }
+                        
+                        .taskName {
+                            display: grid;
+                            place-self: stretch;
+                            justify-self: stretch;
+                            place-content: center;
+                            font-size: 1.2rem;
+
+                            grid-row: 1 / -1;
+                            grid-column: 1 / -1;
+                            border-radius: 1rem;
+                        }
+
+                        .taskDescription,
+                        .taskDue {
+                            place-self: center;
+                            grid-row: 2;
+                        }
+
+                        .taskPriority {
+                            border-radius: 50%;
+                            grid-row: 1 / -1;
+                            place-self: center;
+                            padding: 0.5rem;
+                            border: 1px solid black;
+                        }
+
+                        .taskPriority.low {
+                            background-color: #3E885B;
+                        }
+
+                        .taskPriority.medium {
+                            background-color: #F19143;
+                            /*
+                            test these colours out:
+
+                            #F19143;
+                            FFB238
+                            FF773D
+                            F46036
+                            E57A44
+                            FF3F00
+                            FF7F11
+                            FE621D
+                            FD5200
+                            FC9E4F
+                            FE5F00
+                            FFB100
+                            EAC435
+                            FFC482
+                            FADF7F
+
+                            */
+                        }
+
+                        .taskPriority.high {
+                            background-color: red;
+
+                            /*
+                            test these colours out:
+
+                            F55536
+                            D7263D
+                            FE654F
+                            FB4D3D
+
+
+                            */
+                        }
+                        
+                        .icon {
+                            grid-row: 1 / -1;
+                        }
+
+                        .taskDescription {
+                            justify-self: left;
+                        }
+
+                        .taskItem:hover:not(.visibleDetails:hover) {
+                            background-color: rgb(135, 131, 209, 0.8);
+                            border-radius: 1.5rem;
+                            font-weight: bold;
+                        }
+
+                        
+                        .taskItem.visibleDetails:hover {
+                            background-color: rgb(135, 131, 209, 0.9);
+                        }
+                        
+                        ul.activeTaskList {
+                            margin-left: 1rem;
+                            grid-auto-rows: max-content;
+                        }
+
+                        .newTaskForm {
+                            display: grid;
+                            grid-template-columns: 1fr 200px;
+                            grid-template-rows: repeat(3, min-content);
+                            padding: 0 2rem;
+                            gap: 0.5rem;
+                        }
 
 h2 {
     font-family: "Headings";
@@ -113,18 +257,21 @@ h2 {
     text-align: center;
 }
 
-aside.listSection ul.sidebarList,
-section.taskSection ul.activeTaskList {
+.sidebarList,
+.activeTaskList {
     list-style: none;
     display: grid;
     padding: 0rem 3rem;
-    grid-template-rows: 5rem;
-    grid-auto-rows: 5rem;
-    margin-left: 1.25rem;
+    /*grid-auto-rows: 5rem;*/
 }
 
-aside.listSection ul li,
-section.taskSection ul li {
+ul.sidebarList {
+    margin-left: 1.25rem;
+    grid-auto-rows: 5rem;
+}
+
+
+aside.listSection ul li {
     display: grid;
     align-items: center;
     margin-bottom: 0.5rem;
@@ -137,10 +284,6 @@ aside.listSection ul li {
     border-radius: 3rem;
 }
 
-section.taskSection ul li {
-    border-bottom: 1px solid black;
-}
-
 /* Styles for highlighting and selecting a to-do list from the sidebar */
 aside.listSection ul li.active {
     background-color: var(--main-border-color);
@@ -149,10 +292,9 @@ aside.listSection ul li.active {
 }
 
 aside.listSection ul li:hover {
-    background-color: var(--main-scroll-color);
+    background-color: rgb(4, 138, 129, 0.9);
     color: var(--main-bg-color);
     cursor: pointer;
-
 }
 
 /* Container for the lists which need to scroll when they overflow */
@@ -173,14 +315,6 @@ aside.listSection ul li:hover {
     gap: 0.5rem;
 }
 
-.newTaskForm {
-    display: grid;
-    grid-template-columns: 1fr 200px;
-    grid-template-rows: repeat(3, min-content);
-    padding: 0 2rem;
-    gap: 0.5rem;
-}
-
 .addListLabel,
 .addTaskLabel {
     font-size: 0.9rem;
@@ -191,16 +325,20 @@ aside.listSection ul li:hover {
     margin-top: 0.2rem;
 }
 
-input.addListInput {
+.addListInput {
     grid-column: 1 / -1;
 }
 
-input.addListInput,
-input.addTaskInput {
+.addListInput,
+.addTaskInput {
+    appearance: none;
     font-size: 1.5rem;
     width: 100%;
     text-align: center;
     padding: 1.5rem 0rem 0.5rem 0rem;
+    border-radius: 0.5rem;
+    outline: 1px solid var(--main-border-color);
+    background-color: rgb(4, 138, 129, 0.3);
 }
 
 form button,
