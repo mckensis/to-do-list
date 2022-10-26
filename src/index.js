@@ -2,6 +2,7 @@ import './style.css';
 import CreateDOM from './createDOM.js';
 import createDefaultLists from './createDefaultLists.js';
 import AddNewList from './AddNewList.js';
+import AddNewTask from './AddNewTask.js';
 import PopulateListSidebar from './PopulateListSidebar.js';
 import PopulateTaskSection from './PopulateTaskSection.js';
 
@@ -20,7 +21,7 @@ function buildMainPage() {
     PopulateListSidebar(lists);
     
     PopulateTaskSection(lists);
-    
+
     //console.table(lists); 
     
     //moved here from sidebar.js to test with passing lists
@@ -28,6 +29,11 @@ function buildMainPage() {
     button.addEventListener("click", () => {
         AddNewList(lists);
     });
+
+    const addTaskButton = document.querySelector(".addTaskButton");
+    addTaskButton.addEventListener("click", () => {
+        AddNewTask(lists);
+    })
 }
 
 //add click event for clicking on a list title

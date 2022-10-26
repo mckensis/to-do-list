@@ -1,50 +1,48 @@
 @font-face {
     font-family: "Headings";
     src: url('./fonts/font.woff2') format("woff2"),
-         url('./fonts/font.woff') format("woff");
+    url('./fonts/font.woff') format("woff");
 }
 @font-face {
     font-family: "Sarabun";
     src: url('./fonts/Sarabun/Sarabun-Bold.woff2') format('woff2'),
-         url('./fonts/Sarabun/Sarabun-Bold.woff') format('woff');
+    url('./fonts/Sarabun/Sarabun-Bold.woff') format('woff');
     font-weight: 700;
     font-style: normal;
 }
 @font-face {
     font-family: "Sarabun";
     src: url('./fonts/Sarabun/Sarabun-Regular.woff2') format('woff2'),
-         url('./fonts/Sarabun/Sarabun-Regular.woff') format('woff');
+    url('./fonts/Sarabun/Sarabun-Regular.woff') format('woff');
     font-weight: 400;
     font-style: normal;
 }
 @font-face {
     font-family: "Sarabun";
     src: url('./fonts/Sarabun/Sarabun-Italic.woff2') format('woff2'),
-         url('./fonts/Sarabun//Sarabun-Italic.woff') format('woff');
+    url('./fonts/Sarabun//Sarabun-Italic.woff') format('woff');
     font-weight: 400;
     font-style: italic;
 }
 @font-face {
     font-family: "Sarabun";
     src: url('./fonts/Sarabun/Sarabun-ExtraLight.woff2') format('woff2'),
-         url('./fonts/Sarabun/Sarabun-ExtraLight.woff') format('woff');
+    url('./fonts/Sarabun/Sarabun-ExtraLight.woff') format('woff');
     font-weight: 200;
     font-style: normal;
 }
 @font-face {
     font-family: "Sarabun";
     src: url('./fonts/Sarabun/Sarabun-Thin.woff2') format('woff2'),
-         url('./fonts/Sarabun/Sarabun-Thin.woff') format('woff');
+    url('./fonts/Sarabun/Sarabun-Thin.woff') format('woff');
     font-weight: 100;
     font-style: normal;
 }
-
 :root {
     --main-bg-color: #F7F9F9; /* Cultured */
     --main-border-color: #048A81; /* Celadon green */
     --main-box-shadow: 0.75rem 0.75rem 1rem var(--box-shadow-color); /* Bistre */
     --main-scroll-color: #8783D1;
-
     --active-color: rgb(4, 138, 129, 0.6);
     --box-shadow-color: rgb(51, 38, 29, 0.9);
 }
@@ -61,6 +59,7 @@ body {
     height: 100vh;
     background: url('./bg-1.jpg');
     font-family: "Sarabun";
+    overflow: hidden;
 }
 main {
     display: grid;
@@ -69,7 +68,6 @@ main {
     column-gap: 1.5rem;
     row-gap: 2rem;
 }
-
 header {
     display: grid;
     grid-template-columns: 1fr;
@@ -81,220 +79,54 @@ header {
     border-radius: 3rem;
     box-shadow: var(--main-box-shadow);
 }
-header h1 {
-    place-self: center;
-    font-family: "Headings";
-    font-size: 5rem;
-    font-weight: 500;
-    letter-spacing: 0.75rem;
+h1 {
+place-self: center;
+font-family: "Headings";
+font-size: 5rem;
+font-weight: 500;
+letter-spacing: 0.75rem;
 }
-
-                        /* Aside / Main section styles */
-                        .listSection,
-                        .taskSection {
-                            border: 0.5rem solid var(--main-border-color);
-                            background-color: var(--main-bg-color);
-                            box-shadow: var(--main-box-shadow);
-                            padding-top: 1.5rem;
-                            border-radius: 3rem;
-                            display: grid;
-                            grid-template-rows: max-content max-content min-content;
-                            grid-auto-rows: min-content;
-                            padding-bottom: 1.5rem;
-                        }
-
-                        section.taskSection {
-                            width: 60rem;
-                        }
-
-                        .taskItem {
-                            display: grid;
-                            grid-auto-flow: row;
-                            grid-template-columns: 1fr repeat(2, max-content);
-                            margin-bottom: 0.5rem;
-                            border: 1px solid black;
-                            border-radius: 1rem;
-                            gap: 0.5rem;
-                            padding: 1rem;
-                            background-color: #8783D1;
-                            place-self: stretch;
-                            justify-self: stretch;
-                            place-content: center;
-                            cursor: pointer;
-                        }
-
-                        .visibleDetails {
-                            display: grid;
-                            grid-auto-flow: row;
-                            grid-template-columns: 1fr repeat(2, max-content);
-                            grid-template-rows: repeat(2, 3rem);
-                            margin-bottom: 0.5rem;
-                            border: 1px solid black;
-                            border-radius: 1rem;
-                            gap: 0.5rem;
-                            background-color: #8783D1;
-                            place-self: stretch;
-                            justify-self: stretch;
-                            place-content: center;
-                            cursor: pointer;
-                            padding-left: 1rem;
-                            padding-right: 1rem; 
-                        }
-
-                        .visibleDetails .taskName {
-                            grid-column: 1 / -1;
-                            grid-row: 1;
-                            font-weight: bold;
-                            font-size: 1.5rem;
-                        }
-                        
-                        .taskName {
-                            display: grid;
-                            place-self: stretch;
-                            justify-self: stretch;
-                            place-content: center;
-                            font-size: 1.2rem;
-
-                            grid-row: 1 / -1;
-                            grid-column: 1 / -1;
-                            border-radius: 1rem;
-                        }
-
-                        .taskDescription,
-                        .taskDue {
-                            place-self: center;
-                            grid-row: 2;
-                        }
-
-                        .taskPriority {
-                            border-radius: 50%;
-                            grid-row: 1 / -1;
-                            place-self: center;
-                            padding: 0.5rem;
-                            border: 1px solid black;
-                        }
-
-                        .taskPriority.low {
-                            background-color: #3E885B;
-                        }
-
-                        .taskPriority.medium {
-                            background-color: #F19143;
-                            /*
-                            test these colours out:
-
-                            #F19143;
-                            FFB238
-                            FF773D
-                            F46036
-                            E57A44
-                            FF3F00
-                            FF7F11
-                            FE621D
-                            FD5200
-                            FC9E4F
-                            FE5F00
-                            FFB100
-                            EAC435
-                            FFC482
-                            FADF7F
-
-                            */
-                        }
-
-                        .taskPriority.high {
-                            background-color: red;
-
-                            /*
-                            test these colours out:
-
-                            F55536
-                            D7263D
-                            FE654F
-                            FB4D3D
-
-
-                            */
-                        }
-                        
-                        .icon {
-                            grid-row: 1 / -1;
-                        }
-
-                        .taskDescription {
-                            justify-self: left;
-                        }
-
-                        .taskItem:hover:not(.visibleDetails:hover) {
-                            background-color: rgb(135, 131, 209, 0.8);
-                            border-radius: 1.5rem;
-                            font-weight: bold;
-                        }
-
-                        
-                        .taskItem.visibleDetails:hover {
-                            background-color: rgb(135, 131, 209, 0.9);
-                        }
-                        
-                        ul.activeTaskList {
-                            margin-left: 1rem;
-                            grid-auto-rows: max-content;
-                        }
-
-                        .newTaskForm {
-                            display: grid;
-                            grid-template-columns: 1fr 200px;
-                            grid-template-rows: repeat(3, min-content);
-                            padding: 0 2rem;
-                            gap: 0.5rem;
-                        }
-
 h2 {
     font-family: "Headings";
     font-size: 4rem;
     font-weight: 500;
     letter-spacing: 0.1rem;
     text-align: center;
+    }
+/* Scrollbar custom styles */
+::-webkit-scrollbar {
+background: transparent;
+width: 1.25rem;
+}
+::-webkit-scrollbar-thumb {
+border-bottom: 2rem solid transparent;
+border-left: 0.5rem solid transparent;
+background-color: var(--main-border-color);
+background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+background-color: var(--active-color);
+}
+::-webkit-scrollbar-thumb:active {
+background-color: var(--main-scroll-color);
 }
 
-.sidebarList,
-.activeTaskList {
-    list-style: none;
+/* Aside / Main section styles */
+.listSection,
+.taskSection {
     display: grid;
-    padding: 0rem 3rem;
-    /*grid-auto-rows: 5rem;*/
-}
+    grid-template-rows: max-content max-content min-content;
 
-ul.sidebarList {
-    margin-left: 1.25rem;
-    grid-auto-rows: 5rem;
-}
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
 
-
-aside.listSection ul li {
-    display: grid;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-
-aside.listSection ul li {
-    justify-content: center;
-    font-size: 1.3rem;
-    border: 1px solid var(--main-border-color);
+    background-color: var(--main-bg-color);
+    border: 0.5rem solid var(--main-border-color);
     border-radius: 3rem;
+    box-shadow: var(--main-box-shadow);
 }
-
-/* Styles for highlighting and selecting a to-do list from the sidebar */
-aside.listSection ul li.active {
-    background-color: var(--main-border-color);
-    color: var(--main-bg-color);
-    font-weight: bold;
-}
-
-aside.listSection ul li:hover {
-    background-color: rgb(4, 138, 129, 0.9);
-    color: var(--main-bg-color);
-    cursor: pointer;
+.taskSection {
+    width: 55rem;
 }
 
 /* Container for the lists which need to scroll when they overflow */
@@ -303,6 +135,41 @@ aside.listSection ul li:hover {
     overflow-y: scroll;
     align-self: start;
     height: 450px;
+}
+
+.sidebarList,
+.activeTaskList {
+    list-style: none;
+    display: grid;
+    padding: 0rem 1rem;
+}
+
+.sidebarList {
+    margin-left: 1.25rem;
+    grid-auto-rows: 5rem;
+}
+
+.listItem {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--main-border-color);
+    border-radius: 3rem;
+    font-size: 1.3rem;    
+}
+
+/* Styles for highlighting and selecting a to-do list from the sidebar */
+.listItem.active {
+    color: var(--main-bg-color);
+    background-color: var(--main-border-color);
+    font-weight: bold;
+}
+
+.listItem:hover {
+    background-color: rgb(4, 138, 129, 0.9);
+    color: var(--main-bg-color);
+    cursor: pointer;
 }
 
 .addListForm {
@@ -314,9 +181,7 @@ aside.listSection ul li:hover {
     padding: 0rem 2rem;
     gap: 0.5rem;
 }
-
-.addListLabel,
-.addTaskLabel {
+.addListLabel {
     font-size: 0.9rem;
     font-style: italic;
     position: absolute;
@@ -324,65 +189,187 @@ aside.listSection ul li:hover {
     margin-left: 0.5rem;
     margin-top: 0.2rem;
 }
-
 .addListInput {
     grid-column: 1 / -1;
-}
-
-.addListInput,
-.addTaskInput {
     appearance: none;
     font-size: 1.5rem;
     width: 100%;
     text-align: center;
-    padding: 1.5rem 0rem 0.5rem 0rem;
+    padding: 2rem 0rem 0.5rem 0rem;
     border-radius: 0.5rem;
     outline: 1px solid var(--main-border-color);
     background-color: rgb(4, 138, 129, 0.3);
 }
 
-form button,
-form button {    
-    font-size: 1.5rem;
-    padding: 0 1rem;
+.taskItem {
     display: grid;
-    place-content: center;
-    place-items: center;
-    border: none;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr repeat(2, max-content);
+    margin-bottom: 0.5rem;
+    border: 1px solid black;
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: #8783D1;
     cursor: pointer;
-    background-color: var(--main-border-color);
-    color: var(--main-bg-color);
+    place-items: center;
 }
 
-form button.addListCancel,
-form button.addTaskCancel {
-    background-color: red;
-    color: var(--main-bg-color);
+.taskItem.visibleDetails {
+    grid-template-rows: repeat(2, 3rem);
+    border-radius: 1.5rem;
+    padding-bottom: 0rem;
 }
 
-/* Button styles for adding task / list */
-.addTaskButton,
-.addListButton {
+.taskItem.visibleDetails .taskName {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.taskItem:hover:not(.visibleDetails:hover) {
+    background-color: rgb(135, 131, 209, 0.8);
+    border-radius: 1.5rem;
+    font-weight: bold;
+}
+
+.taskItem.visibleDetails:hover {
+    background-color: rgb(135, 131, 209, 0.9);
+}
+
+.taskItem .taskName {
+    grid-row: 1 / -1;
+    grid-column: 1 / -1;
+    font-size: 1.2rem;
+}
+
+.taskItem .taskDescription {
+    justify-self: left;
+}
+
+.taskItem .taskPriority {
+    place-self: center;
+    grid-row: 1 / -1;
+    padding: 0.75rem;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+.taskItem .taskPriority.low {
+    background-color: #238823;
+}
+.taskItem .taskPriority.medium {
+    background-color: #FFBF00;
+}
+.taskItem .taskPriority.high {
+    background-color: #CC3232;
+}
+
+ul.activeTaskList {
+    margin-left: 1rem;
+    grid-auto-rows: max-content;
+}
+
+.addTaskForm {
+    display: grid;
+    grid-template-columns: 1fr max-content max-content max-content;
+    grid-template-rows: repeat(2, min-content);
+    margin-bottom: 1rem;
+    padding: 0rem 1rem;
+    column-gap: 0.5rem;
+    row-gap: 1rem;
+}
+
+.addNewTask.priority {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-evenly;
+    column-gap: 2rem;
+    place-items: center;
+    place-content: center;
+    font-size: 1rem;
+}
+
+.addNewTask.priority label {
     display: grid;
     grid-auto-flow: column;
     gap: 0.5rem;
-    width: 80%;
+}
 
-    place-self: center;
-    place-items: center;
+.addTaskForm input[type="date"] {
+    font-size: 1rem;
+}
+.addTaskForm input[type="date"]:focus {
+    background-color: rgb(4, 138, 129, 0.1);
+}
+
+.addTaskLabel {
+    font-size: 1.3rem;
+    font-style: italic;
+    padding: inherit;
+    margin-left: 0.5rem;
+    margin-top: 0.2rem;
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 0.25rem;
+    text-align: center;
+}
+
+.addTaskLabel.title,
+.addTaskLabel.description {
+    text-align: left;
+}
+
+.addTaskLabel.description {
+    grid-column: 1 / 4;
+}
+
+form .addNewTask {
+    appearance: none;
+    font-size: 1.3rem;
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    outline: 1px solid var(--main-border-color);
+    background-color: rgb(4, 138, 129, 0.3);
+}
+
+/* Buttons & Inputs */
+form button {    
+    display: grid;
     place-content: center;
-
-    font-family: "Sarabun";
-    font-size: 2rem;
-    font-weight: 700;
-    
-    cursor: pointer;
-    background-color: transparent;
+    place-items: center;
     border: none;
+    padding: 0 1.25rem;
+    color: var(--main-bg-color);
+    background-color: var(--main-border-color);
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+form button[type="cancel"] {
+    color: var(--main-bg-color);
+    background-color: red;
+}
+
+/* "+" button styles */
+.addTaskButton,
+.addListButton {
+    place-self: center;
+    gap: 0.5rem;
+    
+    border: none;
+    width: 80%;
     border-radius: 2rem;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
+
+    font-family: "Sarabun";
+    font-size: 2.3rem;
+    font-weight: 900;
+
+    cursor: pointer;
 }
+
 .addTaskButton:hover,
 .addListButton:hover {
     background-color: rgba(0,0,0,0.1);
@@ -390,25 +377,4 @@ form button.addTaskCancel {
 
 *.hidden {
     display: none;
-}
-
-/* Scrollbar custom styles */
-::-webkit-scrollbar {
-    background: transparent;
-    width: 1.25rem;
-}
-
-::-webkit-scrollbar-thumb {
-    border-bottom: 2rem solid transparent;
-    border-left: 0.5rem solid transparent;
-    background-color: var(--main-border-color);
-    background-clip: padding-box;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background-color: var(--active-color);
-}
-
-::-webkit-scrollbar-thumb:active {
-    background-color: var(--main-scroll-color);
 }

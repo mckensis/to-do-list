@@ -25,10 +25,18 @@ function myListItems(myList) {
 
 function defaultListItems(defaultList) {
 
-    defaultList.create("Go to shops", "Take a wee wander to shops and buy hings", "today", "high");
-    defaultList.create("Take out the cat for a wee snacc", "t", "low");
-    defaultList.create("Desto with the besto", "u know", "all day", "high");
-    defaultList.create("New freezer", "Singing", "tomorrow", "high");
+    const test = new ToDo("Bins", "Take bins to back garden and set them on fire", "tomorrow", "high");
+
+    defaultList.add(test);
+    defaultList.add(new ToDo("Cooking", "Make a tasty dinner", "today", "medium"));
+    defaultList.add(new ToDo("Sit ups", "Do one million sit ups", "next year", "low"));
+    defaultList.add(new ToDo("Go to shops", "Take a wee wander to shops and buy hings", "today", "high"));
+    defaultList.add(new ToDo("Cooking", "Make a tasty dinner", "today", "high"));
+    defaultList.add(new ToDo("Sit ups", "Do one million sit ups", "next year", "low"));
+    defaultList.add(new ToDo("Go to shops", "Take a wee wander to shops and buy hings", "today", "high"));
+    defaultList.add(new ToDo("Cooking", "Make a tasty dinner", "today", "high"));
+    defaultList.add(new ToDo("Sit ups", "Do one million sit ups", "next year", "low"));
+    defaultList.add(new ToDo("Go to shops", "Take a wee wander to shops and buy hings", "today", "high"));
 
     return defaultList;
 }

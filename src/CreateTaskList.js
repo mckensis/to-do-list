@@ -1,12 +1,5 @@
 import { EmptySection } from "./Helpers";
 
-function Toggle(taskListItem) {
-    taskListItem.classList.toggle("visibleDetails");
-    for (let i = 1; i < taskListItem.childNodes.length; i++) {
-        taskListItem.childNodes[i].classList.toggle("hidden");
-    }
-}
-
 /*
 function ShowUrgency(taskListItem, taskPriority) {
     console.log(taskPriority.classList[0]);
@@ -20,6 +13,13 @@ function ShowUrgency(taskListItem, taskPriority) {
         taskListItem.removeChild(icon);
     })
 }*/
+
+function Toggle(taskListItem) {
+    taskListItem.classList.toggle("visibleDetails");
+    for (let i = 1; i < taskListItem.childNodes.length; i++) {
+        taskListItem.childNodes[i].classList.toggle("hidden");
+    }
+}
 
 function ChangePriority(e, priority, item) {
     e.stopImmediatePropagation();
@@ -47,25 +47,25 @@ function ChangePriority(e, priority, item) {
 
 }
 
-function OpenTask(e, taskListItem, taskList) {
-    
-    const target = e.currentTarget;
+function OpenTask(taskList) {
 
-    CloseOtherTasks(target, taskList);
+    CloseOtherTasks(this, taskList);
 
-    Toggle(taskListItem);
+    Toggle(this);
 
 }
 
-function CloseOtherTasks(target, taskList) {
+function CloseOtherTasks(taskListItem, taskList) {
 
-    const children = taskList.childNodes;
+    console.log(taskListItem);
     
+    console.log(taskList.childNodes);
     //Iterate over each task and make sure only one is open at a time
-    for (let taskCounter = 0; taskCounter < children.length; taskCounter++) {
+    for (let taskCounter = 0; taskCounter < taskList.childNodes.length; taskCounter++) {
         const item = taskList.childNodes[taskCounter];
         //Hide the details of all tasks except the one that was clicked
-        if (item !== target) {
+        if (item !== taskListItem) {
+            console.log("hehe")
             item.classList.remove("visibleDetails");
             for (let detailCounter = 1; detailCounter < item.childNodes.length; detailCounter++) {
                 item.childNodes[detailCounter].classList.add("hidden");
@@ -86,23 +86,6 @@ function CloseOtherTasks(target, taskList) {
     });
     */
 }
-
-/*
-//Don't need this to set class with priority
-function GetPriority(priority) {
-    
-    switch(priority) {
-        case "low":
-            return "low";
-        case "medium":
-            return "medium";
-        case "high":
-            return "high";
-        default:
-            return "dunno";
-    }
-}
-*/
 
 function CreateTaskList(list) {
 
@@ -150,16 +133,19 @@ function CreateTaskList(list) {
             ChangePriority(e, priority, item);
         })
 
+        taskListItem.addEventListener("click", OpenTask.bind(taskListItem, taskList));
+
         /*
         taskListItem.addEventListener("mouseover", () => {
             ShowUrgency(taskListItem, taskPriority);
         });
         */
-
+        
+        /* add back in when done testing:
         taskListItem.addEventListener("click", (e) => {
             //console.log("clicked: ", item.title);
             OpenTask(e, taskListItem, taskList);
-        });
+        });*/
     }
 
     return taskList;

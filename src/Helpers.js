@@ -102,5 +102,11 @@ function SetListInputAttributes(input) {
     input.pattern = "[a-zA-Z0-9_]";
 }
 
+function SetTaskTitleInputAttributes(input) {
+    input.value = '';
+    input.maxLength = "15";
+    input.pattern = "[a-zA-Z0-9_]";
+}
+
 export { SetActiveList, ReturnActiveList, RemoveForms, RemoveActiveClass, RemoveActiveProperty,
-         AddActiveClass, AddActiveProperty, EmptySection, Hide, Show, SetHeight, SetListInputAttributes };
+         AddActiveClass, AddActiveProperty, EmptySection, Hide, Show, SetHeight, SetListInputAttributes, SetTaskTitleInputAttributes };
