@@ -15,7 +15,9 @@ function AddNewTask(lists) {
     const submit = document.querySelector(".addTaskConfirm");
     const cancel = document.querySelector(".addTaskCancel");
 
+    const taskSection = document.querySelector(".taskSection");
     const taskContainer = document.querySelector(".taskContainer");
+    const taskHeight = taskSection.offsetHeight;
     const height = taskContainer.offsetHeight;
 
     SetTaskTitleInputAttributes(title);
@@ -23,7 +25,8 @@ function AddNewTask(lists) {
     Hide(button);
     Show(form);
 
-    SetHeight(taskContainer, "310")
+    SetHeight(taskSection, taskHeight);
+    SetHeight(taskContainer, "310");
 
     form.addEventListener("submit", (e) => {
         e.stopImmediatePropagation();
@@ -57,7 +60,7 @@ function AddNewTask(lists) {
     description.value = '';
     due.value = '';
     priority.option = "Default";
-    
+
     title.focus();
 }
 
