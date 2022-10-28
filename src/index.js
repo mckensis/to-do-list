@@ -5,6 +5,7 @@ import AddNewList from './AddNewList.js';
 import AddNewTask from './AddNewTask.js';
 import PopulateListSidebar from './PopulateListSidebar.js';
 import PopulateTaskSection from './PopulateTaskSection.js';
+import { ReturnActiveList, SetupDefaultList } from './Helpers';
 
 //import { format, formatDistance, formatRelative, subDays } from 'date-fns';
 //import data from './data.json';
@@ -13,14 +14,16 @@ window.addEventListener("load", buildMainPage);
 function buildMainPage() {
     //The 'lists' variable is an array which holds all lists containing tasks
     let lists = createDefaultLists();
-    
-    //console.log(lists);
+
+    SetupDefaultList(lists);
 
     //Create and populate the DOM with the lists
     CreateDOM();
     PopulateListSidebar(lists);
     
-    PopulateTaskSection(lists);
+    let activeList = ReturnActiveList(lists);
+
+    PopulateTaskSection(activeList);
 
     //console.table(lists); 
     

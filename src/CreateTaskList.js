@@ -1,19 +1,5 @@
 import { EmptySection } from "./Helpers";
 
-/*
-function ShowUrgency(taskListItem, taskPriority) {
-    console.log(taskPriority.classList[0]);
-    const icon = document.createElement("p");
-    icon.classList.add("icon");
-    icon.classList.add(taskPriority.classList[0]);
-
-    taskListItem.appendChild(icon);
-
-    taskListItem.addEventListener("mouseleave", () => {
-        taskListItem.removeChild(icon);
-    })
-}*/
-
 function Toggle(taskListItem) {
     taskListItem.classList.toggle("visibleDetails");
     for (let i = 1; i < taskListItem.childNodes.length; i++) {
@@ -23,9 +9,6 @@ function Toggle(taskListItem) {
 
 function ChangePriority(e, priority, item) {
     e.stopImmediatePropagation();
-
-    console.log("current priority: ", priority);
-    console.log(item);
 
     switch (priority.classList[1]) {
         case "high":
@@ -44,47 +27,27 @@ function ChangePriority(e, priority, item) {
             item.priority = "medium";
             return;
     }
-
 }
 
 function OpenTask(taskList) {
 
     CloseOtherTasks(this, taskList);
-
     Toggle(this);
-
 }
 
 function CloseOtherTasks(taskListItem, taskList) {
 
-    console.log(taskListItem);
-    
-    console.log(taskList.childNodes);
     //Iterate over each task and make sure only one is open at a time
     for (let taskCounter = 0; taskCounter < taskList.childNodes.length; taskCounter++) {
         const item = taskList.childNodes[taskCounter];
         //Hide the details of all tasks except the one that was clicked
         if (item !== taskListItem) {
-            console.log("hehe")
             item.classList.remove("visibleDetails");
             for (let detailCounter = 1; detailCounter < item.childNodes.length; detailCounter++) {
                 item.childNodes[detailCounter].classList.add("hidden");
             }
         }
     }
-    
-    /*
-    //This works:
-    //NodeList.prototype.forEach = Array.prototype.forEach;
-    children.forEach(function(item) {
-        if (item !== target) {
-            item.classList.remove("visibleDetails")
-            for (let i = 1; i < item.childNodes.length; i++) {
-                item.childNodes[i].classList.add("hidden");
-            }
-        }
-    });
-    */
 }
 
 function CreateTaskList(list) {
@@ -92,8 +55,6 @@ function CreateTaskList(list) {
     const container = document.querySelector(".taskContainer");
     const taskList = document.createElement("ul");
     taskList.classList.add("activeTaskList");
-
-    //console.log("CreateTaskList - active list is: ", list);
 
     EmptySection(container);
 
@@ -134,18 +95,6 @@ function CreateTaskList(list) {
         })
 
         taskListItem.addEventListener("click", OpenTask.bind(taskListItem, taskList));
-
-        /*
-        taskListItem.addEventListener("mouseover", () => {
-            ShowUrgency(taskListItem, taskPriority);
-        });
-        */
-        
-        /* add back in when done testing:
-        taskListItem.addEventListener("click", (e) => {
-            //console.log("clicked: ", item.title);
-            OpenTask(e, taskListItem, taskList);
-        });*/
     }
 
     return taskList;

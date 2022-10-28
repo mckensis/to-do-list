@@ -24,16 +24,14 @@ function Show(element) {
 //Clears the tasks from the bottom right container in preparation to display the correct tasks
 function EmptySection(container) {
 
-    //console.log("container is: ", container);
-
     while (container.childNodes.length > 0) {
-        //console.log("removing... ", container.lastChild);
         container.removeChild(container.lastChild);
     }
     return container;
 }
 
 function ReturnActiveList(lists) {
+
     for (const list of lists) {
         if (list.active) {
             return list;
@@ -103,10 +101,43 @@ function SetListInputAttributes(input) {
 }
 
 function SetTaskTitleInputAttributes(input) {
-    input.value = '';
-    input.maxLength = "15";
-    input.pattern = "[a-zA-Z0-9_]";
+
+    input.maxLength = "20";
+}
+
+function SetTaskDescriptionInputAttributes(input) {
+
+    input.maxLength = "40";
+    input.pattern = "[a-zA-Z0-9 ]";
+}
+
+
+function UpdateDefaultList(active, lists) {
+
+    for (const list of lists) {
+        if (active !== list) {
+            for (const item of list.items) {
+                active.items.unshift(item);
+            }
+        }
+    }
+}
+
+function SetupDefaultList(lists) {
+
+    for (const list of lists) {
+        if (list.title == "All Tasks") { 
+            const active = list;
+            UpdateDefaultList(active, lists);
+        }
+    }
+}
+
+
+function SetTaskDueInputAttributes(input) {
+    console.log("not set up yet")
 }
 
 export { SetActiveList, ReturnActiveList, RemoveForms, RemoveActiveClass, RemoveActiveProperty,
-         AddActiveClass, AddActiveProperty, EmptySection, Hide, Show, SetHeight, SetListInputAttributes, SetTaskTitleInputAttributes };
+         AddActiveClass, AddActiveProperty, EmptySection, Hide, Show, SetHeight,
+         SetListInputAttributes, SetTaskTitleInputAttributes, SetTaskDescriptionInputAttributes, SetTaskDueInputAttributes, SetupDefaultList, UpdateDefaultList };

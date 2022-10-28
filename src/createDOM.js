@@ -4,11 +4,11 @@ import Section from './Section.js';
 
 //Will be imported and called from index.js
 //Creates templates for all necessary DOM elements
-function CreateDOMLayout() {
+function CreateDOM() {
     const page = document.querySelector('.mainPage');
     page.appendChild(Header());
     page.appendChild(Sidebar());
     page.appendChild(Section());
 }
 
-export default CreateDOMLayout;
+export default CreateDOM;

@@ -1,51 +1,18 @@
 import List from './List.js';
-import ToDo from './ToDo.js'
 
 function myListItems(myList) {
 
-    const test = new ToDo("Bins", "Take bins to back garden and set them on fire", "tomorrow", "medium");
-
-    myList.add(test);
-    myList.add(new ToDo("Cooking", "Make a tasty dinner", "today", "high"));
-    myList.add(new ToDo("Sit ups", "Do one million sit ups", "next year", "low"));
-    myList.add(new ToDo("Go to shops", "Take a wee wander to shops and buy hings", "today", "high"));
-
-    myList.add(new ToDo("Cooking", "Make a tasty dinner", "today", "high"));
-    myList.add(new ToDo("Sit ups", "Do one million sit ups", "next year", "low"));
-    myList.add(new ToDo("Go to shops", "Take a wee wander to shops and buy hings", "today", "high"));
-
-    myList.add(new ToDo("Cooking", "Make a tasty dinner", "today", "high"));
-    myList.add(new ToDo("Sit ups", "Do one million sit ups", "next year", "low"));
-    myList.add(new ToDo("Go to shops", "Take a wee wander to shops and buy hings", "today", "high"));
-
-    myList.create("test");
+    myList.create("Make dinner", "Lentil curry and coconut rice", "28-10-22", "high");
+    myList.create("Go to shops", "Take a wee wander to shops and buy hings", "today", "medium");
 
     return myList;
 }
 
-function defaultListItems(defaultList) {
-
-    const test = new ToDo("Bins", "Take bins to back garden and set them on fire", "tomorrow", "high");
-
-    defaultList.add(test);
-    defaultList.add(new ToDo("Cooking", "Make a tasty dinner", "today", "medium"));
-    defaultList.add(new ToDo("Sit ups", "Do one million sit ups", "next year", "low"));
-    defaultList.add(new ToDo("Go to shops", "Take a wee wander to shops and buy hings", "today", "high"));
-    defaultList.add(new ToDo("Cooking", "Make a tasty dinner", "today", "high"));
-    defaultList.add(new ToDo("Sit ups", "Do one million sit ups", "next year", "low"));
-    defaultList.add(new ToDo("Go to shops", "Take a wee wander to shops and buy hings", "today", "high"));
-    defaultList.add(new ToDo("Cooking", "Make a tasty dinner", "today", "high"));
-    defaultList.add(new ToDo("Sit ups", "Do one million sit ups", "next year", "low"));
-    defaultList.add(new ToDo("Go to shops", "Take a wee wander to shops and buy hings", "today", "high"));
-
-    return defaultList;
-}
-
 function workListItems(workList) {
 
-    workList.create("Make a rota");
-    workList.create("Update labour");
-    workList.create("Clean cellar");
+    workList.create("Make a rota", "Double check staff holidays", "05-11-22", "low");
+    workList.create("Update labour", "Make sure we're not overspent", "28-10-22", "high");
+    workList.create("Clean cellar", "Delegate out to a staff member", "30-10-22", "medium");
 }
 
 function createListContainer() {
@@ -57,15 +24,14 @@ function createListContainer() {
 
 function createDefaultLists() {
 
-    const defaultList = new List("Default");
-    const workList = new List("Work")
-    const myList = new List("Aidan");
+    const defaultList = new List("All Tasks");
+    const myList = new List("Personal");
+    const workList = new List("Work");
 
     const listContainer = createListContainer();
 
-    defaultListItems(defaultList);
-    workListItems(workList);
     myListItems(myList);
+    workListItems(workList);
 
     listContainer.push(defaultList);
     listContainer.push(workList);

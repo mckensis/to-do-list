@@ -1,4 +1,4 @@
-import ToDo from "./ToDo";
+import Task from "./Task.js";
 
 class List {
     constructor(title) {
@@ -7,14 +7,15 @@ class List {
         this.active = false;
     }
 
-    create(item) {
-        const todo = new ToDo(item);
-        this.add(todo);
+    add(task) {
+        this.items.unshift(task);
     }
 
-    add(todo) {
-        this.items.push(todo);
+    create(title, description, dueDate, priority) {
+        const task = new Task(title, description, dueDate, priority);
+        this.add(task);
     }
+
 };
 
 export default List;
