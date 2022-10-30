@@ -1,3 +1,6 @@
+import List from "../classes/List";
+import CreateDefaultTasks from './CreateDefaultTasks';
+
 function SaveLocalStorage(items) {
 
     localStorage.setItem("items", JSON.stringify(items));
@@ -19,4 +22,19 @@ function CheckLocalStorage() {
     return false;
 }
 
-export { SaveLocalStorage, LoadLocalStorage, CheckLocalStorage };
+function GetList() {
+
+    let defaultList = new List("All Tasks");
+
+    if (!CheckLocalStorage()) {
+        const items = CreateDefaultTasks();
+        defaultList.items = items;
+        SaveLocalStorage(defaultList.items);
+    } else {
+        defaultList.items = LoadLocalStorage();
+    }
+
+    return defaultList;
+}
+
+export { SaveLocalStorage, LoadLocalStorage, CheckLocalStorage, GetList };

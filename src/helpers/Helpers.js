@@ -1,3 +1,4 @@
+import { formatDistance, parseISO, toDate } from "date-fns";
 import List from "../classes/List";
 import { LoadLocalStorage } from "./LocalStorageHelpers";
 
@@ -250,6 +251,7 @@ function ManageDefaultList(lists) {
     }
 }
 
+//Creates the default List, loads the items and appends them to the container
 function ShowAllTasks() {
 
     const defaultList = new List("All Tasks");
@@ -262,6 +264,7 @@ function ShowAllTasks() {
     taskContainer.appendChild(CreateTaskList(defaultList.items));
 }
 
+//Toggles the task from title / full view when clicked on
 function Toggle(taskListItem) {
     taskListItem.classList.toggle("visibleDetails");
     for (let i = 1; i < taskListItem.childNodes.length; i++) {
@@ -269,6 +272,7 @@ function Toggle(taskListItem) {
     }
 }
 
+//Changes the task priority when the coloured circle is clicked
 function ChangePriority(e, priority, item) {
     e.stopImmediatePropagation();
 
@@ -301,6 +305,7 @@ function OpenTask(taskList) {
     Toggle(this);
 }
 
+//Closes any task that might be open in preparation for opening "this" which was clicked on
 function CloseOtherTasks(taskListItem, taskList) {
 
     //Iterate over each task and make sure only one is open at a time
@@ -316,6 +321,8 @@ function CloseOtherTasks(taskListItem, taskList) {
     }
 }
 
+
+
 function CreateTaskList(list) {
 
     const container = document.querySelector(".taskContainer");
@@ -327,14 +334,24 @@ function CreateTaskList(list) {
     for (const item of list) {
         const taskListItem = document.createElement("li");
 
+        const itemDate = new Date(item[2]);
+        const today = new Date();
+
+        const u = toDate(itemDate);
+        console.log(today);
+
+        const dueDate = formatDistance((u), (today), {addSuffix: true});
+        console.log(dueDate);
+
+
         const taskName = document.createElement("p");
         const taskDue = document.createElement("p");
         const taskPriority = document.createElement("p");
         const taskDescription = document.createElement("p");
 
         taskName.textContent = item[0];
-        taskDescription.textContent = `Details: ${item[1]}`;
-        taskDue.textContent = `Due: ${item[2]}`;
+        taskDescription.textContent = `${item[1]}`;
+        taskDue.textContent = `Due ${dueDate}`;
         
         taskPriority.classList.add("taskPriority");
         taskPriority.classList.add(item[3]);
@@ -370,23 +387,3 @@ export { RemoveActiveClass, AddActiveClass, EmptySection, Hide, Show, SetHeight,
          SetListInputAttributes, SetTaskTitleInputAttributes, SetTaskDescriptionInputAttributes, SetTaskDueInputAttributes,
          UpdateTaskListOptions, GetListNames, CreateSidebarList, PopulateListSidebar, FilterTasks, DisplayAllTasks, 
          DefaultList, ManageDefaultList, CreateListItem, GetActiveList, SetActiveList, FilterTaskSection, ShowAllTasks, CreateTaskList };
-
-/* Old functions, may not use still
-function AddActiveProperty(listItem, lists) {
-
-    for (const list of lists) {
-        if (list.title == listItem.textContent) {
-            list.active = true;
-            return list;
-        }
-    }
-}
-
-
-//Removes the active property from all lists
-function RemoveActiveProperty(lists) {
-    for (const list of lists) {
-        list.active = false;
-    }
-}
-*/
