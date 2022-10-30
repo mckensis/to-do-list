@@ -20,25 +20,6 @@ function EmptySection(container) {
     return container;
 }
 
-//Removes the add list / add task forms when called
-function RemoveForms() {
-    if (document.querySelector(".newListForm")) {
-        const form = document.querySelector(".newListForm");
-        const sidebar = document.querySelector(".listSection")
-        //sidebar.removeChild(form);
-        form.classList.add("hidden");
-    }
-
-    if (document.querySelector(".newTaskForm")) {
-        const form = document.querySelector(".newTaskForm");
-        const section = document.querySelector(".taskSection");
-        //section.removeChild(form);
-        form.classList.add("hidden");
-    }
-
-    return;
-}
-
 //Removes the active class from the sidebar list items
 function RemoveActiveClass() {
     const sidebarListItem = document.querySelectorAll('.listItem');
@@ -120,23 +101,28 @@ function GetListNames() {
     return array;
 }
 
-function DisplayAllTasks() {
+function ResetFormsAndButtons() {
+    const forms = document.querySelectorAll("form");
+    const listBtn = document.querySelector(".addListButton");
+    const taskBtn = document.querySelector(".addTaskButton");
 
-    RemoveActiveClass();
-    AddActiveClass(this);
-    ShowAllTasks();
+    for (const form of forms) {
+        Hide(form);
+    }
+
+    Show(listBtn);
+    Show(taskBtn);
 }
 
-function DefaultList() {
+function PopulateListSidebar() {
 
-    const listItem = document.createElement("li");
+    const listContainer = document.querySelector('.listContainer');
+    
+    EmptySection(listContainer);
 
-    listItem.classList.add("listItem","active");
-    listItem.textContent = "All Tasks";
-
-    listItem.addEventListener("click", DisplayAllTasks.bind(listItem));
-
-    return listItem;
+    listContainer.appendChild(CreateSidebarList());
+    
+    return listContainer;
 }
 
 function CreateSidebarList() {
@@ -155,24 +141,36 @@ function CreateSidebarList() {
     return sidebarList;
 }
 
-function PopulateListSidebar() {
+function CreateListItem(item) {
 
-    const listContainer = document.querySelector('.listContainer');
-    
-    EmptySection(listContainer);
+    const listItem = document.createElement("li");
+        
+    listItem.classList.add("listItem");
+    listItem.textContent = item;
 
-    listContainer.appendChild(CreateSidebarList());
-    
-    return listContainer;
+    listItem.addEventListener("click", FilterTasks);
+
+    return listItem;
 }
 
-function FindThis(f) {
-    const listItems = document.querySelectorAll(".listItem");
-    for (const item of listItems) {
-        if (item.textContent === f) {
-            return item;
-        }
-    }
+function DisplayAllTasks() {
+
+    ResetFormsAndButtons();
+    RemoveActiveClass();
+    AddActiveClass(this);
+    ShowAllTasks();
+}
+
+function DefaultList() {
+
+    const listItem = document.createElement("li");
+
+    listItem.classList.add("listItem","active");
+    listItem.textContent = "All Tasks";
+
+    listItem.addEventListener("click", DisplayAllTasks.bind(listItem));
+
+    return listItem;
 }
 
 function FilterTasks(list) {
@@ -188,9 +186,19 @@ function FilterTasks(list) {
         filter = this.textContent;
     }
 
+    ResetFormsAndButtons();
     RemoveActiveClass();
     AddActiveClass(saveThis);
     FilterTaskSection(filter);
+}
+
+function FindThis(f) {
+    const listItems = document.querySelectorAll(".listItem");
+    for (const item of listItems) {
+        if (item.textContent === f) {
+            return item;
+        }
+    }
 }
 
 function FilterTaskSection(filter) {
@@ -241,18 +249,6 @@ function ManageDefaultList(lists) {
         }
     }
 }
-    
-function CreateListItem(item) {
-
-    const listItem = document.createElement("li");
-        
-    listItem.classList.add("listItem");
-    listItem.textContent = item;
-
-    listItem.addEventListener("click", FilterTasks);
-
-    return listItem;
-}
 
 function ShowAllTasks() {
 
@@ -297,6 +293,10 @@ function ChangePriority(e, priority, item) {
 
 function OpenTask(taskList) {
 
+    const taskContainer = document.querySelector(".taskContainer");
+
+    ResetFormsAndButtons();
+    SetHeight(taskContainer, "435");
     CloseOtherTasks(this, taskList);
     Toggle(this);
 }
@@ -366,7 +366,7 @@ function CreateTaskList(list) {
     return taskList;
 }
 
-export { RemoveForms, RemoveActiveClass, AddActiveClass, EmptySection, Hide, Show, SetHeight,
+export { RemoveActiveClass, AddActiveClass, EmptySection, Hide, Show, SetHeight,
          SetListInputAttributes, SetTaskTitleInputAttributes, SetTaskDescriptionInputAttributes, SetTaskDueInputAttributes,
          UpdateTaskListOptions, GetListNames, CreateSidebarList, PopulateListSidebar, FilterTasks, DisplayAllTasks, 
          DefaultList, ManageDefaultList, CreateListItem, GetActiveList, SetActiveList, FilterTaskSection, ShowAllTasks, CreateTaskList };

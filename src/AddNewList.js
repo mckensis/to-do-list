@@ -61,9 +61,6 @@ function Add() {
     
     PopulateListSidebar();
     ShowAllTasks();
-    
-    //console.log("Add function, lists after PopulateListSidebar: ", lists);
-    //need to get this list into "lists" array and then repopulate the list display aside
 }
 
 export default AddNewList;
