@@ -49,9 +49,6 @@ function Sidebar() {
     
     header.textContent = "lists";
     button.textContent = "+";
-
-    //moved to index.js to test for passing lists
-    //button.addEventListener("click", AddNewList);
     
     container.appendChild(header);
     container.appendChild(Form());

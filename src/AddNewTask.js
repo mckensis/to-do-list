@@ -1,8 +1,9 @@
-import { Hide, Show, SetHeight, SetTaskTitleInputAttributes, SetTaskDescriptionInputAttributes, SetTaskDueInputAttributes, ReturnActiveList, UpdateDefaultList, EmptySection } from './Helpers.js';
-import { CheckForBlankInput, TestForValidInput } from './Validate.js';
-import PopulateTaskSection from './PopulateTaskSection';
+import { LoadLocalStorage, SaveLocalStorage } from './helpers/LocalStorageHelpers.js';
+import { CheckForBlankInput, TestForValidInput } from './helpers/Validate.js';
+import { Hide, Show, SetHeight, SetTaskTitleInputAttributes, SetTaskDescriptionInputAttributes, SetTaskDueInputAttributes, UpdateDefaultList, 
+         UpdateTaskListOptions, PopulateListSidebar, FilterTasks } from './helpers/Helpers.js';
 
-function AddNewTask(lists) {
+function AddNewTask() {
 
     const button = document.querySelector(".addTaskButton");
     const form = document.querySelector(".addTaskForm");
@@ -10,42 +11,44 @@ function AddNewTask(lists) {
     const description = document.querySelector(".addTaskInput.description");
     const due = document.querySelector(".addTaskInput.due");
     const priority = document.querySelector(".addTaskInput.priority");
-    const list = document.querySelector(".addTaskInput.list");
+    const inputList = document.querySelector(".addTaskInput.list");
 
     const submit = document.querySelector(".addTaskConfirm");
     const cancel = document.querySelector(".addTaskCancel");
 
     const taskSection = document.querySelector(".taskSection");
     const taskContainer = document.querySelector(".taskContainer");
+
     const taskHeight = taskSection.offsetHeight;
     const height = taskContainer.offsetHeight;
 
     SetTaskTitleInputAttributes(title);
+    UpdateTaskListOptions(inputList);
 
     Hide(button);
     Show(form);
 
     SetHeight(taskSection, taskHeight);
-    SetHeight(taskContainer, "310");
+    SetHeight(taskContainer, "250");
 
     form.addEventListener("submit", (e) => {
         e.stopImmediatePropagation();
         e.preventDefault();
 
-        const activeList = ReturnActiveList(lists);
-
         const formData = new FormData(form);
         const data = [...formData.entries()];
 
-        Add(activeList, data);
-        UpdateDefault(lists);
+        Add(data);
+        //UpdateDefault(lists);
 
         Hide(form);
         Show(button);
+        SetHeight(taskContainer, height);
     })
 
     submit.addEventListener("click", (e) => {
         e.stopImmediatePropagation();
+        SetHeight(taskContainer, height);
         return;
     })
 
@@ -64,45 +67,26 @@ function AddNewTask(lists) {
     title.focus();
 }
 
-function Populate(list, lists) {
-    console.log(list);
-    for (const l of lists) {
-        if (l.title !== "All Tasks") {
-            for (const item of l.items) {
-                console.log(item);
-                list.add(item);
-            }
-        }
-    }
-}
-
-function Empty(list) {
-    while (list.items.length > 0) {
-        list.items.pop();
-    }
-}
-
-function UpdateDefault(lists) {
-    for (const list of lists) {
-        if (list.title == "All Tasks") {
-            Empty(list);
-            Populate(list, lists);
-        }
-    }
-}
-
-function Add(activeList, data) {
+function Add(data) {
 
     const title = data[0][1];
     const due = data[1][1];
     const priority = data[2][1];
-    const description = data[3][1];
+    const list = data[3][1];
+    const description = data[4][1];
 
-    activeList.create(title, description, due, priority);
+    const newTask = [];
 
-    PopulateTaskSection(activeList);
+    newTask.push(title, description, due, priority, list);
+    console.log(newTask);
+
+    const items = LoadLocalStorage();
     
-    return activeList;
+    items.unshift(newTask);
+    
+    SaveLocalStorage(items);
+    PopulateListSidebar();
+    FilterTasks(list);
 }
 
 export default AddNewTask;

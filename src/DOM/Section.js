@@ -1,4 +1,4 @@
-import { ReturnActiveList } from "./Helpers";
+import { UpdateTaskListOptions } from "../helpers/Helpers.js";
 
 function Title() {
 
@@ -106,6 +106,23 @@ function Priority() {
     return labelPriority;
 }
 
+function TaskList() {
+
+    const inputList = document.createElement("select");
+    const labelList = document.createElement("label");
+
+    labelList.textContent = "List";
+    inputList.required = true;
+    inputList.name = "List";
+    labelList.classList.add("addTaskLabel","list");
+    inputList.classList.add("addTaskInput","list");
+
+    //This needs to be updated so that the list selector for a new task is built every time a new one is added.
+    labelList.appendChild(UpdateTaskListOptions(inputList));
+    
+    return labelList;
+}
+
 function Submit() {
     const submitButton = document.createElement("button");
     
@@ -137,6 +154,7 @@ function Form() {
     newTaskForm.appendChild(Title());
     newTaskForm.appendChild(Due());
     newTaskForm.appendChild(Priority());
+    newTaskForm.appendChild(TaskList());
     newTaskForm.appendChild(Description());
     
     newTaskForm.appendChild(Submit());

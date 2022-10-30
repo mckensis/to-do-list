@@ -1,9 +1,7 @@
-import { Hide, Show, SetHeight, SetListInputAttributes } from './Helpers.js';
-import { CheckForBlankInput, TestForValidInput } from './Validate.js';
-import List from './List.js';
-import PopulateListSidebar from './PopulateListSidebar.js';
+import { Hide, Show, SetHeight, SetListInputAttributes, GetListNames, PopulateListSidebar, ShowAllTasks } from './helpers/Helpers.js';
+import { CheckForBlankInput, TestForValidInput } from './helpers/Validate.js';
 
-function AddNewList(lists) {
+function AddNewList() {
     //console.log("AddNewList.js - clicked add new list...");
     const button = document.querySelector(".addListButton");
     const form = document.querySelector(".addListForm");
@@ -22,7 +20,7 @@ function AddNewList(lists) {
     SetHeight(listSection, height);
 
     submit.addEventListener("click", (e) => {
-        //console.log("AddNewList.js - clicked submit button!");
+
         e.preventDefault();
         e.stopImmediatePropagation();
 
@@ -34,7 +32,7 @@ function AddNewList(lists) {
             return;
         };
         
-        Add(lists);
+        Add();
     
         Hide(form);
         Show(button);
@@ -51,18 +49,20 @@ function AddNewList(lists) {
 
 }
 
-function Add(lists) {
-
+function Add() {
 
     const name = document.querySelector("#list_name");
-    const list = new List(name.value);
+    const array = GetListNames();
+    console.log(array);
+    array.push(name.value);
+    localStorage.setItem("array", JSON.stringify(array));
+
+    console.log(array);
     
-    lists.push(list);
-    
-    PopulateListSidebar(lists);
+    PopulateListSidebar();
+    ShowAllTasks();
     
     //console.log("Add function, lists after PopulateListSidebar: ", lists);
-    return lists;
     //need to get this list into "lists" array and then repopulate the list display aside
 }
 
