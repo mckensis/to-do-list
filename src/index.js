@@ -8,6 +8,7 @@ import AddNewTask from './AddNewTask.js';
 //import data from './data.json';
 window.addEventListener("load", buildMainPage);
 
+
 function buildMainPage() {
     //localStorage.clear();
 
@@ -18,7 +19,7 @@ function buildMainPage() {
     
     PopulateListSidebar();
     ShowAllTasks();
-    
+
     const addListButton = document.querySelector('.addListButton');
     const addTaskButton = document.querySelector(".addTaskButton");
 

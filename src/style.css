@@ -357,7 +357,11 @@ form button[type="cancel"] {
     color: grey;
 }
 
-.taskItem:hover:not(.visibleDetails:hover) {
+.taskComplete:hover {
+    opacity: 0.9;
+}
+
+.taskItem:hover:not(.visibleDetails:hover):not(.taskItem.taskComplete) {
     background-color: var(--purple-color-hover);
     border-radius: 1.5rem;
     font-weight: bold;

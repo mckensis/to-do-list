@@ -97,7 +97,6 @@ function GetListNames() {
     }
 
     let array = JSON.parse(localStorage.getItem("array"));
-    console.log(array);
 
     return array;
 }
@@ -194,11 +193,8 @@ function CreateTaskList(list) {
         const today = new Date();
 
         const u = toDate(itemDate);
-        console.log(today);
 
         const dueDate = formatDistance((u), (today), {addSuffix: true});
-        console.log(dueDate);
-
 
         const taskName = document.createElement("p");
         const taskDue = document.createElement("p");

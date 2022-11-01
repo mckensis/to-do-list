@@ -9,7 +9,7 @@ function SaveLocalStorage(items) {
 function LoadLocalStorage() {
 
     let items = JSON.parse(localStorage.getItem("items"));
-
+    
     return items;
 }
 
