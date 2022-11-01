@@ -313,7 +313,7 @@ form button[type="cancel"] {
 .taskItem {
     display: grid;
     grid-auto-flow: row;
-    grid-template-columns: 1fr repeat(2, max-content);
+    grid-template-columns: 1fr repeat(3, max-content);
     margin-bottom: 0.5rem;
     border: 1px solid var(--box-shadow-color);
     border-radius: 1rem;
@@ -329,19 +329,6 @@ form button[type="cancel"] {
     padding-bottom: 0rem;
 }
 
-.taskItem.visibleDetails .taskName {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    font-weight: bold;
-    font-size: 1.5rem;
-}
-
-.taskItem:hover:not(.visibleDetails:hover) {
-    background-color: var(--purple-color-hover);
-    border-radius: 1.5rem;
-    font-weight: bold;
-}
-
 .taskItem .taskName {
     grid-row: 1 / -1;
     grid-column: 1 / -1;
@@ -350,15 +337,47 @@ form button[type="cancel"] {
 
 .taskItem .taskDescription {
     justify-self: left;
+    margin-left: 2rem;
+}
+
+.taskItem .taskDue {
+    margin-right: 2rem;
+}
+
+.taskItem.visibleDetails .taskName {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.taskItem.taskComplete {
+    background-color: var(--box-shadow-color);
+    opacity: 1;
+    color: grey;
+}
+
+.taskItem:hover:not(.visibleDetails:hover) {
+    background-color: var(--purple-color-hover);
+    border-radius: 1.5rem;
+    font-weight: bold;
 }
 
 .taskItem .taskPriority {
-    place-self: center;
-    grid-row: 1 / -1;
+    place-self: start;
+    grid-row: 1;
+    grid-column: 1;
     padding: 0.75rem;
     border: 1px solid black;
     border-radius: 50%;
 }
+
+.completeTask {
+    grid-row: 1 / -1;
+    grid-column: -1;
+    transform: scale(2.5);
+}
+
 .taskItem .taskPriority.low {
     background-color: var(--green-priority);
 }

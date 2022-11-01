@@ -1,7 +1,7 @@
 import './style.css';
-import CreateDOM from './DOM/createDOM';
+import CreateDOMLayout from './DOM/CreateDOMLayout';
 import { PopulateListSidebar, ShowAllTasks } from './helpers/Helpers';
-import { CheckLocalStorage, LoadLocalStorage, SaveLocalStorage, GetList } from './helpers/LocalStorageHelpers';
+import { GetList } from './helpers/LocalStorageHelpers';
 import AddNewList from './AddNewList.js';
 import AddNewTask from './AddNewTask.js';
 
@@ -14,7 +14,7 @@ function buildMainPage() {
     let defaultList = GetList();
 
     //Create and populate the DOM with the lists
-    CreateDOM();
+    CreateDOMLayout();
     
     PopulateListSidebar();
     ShowAllTasks();

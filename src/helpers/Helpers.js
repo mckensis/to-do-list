@@ -162,6 +162,122 @@ function DisplayAllTasks() {
     ShowAllTasks();
 }
 
+//Creates the default List, loads the items and appends them to the container
+function ShowAllTasks() {
+
+    const defaultList = new List("All Tasks");
+    defaultList.items = LoadLocalStorage();
+
+    const taskContainer = document.querySelector('.taskContainer');
+
+    EmptySection(taskContainer);
+
+    taskContainer.appendChild(CreateTaskList(defaultList.items));
+}
+
+function CreateTaskList(list) {
+
+    const container = document.querySelector(".taskContainer");
+    const taskList = document.createElement("ul");
+    taskList.classList.add("activeTaskList");
+
+    EmptySection(container);
+
+    for (const item of list) {
+        const taskListItem = document.createElement("li");
+        const button = document.createElement("input");
+
+        button.type = "checkbox";
+        button.checked = false;
+
+        const itemDate = new Date(item[2]);
+        const today = new Date();
+
+        const u = toDate(itemDate);
+        console.log(today);
+
+        const dueDate = formatDistance((u), (today), {addSuffix: true});
+        console.log(dueDate);
+
+
+        const taskName = document.createElement("p");
+        const taskDue = document.createElement("p");
+        const taskPriority = document.createElement("p");
+        const taskDescription = document.createElement("p");
+
+        taskName.textContent = item[0];
+        taskDescription.textContent = `${item[1]}`;
+        taskDue.textContent = `Due ${dueDate}`;
+        
+        taskPriority.classList.add("taskPriority");
+        taskPriority.classList.add(item[3]);
+        taskListItem.classList.add("taskItem");
+        taskName.classList.add("taskName");
+        taskDescription.classList.add("taskDescription");
+        taskDue.classList.add("taskDue");
+        button.classList.add("completeTask");
+        
+        taskDescription.classList.add("hidden");
+        taskDue.classList.add("hidden");
+        taskPriority.classList.add("hidden");
+        button.classList.add("hidden");
+        
+        taskListItem.appendChild(taskName);
+        taskListItem.appendChild(taskDescription);
+        taskListItem.appendChild(taskDue);
+        taskListItem.appendChild(taskPriority);
+        taskListItem.appendChild(button);
+        
+        taskList.appendChild(taskListItem);
+
+        const priority = taskListItem.lastChild.previousSibling;
+
+        priority.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            ChangePriority(priority, item);
+        })
+        
+        taskListItem.addEventListener("click", OpenTask.bind(taskListItem, taskList));
+        
+        button.addEventListener("change", CompleteTask.bind(taskListItem, button));
+    }
+
+    return taskList;
+}
+
+function CompleteTask(button) {
+    const item = this;
+    
+    if (button.checked) {
+        this.classList.add("taskComplete");
+        button.classList.add("taskComplete");
+    } else {
+        this.classList.remove("taskComplete");
+    }
+
+    const parent = this.parentElement;
+
+    parent.removeChild(this);
+    parent.appendChild(this);
+    CloseAllTasks(parent);
+
+    //Save localstorage?
+}
+
+function CloseAllTasks(parent) {
+
+    //Iterate over each task and make sure only one is open at a time
+    for (let taskCounter = 0; taskCounter < parent.childNodes.length; taskCounter++) {
+        const item = parent.childNodes[taskCounter];
+        //Hide the details of all tasks except the one that was clicked
+            item.classList.remove("visibleDetails");
+            for (let detailCounter = 1; detailCounter < item.childNodes.length; detailCounter++) {
+                item.childNodes[detailCounter].classList.add("hidden");
+            }
+        }
+}
+
 function DefaultList() {
 
     const listItem = document.createElement("li");
@@ -251,18 +367,6 @@ function ManageDefaultList(lists) {
     }
 }
 
-//Creates the default List, loads the items and appends them to the container
-function ShowAllTasks() {
-
-    const defaultList = new List("All Tasks");
-    defaultList.items = LoadLocalStorage();
-
-    const taskContainer = document.querySelector('.taskContainer');
-
-    EmptySection(taskContainer);
-
-    taskContainer.appendChild(CreateTaskList(defaultList.items));
-}
 
 //Toggles the task from title / full view when clicked on
 function Toggle(taskListItem) {
@@ -273,9 +377,9 @@ function Toggle(taskListItem) {
 }
 
 //Changes the task priority when the coloured circle is clicked
-function ChangePriority(e, priority, item) {
-    e.stopImmediatePropagation();
+function ChangePriority(priority, item) {
 
+    
     switch (priority.classList[1]) {
         case "high":
             priority.classList.remove("high");
@@ -319,68 +423,6 @@ function CloseOtherTasks(taskListItem, taskList) {
             }
         }
     }
-}
-
-
-
-function CreateTaskList(list) {
-
-    const container = document.querySelector(".taskContainer");
-    const taskList = document.createElement("ul");
-    taskList.classList.add("activeTaskList");
-
-    EmptySection(container);
-
-    for (const item of list) {
-        const taskListItem = document.createElement("li");
-
-        const itemDate = new Date(item[2]);
-        const today = new Date();
-
-        const u = toDate(itemDate);
-        console.log(today);
-
-        const dueDate = formatDistance((u), (today), {addSuffix: true});
-        console.log(dueDate);
-
-
-        const taskName = document.createElement("p");
-        const taskDue = document.createElement("p");
-        const taskPriority = document.createElement("p");
-        const taskDescription = document.createElement("p");
-
-        taskName.textContent = item[0];
-        taskDescription.textContent = `${item[1]}`;
-        taskDue.textContent = `Due ${dueDate}`;
-        
-        taskPriority.classList.add("taskPriority");
-        taskPriority.classList.add(item[3]);
-        taskListItem.classList.add("taskItem");
-        taskName.classList.add("taskName");
-        taskDescription.classList.add("taskDescription");
-        taskDue.classList.add("taskDue");
-        
-        taskDescription.classList.add("hidden");
-        taskDue.classList.add("hidden");
-        taskPriority.classList.add("hidden");
-        
-        taskListItem.appendChild(taskName);
-        taskListItem.appendChild(taskDescription);
-        taskListItem.appendChild(taskDue);
-        taskListItem.appendChild(taskPriority);
-        
-        taskList.appendChild(taskListItem);
-
-        const priority = taskListItem.lastChild;
-
-        priority.addEventListener("click", (e) => {
-            ChangePriority(e, priority, item);
-        })
-
-        taskListItem.addEventListener("click", OpenTask.bind(taskListItem, taskList));
-    }
-
-    return taskList;
 }
 
 export { RemoveActiveClass, AddActiveClass, EmptySection, Hide, Show, SetHeight,
