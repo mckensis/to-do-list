@@ -1,5 +1,5 @@
-import { Hide, Show, SetHeight, SetListInputAttributes, GetListNames, PopulateListSidebar, ShowAllTasks } from './helpers/Helpers.js';
-import { CheckForBlankInput, TestForValidInput } from './helpers/Validate.js';
+import { Hide, Show, SetHeight, SetListInputAttributes, GetListNames, PopulateListSidebar, ShowAllTasks } from '../helpers/Helpers.js';
+import { CheckForBlankInput, TestForValidInput } from '../helpers/Validate.js';
 
 function AddNewList() {
     //console.log("AddNewList.js - clicked add new list...");

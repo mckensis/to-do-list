@@ -1,10 +1,11 @@
 import Task from "./Task";
+import {v4 as uuidv4} from 'uuid';
 
 class List {
-    constructor(title) {
+    constructor(title, id) {
         this.title = title;
-        this.items = [];
         this.tasks = [];
+        this.id = id || uuidv4();
     }
 
     _store(item) {
@@ -12,12 +13,15 @@ class List {
     }
 
     create(item) {
-        const task = new Task(item[0], item[1], item[2], item[3], item[4]);
+        const task = new Task({
+            title: item.title,
+            due: item.due,
+            priority: item.priority,
+            complete: item.complete,
+            id: item.id
+        });
+        
         this._store(task);
-    }
-
-    returnItemsArray()  {
-        return this.items;
     }
 };
 

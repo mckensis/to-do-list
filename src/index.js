@@ -1,28 +1,29 @@
 import './style.css';
-import CreateDOMLayout from './DOM/CreateDOMLayout';
-import { PopulateListSidebar, ShowAllTasks } from './helpers/Helpers';
-import { GetList } from './helpers/LocalStorageHelpers';
-import AddNewList from './AddNewList.js';
-import AddNewTask from './AddNewTask.js';
+import CreateWebpage from './components/Webpage';
+import { DisplayLists } from './functions/ListFunctions';
+import { DisplayAllTasks } from './functions/TaskFunctions';
+import CreateDefaultList from './functions/CreateDefaultList';
+import { GetListFromLocalStorage, SaveLocalStorage } from './functions/LocalStorageHelpers';
 
-//import data from './data.json';
-window.addEventListener("load", buildMainPage);
-
+// import data from './data.json';
+window.addEventListener('load', buildMainPage);
 
 function buildMainPage() {
-    //localStorage.clear();
+    // Create the DOM Layout (title, lists & tasks sections);
+    CreateWebpage();
 
-    let defaultList = GetList();
+    localStorage.clear();
+    //Get the tasks from local storage
+    let list = GetListFromLocalStorage();
 
-    //Create and populate the DOM with the lists
-    CreateDOMLayout();
-    
-    PopulateListSidebar();
-    ShowAllTasks();
+    //If they don't exist, then create the default lists & tasks
+    if (!list) {
+        list = CreateDefaultList();
+        //Save the list that was just created 
+        SaveLocalStorage(list);
+    }
 
-    const addListButton = document.querySelector('.addListButton');
-    const addTaskButton = document.querySelector(".addTaskButton");
-
-    addListButton.addEventListener("click", AddNewList);
-    addTaskButton.addEventListener("click", AddNewTask);
+    //Display lists and all tasks
+    DisplayLists(list);
+    DisplayAllTasks();
 }

@@ -1,7 +1,7 @@
-import { LoadLocalStorage, SaveLocalStorage } from './helpers/LocalStorageHelpers.js';
-import { CheckForBlankInput, TestForValidInput } from './helpers/Validate.js';
+import { LoadLocalStorage, SaveLocalStorage } from '../functions/LocalStorageHelpers.js';
+import { CheckForBlankInput, TestForValidInput } from '../helpers/Validate.js';
 import { Hide, Show, SetHeight, SetTaskTitleInputAttributes, SetTaskDescriptionInputAttributes, 
-         SetTaskDueInputAttributes, UpdateTaskListOptions, PopulateListSidebar, FilterTasks } from './helpers/Helpers.js';
+         SetTaskDueInputAttributes, UpdateTaskListOptions, PopulateListSidebar, FilterTasks } from '../helpers/Helpers.js';
 
 function AddNewTask() {
 

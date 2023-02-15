@@ -1,11 +1,33 @@
+import {v4 as uuidv4} from 'uuid';
+
 class Task {
-    constructor(title, description, dueDate, priority, list) {
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.priority = priority;
-        this.list = list;
-        this.complete = false;
+    constructor(task) {
+        this.title = task.title;
+        this.due = task.due;
+        this.priority = task.priority;
+        this.complete = task.complete || false;
+        this.index = null;
+        this.id = task.id || uuidv4();
+    }
+
+    isComplete() {
+        return this.complete;
+    }
+
+    changePriority() {
+        this.priority < 2 ? this.priority++ : this.priority = 0;
+    }
+
+    saveIndex(index) {
+        this.index = index;
+    }
+
+    returnIndex() {
+        return this.index;
+    }
+
+    toggleComplete() {
+        this.complete = !this.complete;
     }
 }
 
