@@ -3,7 +3,7 @@ import {v4 as uuidv4} from 'uuid';
 class Task {
     constructor(task) {
         this.title = task.title;
-        this.due = task.due;
+        this.due = ({ day: task.due.day, month: task.due.month -1, year: task.due.year });
         this.priority = task.priority;
         this.complete = task.complete || false;
         this.index = null;

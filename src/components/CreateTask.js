@@ -1,7 +1,8 @@
-import { formatDistance, parseISO, toDate } from "date-fns";
+import { formatDistance, format, parseISO, toDate } from "date-fns";
 import EmptyContainer from "../functions/EmptyContainer";
 import { UpdateLocalStorage } from "../functions/LocalStorageHelpers";
 import { DisplayAllTasks, PopulateTasks, SortTasks } from "../functions/TaskFunctions";
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 //Toggle between complete & incomplete tasks
 function ToggleTaskCompletion(tasks, task, listItem, priority, e) {
@@ -43,19 +44,28 @@ function ChangeDueDateFormat(due, datefnsDate, dueDate) {
 
 //Create an li for each task
 function CreateTask(task, tasks) {
+    const container = document.querySelector('.task-container');
+
     const item = document.createElement("li");
     const completed = document.createElement("input");
     const title = document.createElement("p");
     const due = document.createElement("p");
     const priority = document.createElement('button');
-    //const priorities = ['low', 'default', 'high'];
-    const priorities = ['chill', 'default', 'urgent'];
-    
-    console.log(priorities);
+    const priorities = ['low', 'default', 'urgent'];
 
     const todayDate = new Date();
-    const dueDate = new Date(task.due);
+
+    let year = task.due.year;
+    let month = task.due.month;
+    let day = task.due.day;
+
+    const a = `${year} ${month} ${day}`;
+    console.log(a);
+
+    const dueDate = new Date(task.due.year, task.due.month, task.due.day);
+
     const datefnsDate = formatDistance((dueDate), (todayDate), {addSuffix: true});
+    //container.parentElement.style.backgroundColor = 'blue';
 
     item.classList.add('task-item');
     priority.classList.add('task-priority',`p${task.priority}`);
@@ -80,8 +90,7 @@ function CreateTask(task, tasks) {
     
     item.addEventListener('click',
         ChangeDueDateFormat.bind(item, due, datefnsDate, dueDate));
-    
-    item.addEventListener('mouseover',
+       item.addEventListener('mouseover',
     ChangeDueDateFormat.bind(item, due, datefnsDate, dueDate));
     
     item.addEventListener('mouseleave', () => {

@@ -340,7 +340,7 @@ form input[type='date'] {
     padding: 1rem;
     background-color: var(--purple-color);
     border: 1px solid var(--palette-color-primary);
-    border-radius: 3rem;
+    border-radius: 1rem;
 }
 
 .task-section .task-item.completed {
@@ -442,8 +442,52 @@ button.task-priority.p2 {
     }
 
     /* Change checked style ?*/
-    checkbox:checked {
+    input[type=checkbox] {
+        -webkit-appearance: none;
+        -webkit-position: relative;
+        -webkit-width: 1rem;
+        -webkit-height: 1rem;
+        -webkit-outline: 1px solid black;
+        
         appearance: none;
-        background-color: red;
+        position: relative;
+        width: 1.25rem;
+        height: 1.25rem;
+        outline: 1px solid black;
+    }
+    input[type=checkbox]:checked {
+        -webkit-appearance: none;
+        -webkit-content: 'u';
+        -webkit-width: 1rem;
+        -webkit-height: 1rem;
+
+        appearance: none;
+        content: 'u';
+        width: 1rem;
+        height: 1rem;
+    }
+    input[type=checkbox]:checked:after {
+        -webkit-appearance: none;
+        -webkit-content: '\2714';
+        -webkit-position: absolute;
+        -webkit-top: 0;
+        -webkit-transform-origin: center;
+        -webkit-transform: translateY(-75%);
+        -webkit-font-size: 2rem;
+        -webkit-color: red;
+        -webkit-width: 1rem;
+        -webkit-height: 1rem;
+
+        appearance: none;
+        content: '\2714';
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform-origin: center;
+        transform: translateY(-75%);
+        font-size: 2rem;
+        color: red;
+        width: 1rem;
+        height: 1rem;
     }
 }

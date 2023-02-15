@@ -28,6 +28,7 @@ function FilterTasks(list) {
     const container = document.querySelector('.task-container');
     EmptyContainer(container);
     let sortedTasks = SortTasks(list.tasks);
+ 
     //Filter the tasks to the selected list
     PopulateTasks(sortedTasks);
 }
@@ -53,13 +54,11 @@ function CheckForEmptyTaskList(container) {
 function PopulateTasks(tasks) {
     const container = document.querySelector('.task-container');
 
-    //TO-DO:
-    //Sort the tasks by due date in here before displaying them
     tasks.forEach(task => {
         container.append(CreateTask(task, tasks));
     })
     
-    CheckForEmptyTaskList(container);
+    //CheckForEmptyTaskList(container);
 }
 
 export { PopulateTasks, FilterTasks, DisplayAllTasks, SortTasks };

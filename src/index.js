@@ -25,5 +25,7 @@ function buildMainPage() {
 
     //Display lists and all tasks
     DisplayLists(list);
+
+    //Why is this broken on mobile?
     DisplayAllTasks();
 }

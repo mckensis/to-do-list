@@ -74,14 +74,14 @@ function CreateListItem(list) {
 
     listItem.addEventListener("click", (e) => {
         //If we came here from the delete button then display the default list
-        if (e.target === listItem.querySelector('button')) {
-            DisplayAllTasks();
-            return;
-        }
+//        if (e.target === listItem.querySelector('button')) {
+//            DisplayAllTasks();
+//            return;
+//        }
         //Filter the displayed tasks
-        FilterTasks(list);
         //Toggle the active class
         ToggleActive(listItem, list);
+        FilterTasks(list);
     });
 
     return listItem;
