@@ -1,4 +1,4 @@
-import { formatDistance, format, parseISO, toDate } from "date-fns";
+import { formatDistance, format, parseISO, toDate, formatISO, compareAsc } from "date-fns";
 import EmptyContainer from "../functions/EmptyContainer";
 import { UpdateLocalStorage } from "../functions/LocalStorageHelpers";
 import { DisplayAllTasks, PopulateTasks, SortTasks } from "../functions/TaskFunctions";
@@ -36,47 +36,51 @@ function ChangePriority(priorities, task, e) {
     UpdateLocalStorage(task, 'priority');
 }
 
-function ChangeDueDateFormat(due, datefnsDate, dueDate) {
+function ChangeDueDateFormat(due, datefnsDate, task, e) {
     due.textContent === `Due ${datefnsDate}`
-        ? due.textContent = `Due on ${dueDate.toDateString()}`
+        ? due.textContent = `Due on ${parseISO(task.dueDate).toDateString()}`
         : due.textContent = `Due ${datefnsDate}`;
 }
 
 //Create an li for each task
 function CreateTask(task, tasks) {
-    const container = document.querySelector('.task-container');
-
     const item = document.createElement("li");
     const completed = document.createElement("input");
     const title = document.createElement("p");
     const due = document.createElement("p");
     const priority = document.createElement('button');
+
     const priorities = ['low', 'default', 'urgent'];
-
-    const todayDate = new Date();
-
-    let year = task.due.year;
-    let month = task.due.month;
-    let day = task.due.day;
-
-    const a = `${year} ${month} ${day}`;
-    console.log(a);
-
-    const dueDate = new Date(task.due.year, task.due.month, task.due.day);
-
-    const datefnsDate = formatDistance((dueDate), (todayDate), {addSuffix: true});
-    //container.parentElement.style.backgroundColor = 'blue';
+    const today = format(new Date(), 'yyyy-MM-dd');
+    let datefnsDate = formatDistance
+        (parseISO(task.dueDate), parseISO(today), {addSuffix: true});
+    
+    //Find out if the task is overdue
+    //Returns 1 if today's date is after the task due date
+    let comparedDates = compareAsc(parseISO(today), parseISO(task.dueDate));
+    if (comparedDates === 1) {
+        task.overdue = true;
+    }
+    
+    if (task.overdue && !task.complete) {
+        due.classList.add('overdue');
+    }
 
     item.classList.add('task-item');
     priority.classList.add('task-priority',`p${task.priority}`);
-    
+
     completed.type = "checkbox";
     completed.checked = task.isComplete();
     title.textContent = task.title;
-    due.textContent = `Due ${datefnsDate}`;
     priority.textContent = priorities[task.priority];
 
     item.append(completed, priority, title, due);
+
+    if (datefnsDate === 'less than a minute ago') {
+        datefnsDate = 'today';
+    }
+
+    due.textContent = `Due ${datefnsDate}`;
 
     if (task.isComplete()) {
         item.classList.add('completed');
@@ -89,9 +93,10 @@ function CreateTask(task, tasks) {
         ToggleTaskCompletion.bind(completed, tasks, task, item, priority));
     
     item.addEventListener('click',
-        ChangeDueDateFormat.bind(item, due, datefnsDate, dueDate));
-       item.addEventListener('mouseover',
-    ChangeDueDateFormat.bind(item, due, datefnsDate, dueDate));
+        ChangeDueDateFormat.bind(item, due, datefnsDate, task));
+
+    //item.addEventListener('mouseover',
+    //ChangeDueDateFormat.bind(item, due, datefnsDate, task));
     
     item.addEventListener('mouseleave', () => {
         due.textContent = `Due ${datefnsDate}`;

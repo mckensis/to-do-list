@@ -4,7 +4,7 @@ function CreateDefaultWorkList() {
     const work = new List('Work');
     work.create({
         title: 'Allow completion of tasks',
-        due: {
+        dueDate: {
             day: '04',
             month: '02',
             year: '2023',
@@ -14,7 +14,7 @@ function CreateDefaultWorkList() {
     });
     work.create({
         title: 'Allow deletion of tasks',
-        due: {
+        dueDate: {
             day: '21',
             month: '02',
             year: '2023',
@@ -24,7 +24,7 @@ function CreateDefaultWorkList() {
     });
     work.create({
         title: 'Do not allow priority change of completed tasks',
-        due: {
+        dueDate: {
             day: '17',
             month: '02',
             year: '2023',
@@ -33,8 +33,8 @@ function CreateDefaultWorkList() {
         priority: 2,
     });
     work.create({
-        title: 'Sort tasks by completion / due / priority',
-        due: {
+        title: 'Sort tasks by completion / dueDate / priority',
+        dueDate: {
             day: '15',
             month: '02',
             year: '2023',
@@ -44,7 +44,7 @@ function CreateDefaultWorkList() {
     });
     work.create({
         title: 'Allow priority change of tasks',
-        due: {
+        dueDate: {
             day: '15',
             month: '02',
             year: '2023',
@@ -54,7 +54,7 @@ function CreateDefaultWorkList() {
     });
     work.create({
         title: 'Implement date-fns for due date',
-        due: {
+        dueDate: {
             day: '03',
             month: '02',
             year: '2023',
@@ -70,9 +70,9 @@ function CreateDefaultPersonalList() {
     const personal = new List('Personal');
     personal.create({
         title: 'Move flat',
-        due: {
+        dueDate: {
             day: '16',
-            month: '01',
+            month: '02',
             year: '2023',
         },
         complete: true,
@@ -80,7 +80,7 @@ function CreateDefaultPersonalList() {
     });
     personal.create({
         title: 'Walk 500 miles',
-        due: {
+        dueDate: {
             day: '25',
             month: '12',
             year: '2023',
@@ -89,7 +89,7 @@ function CreateDefaultPersonalList() {
     });
     personal.create({
         title: 'Find a job',
-        due: {
+        dueDate: {
             day: '28',
             month: '02',
             year: '2023',
@@ -99,7 +99,7 @@ function CreateDefaultPersonalList() {
     });
     personal.create({
         title: `Complete Donkey Kong Country 2 for the 1,000,000'th time`,
-        due: {
+        dueDate: {
             day: '16',
             month: '02',
             year: '2023',
@@ -115,7 +115,7 @@ function CreateDefaultShoppingList() {
     const shopping = new List ('Shopping');
     shopping.create({
         title: 'Broccoli',
-        due: {
+        dueDate: {
             day: '18',
             month: '02',
             year: '2023',
@@ -124,7 +124,7 @@ function CreateDefaultShoppingList() {
     });
     shopping.create({
         title: 'Tofu',
-        due: {
+        dueDate: {
             day: '18',
             month: '02',
             year: '2023',
@@ -133,7 +133,7 @@ function CreateDefaultShoppingList() {
     });
     shopping.create({
         title: 'Soy Sauce',
-        due: {
+        dueDate: {
             day: '18',
             month: '02',
             year: '2023',
@@ -142,7 +142,7 @@ function CreateDefaultShoppingList() {
     });
     shopping.create({
         title: 'Sriracha',
-        due: {
+        dueDate: {
             day: '18',
             month: '02',
             year: '2023',

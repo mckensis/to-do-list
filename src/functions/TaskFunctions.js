@@ -2,6 +2,7 @@ import EmptyContainer from "./EmptyContainer";
 import { LoadLocalStorage } from "./LocalStorageHelpers";
 import { CreateTask } from "../components/CreateTask";
 import { ToggleActive } from "./ListFunctions";
+import { parseISO } from "date-fns";
 
 //New function for displaying 'All Tasks'
 function DisplayAllTasks() {
@@ -33,10 +34,11 @@ function FilterTasks(list) {
     PopulateTasks(sortedTasks);
 }
 
+//Sorts tasks by completion, then due date, then urgency
 function SortTasks(tasks) {
     let temp = [...tasks];
     let sortedTasks = temp.sort((taskOne, taskTwo) => {
-        return taskOne.complete - taskTwo.complete || new Date(taskTwo.due) - new Date(taskOne.due) || taskTwo.priority - taskOne.priority;
+        return taskOne.complete - taskTwo.complete || parseISO(taskOne.dueDate) - parseISO(taskTwo.dueDate) || taskTwo.priority - taskOne.priority;
     });
     return sortedTasks;
 }

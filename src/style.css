@@ -331,6 +331,7 @@ form input[type='date'] {
 
 .task-section .task-item {
     display: flex;
+    position: relative;
     flex-wrap: wrap;
     width: 100%;
     align-items: center;
@@ -346,6 +347,11 @@ form input[type='date'] {
 .task-section .task-item.completed {
     opacity: 0.5;
 }
+
+.task-section .task-item .overdue  {
+    color: red;
+}
+
 .task-section .task-item > p {
     pointer-events: none;
 }

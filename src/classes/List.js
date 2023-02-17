@@ -15,10 +15,11 @@ class List {
     create(item) {
         const task = new Task({
             title: item.title,
-            due: item.due,
+            dueDate: item.dueDate,
             priority: item.priority,
             complete: item.complete,
-            id: item.id
+            overdue: item.overdue,
+            id: item.id,
         });
         
         this._store(task);

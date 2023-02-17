@@ -9,13 +9,19 @@ function ConvertJSONIntoObjects(json) {
         let newList = new List(list.title, list.id);
         //Create each task for the lists
         list.tasks.forEach(task => {
+            let date = task.dueDate.split('-');
             newList.create({ 
                 title: task.title,
-                due: task.due,
+                dueDate: {
+                    day: date[2],
+                    month: date[1],
+                    year: date[0],
+                },
                 complete: task.complete,
                 priority: task.priority,
                 id: task.id,
-                });
+                overdue: task.overdue,
+            });
         });
         array.push(newList);
     });

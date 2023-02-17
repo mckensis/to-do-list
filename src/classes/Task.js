@@ -1,12 +1,14 @@
+import { format, formatISO, parseISO } from 'date-fns';
 import {v4 as uuidv4} from 'uuid';
 
 class Task {
     constructor(task) {
         this.title = task.title;
-        this.due = ({ day: task.due.day, month: task.due.month -1, year: task.due.year });
+        this.dueDate = format(new Date(`${task.dueDate.year}, ${task.dueDate.month}, ${task.dueDate.day}`), 'yyyy-MM-dd');
         this.priority = task.priority;
         this.complete = task.complete || false;
         this.index = null;
+        this.overdue = task.overdue || false;
         this.id = task.id || uuidv4();
     }
 
