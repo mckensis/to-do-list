@@ -334,12 +334,14 @@ form input[type='date'] {
 }
 
 .task-section .task-item {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, max-content) 1fr;
+    grid-template-rows: repeat(3, max-content);
     position: relative;
-    flex-wrap: wrap;
     width: 100%;
     align-items: center;
-    gap: 1rem;
+    column-gap: 0.75rem;
+    row-gap: 0.75rem;
     list-style: none;
     margin-bottom: 0.5rem;
     padding: 1rem;
@@ -367,29 +369,40 @@ form input[type='date'] {
     background-position: center;
     width: 1.75rem;
     height: 1.75rem;
-    right: 0;
+    top: 1rem;
+    right: 1rem;
 }
 
 .task-section .task-item > p {
     pointer-events: none;
 }
 
-/* Task name */
-.task-item :nth-last-child(3) {
-    flex-grow: 2;
+/* Task title */
+.task-item :nth-child(3) {
+    grid-column: 1 / -1;
+    font-size: 1rem;
 }
 
-/* Task due */
-.task-item :nth-last-child(2) {
-    text-align: end;
+/* Due date */
+.task-item :nth-child(4) {
+    grid-column: 1 / -1;
+    text-align: right;
+    font-size: 0.9rem;
 }
 
+/* Delete button */
+.task-item :nth-child(5) {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+}
+ 
 .task-section button.task-priority {
     appearance: none;
-    width: 6rem;
-    height: 2rem;
-    padding: 0.25rem 0;
+    width: 5.5rem;
+    padding: 0.5rem 0;
     border: none;
+    font-size: 0.7rem;
     border-radius: 1rem;
     font-weight: 200;
     color: var(--palette-light);

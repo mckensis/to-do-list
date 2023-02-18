@@ -1,6 +1,6 @@
 import ManageElementVisibility from "./ManageElementVisibility";
 import EmptyContainer from "./EmptyContainer";
-import TestForValidInput from './FormValidation';
+import { TestForMultipleValidInputs } from './FormValidation';
 
 //Updates the select element with options for each list name
 function UpdateOptionsList(select) {
@@ -24,13 +24,10 @@ function HandleSubmit(container, form, inputs, e) {
     e.preventDefault();
     e.stopImmediatePropagation();
 
-    inputs.forEach(element => {
-        if (!TestForValidInput(element)) {
-            console.log("failed");
-            return;
-        }
-    })
-
+    if (!TestForMultipleValidInputs(inputs)) {
+        console.log("failed");
+        return;
+    }
 
     //Empty the list in preparation of displaying the updated list
     EmptyContainer(container);
@@ -47,10 +44,9 @@ function HandleCancel(container, e) {
     ManageElementVisibility(container, 'reset');
 }
 
-
 function ResetFormInputs(inputs) {
     inputs.title.value = '';
-    inputs.due.value = '';
+    inputs.due.value = inputs.due.min;
     inputs.priority.selectedIndex = 1;
     inputs.title.focus();
 }
@@ -76,11 +72,11 @@ function AddNewTaskForm() {
     
     //Toggle the form and button when + is clicked
     ManageElementVisibility(container);
-    
+    ResetFormInputs({ title, due, priority });
+
     submit.addEventListener("click", HandleSubmit.bind(submit, container, form, inputs));
     cancel.addEventListener("click", HandleCancel.bind(cancel, container));
     
-    ResetFormInputs({ title, due, priority });
 }
 
 //Adds the new list to local storage and updates the display

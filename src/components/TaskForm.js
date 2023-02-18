@@ -6,7 +6,7 @@ function Title() {
 
     label.textContent = "Task Name";
     input.type = "text";
-    input.name = "Title";
+    input.name = "task-title";
     input.classList.add('add-task','title');
     input.required = true;
     
@@ -32,21 +32,12 @@ function Due() {
     
     label.textContent = "Due";
     input.type = "date";
-    input.name = "Due";
+    input.name = "task-due";
     input.classList.add('add-task','due');
     input.required = true;
     input.min = minimumDate;
     input.max = maximumDate;
-
-    //Enforce the input min & max restrictions
-    input.addEventListener('blur', () => {
-        if (input.value > input.max) {
-            input.value = input.max;
-        }
-        if (input.value < input.min) {
-            input.value = input.min;
-        }
-    })
+    input.value = input.min;
 
     label.append(input);
 
@@ -80,7 +71,7 @@ function Priority() {
     const label = document.createElement("label");
 
     label.textContent = "Priority";
-    input.name = "Priority";
+    input.name = "task-priority";
     input.classList.add('add-task','priority');
     input.required = true;
 
@@ -95,7 +86,7 @@ function TaskList() {
     const label = document.createElement("label");
 
     label.textContent = "List";
-    input.name = "List";
+    input.name = "task-list";
     input.classList.add('add-task','list');
     input.required = true;
 
@@ -113,7 +104,7 @@ function Submit() {
     const button = document.createElement("button");
     button.type = "submit";
     button.textContent = "✓";
-    button.name = "Submit";
+    button.name = "task-submit";
     button.classList.add('add-task','confirm');
 
     return button;
@@ -123,7 +114,7 @@ function Cancel() {
     const button = document.createElement("button");
     button.type = "cancel";
     button.textContent = "❌";
-    button.name = "Cancel";
+    button.name = "task-cancel";
     button.classList.add('add-task','cancel');
 
     return button;

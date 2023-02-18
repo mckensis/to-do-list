@@ -1,4 +1,4 @@
-import TestForValidInput from './FormValidation';
+import { TestForValidInput } from './FormValidation';
 import { DisplayLists } from './ListFunctions';
 import { GetListFromLocalStorage, SaveLocalStorage } from './LocalStorageHelpers';
 import ManageElementVisibility from './ManageElementVisibility';
