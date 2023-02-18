@@ -71,7 +71,7 @@ function TaskSort() {
 
     sort.addEventListener('change', () => {
         console.log("sort needs set up");
-        //TO DO:
+        //TO-DO:
         //SET UP SORTING OF TASKS
     })
     

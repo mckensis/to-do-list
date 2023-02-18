@@ -1,4 +1,6 @@
 import ManageElementVisibility from "./ManageElementVisibility";
+import EmptyContainer from "./EmptyContainer";
+import TestForValidInput from './FormValidation';
 
 //Updates the select element with options for each list name
 function UpdateOptionsList(select) {
@@ -18,6 +20,41 @@ function UpdateOptionsList(select) {
     });
 }
 
+function HandleSubmit(container, form, inputs, e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    inputs.forEach(element => {
+        if (!TestForValidInput(element)) {
+            console.log("failed");
+            return;
+        }
+    })
+
+
+    //Empty the list in preparation of displaying the updated list
+    EmptyContainer(container);
+    
+    //Add the new list to localStorage and the display
+    //Add(input.value);
+    
+    //Toggle the form and button back to the original state
+    ManageElementVisibility(container, 'reset');
+}
+
+function HandleCancel(container, e) {
+    e.preventDefault();
+    ManageElementVisibility(container, 'reset');
+}
+
+
+function ResetFormInputs(inputs) {
+    inputs.title.value = '';
+    inputs.due.value = '';
+    inputs.priority.selectedIndex = 1;
+    inputs.title.focus();
+}
+
 function AddNewTaskForm() {
     const container = document.querySelector('.task-container');
     const form = document.querySelector('.add-task.form');
@@ -25,7 +62,6 @@ function AddNewTaskForm() {
     const due = document.querySelector(".add-task.due");
     const priority = document.querySelector(".add-task.priority");
     const select = document.querySelector('.add-task.list');
-    const button = document.querySelector('.add-new.task');
     const submit = document.querySelector('.add-task.confirm');
     const cancel = document.querySelector('.add-task.cancel');
 
@@ -41,43 +77,24 @@ function AddNewTaskForm() {
     //Toggle the form and button when + is clicked
     ManageElementVisibility(container);
     
-    title.value = '';    
-    title.focus();
+    submit.addEventListener("click", HandleSubmit.bind(submit, container, form, inputs));
+    cancel.addEventListener("click", HandleCancel.bind(cancel, container));
     
-    select.addEventListener('click', UpdateOptionsList.bind(select, select));
-    //submit.addEventListener("click", HandleSubmit.bind(submit, form, input, button));
-    //cancel.addEventListener("click", HandleCancel.bind(cancel, form, input, button));
+    ResetFormInputs({ title, due, priority });
+}
+
+//Adds the new list to local storage and updates the display
+function Add(value) {
+    let storedList = GetListFromLocalStorage();
+    let newList = new List(value);
+    storedList.push(newList);
+    SaveLocalStorage(storedList);
+    DisplayLists(storedList);
 }
 
 export default AddNewTaskForm;
 
 /*
-    const button = document.querySelector(".addTaskButton");
-    const form = document.querySelector(".addTaskForm");
-    const title = document.querySelector(".addTaskInput.title");
-    const description = document.querySelector(".addTaskInput.description");
-    const due = document.querySelector(".addTaskInput.due");
-    const priority = document.querySelector(".addTaskInput.priority");
-    const inputList = document.querySelector(".addTaskInput.list");
-
-    const submit = document.querySelector(".addTaskConfirm");
-    const cancel = document.querySelector(".addTaskCancel");
-
-    const taskSection = document.querySelector(".taskSection");
-    const taskContainer = document.querySelector(".taskContainer");
-
-    const taskHeight = taskSection.offsetHeight;
-    const height = taskContainer.offsetHeight;
-
-    SetTaskTitleInputAttributes(title);
-    UpdateTaskListOptions(inputList);
-
-    Hide(button);
-    Show(form);
-
-    SetHeight(taskSection, taskHeight);
-    SetHeight(taskContainer, "250");
-
     form.addEventListener("submit", (e) => {
         e.stopImmediatePropagation();
         e.preventDefault();
@@ -93,59 +110,6 @@ export default AddNewTaskForm;
         SetHeight(taskContainer, height);
     })
 
-    submit.addEventListener("click", (e) => {
-        e.stopImmediatePropagation();
-        SetHeight(taskContainer, height);
-        return;
-    })
-
-    cancel.addEventListener("click", (e) => {
-        e.preventDefault();
-        Hide(form);
-        Show(button);
-        SetHeight(taskContainer, height);
-    });
-
-    title.value = '';
-    description.value = '';
-    due.value = '';
-    priority.option = "Default";
-
-    title.focus();
-}
-
-}
-
-export default AddNewTaskForm;
-/*
-function AddNewTask() {
-
-    const button = document.querySelector(".addTaskButton");
-    const form = document.querySelector(".addTaskForm");
-    const title = document.querySelector(".addTaskInput.title");
-    const description = document.querySelector(".addTaskInput.description");
-    const due = document.querySelector(".addTaskInput.due");
-    const priority = document.querySelector(".addTaskInput.priority");
-    const inputList = document.querySelector(".addTaskInput.list");
-
-    const submit = document.querySelector(".addTaskConfirm");
-    const cancel = document.querySelector(".addTaskCancel");
-
-    const taskSection = document.querySelector(".taskSection");
-    const taskContainer = document.querySelector(".taskContainer");
-
-    const taskHeight = taskSection.offsetHeight;
-    const height = taskContainer.offsetHeight;
-
-    SetTaskTitleInputAttributes(title);
-    UpdateTaskListOptions(inputList);
-
-    Hide(button);
-    Show(form);
-
-    SetHeight(taskSection, taskHeight);
-    SetHeight(taskContainer, "250");
-
     form.addEventListener("submit", (e) => {
         e.stopImmediatePropagation();
         e.preventDefault();
@@ -160,47 +124,4 @@ function AddNewTask() {
         Show(button);
         SetHeight(taskContainer, height);
     })
-
-    submit.addEventListener("click", (e) => {
-        e.stopImmediatePropagation();
-        SetHeight(taskContainer, height);
-        return;
-    })
-
-    cancel.addEventListener("click", (e) => {
-        e.preventDefault();
-        Hide(form);
-        Show(button);
-        SetHeight(taskContainer, height);
-    });
-
-    title.value = '';
-    description.value = '';
-    due.value = '';
-    priority.option = "Default";
-
-    title.focus();
-}
-
-function Add(data) {
-
-    const title = data[0][1];
-    const due = data[1][1];
-    const priority = data[2][1];
-    const list = data[3][1];
-    const description = data[4][1];
-
-    const newTask = [];
-
-    newTask.push(title, description, due, priority, list);
-    console.log(newTask);
-
-    const items = LoadLocalStorage();
-    
-    items.unshift(newTask);
-    
-    SaveLocalStorage(items);
-    PopulateListSidebar();
-    FilterTasks(list);
-}
 */

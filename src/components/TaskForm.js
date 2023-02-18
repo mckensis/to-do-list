@@ -1,3 +1,5 @@
+import add from "date-fns/add";
+
 function Title() {
     const label = document.createElement("label");
     const input = document.createElement("input");
@@ -7,20 +9,12 @@ function Title() {
     input.name = "Title";
     input.classList.add('add-task','title');
     input.required = true;
-
-    label.append(input);
-
-    return label;
-}
-
-function Description() {
-    const label = document.createElement("label");
-    const input = document.createElement("input");
-
-    label.textContent = "Description / Notes (optional)";
-    input.type = "text";
-    input.name = "Description";
-    input.classList.add('add-task','description');
+    
+    input.minLength = '1';
+    input.maxLength = "15";
+    input.pattern = '^[a-zA-Z0-9-_ ]+';
+    input.required = true;
+    input.autocomplete = 'off';
 
     label.append(input);
 
@@ -31,11 +25,28 @@ function Due() {
     const label = document.createElement("label");
     const input = document.createElement("input");
 
+    //Minimum date is today
+    //Maximum date is 100 years from today
+    let minimumDate = new Date().toISOString().split("T")[0];
+    let maximumDate = add(new Date(), { years: 100, }).toISOString().split('T')[0];
+    
     label.textContent = "Due";
     input.type = "date";
     input.name = "Due";
     input.classList.add('add-task','due');
     input.required = true;
+    input.min = minimumDate;
+    input.max = maximumDate;
+
+    //Enforce the input min & max restrictions
+    input.addEventListener('blur', () => {
+        if (input.value > input.max) {
+            input.value = input.max;
+        }
+        if (input.value < input.min) {
+            input.value = input.min;
+        }
+    })
 
     label.append(input);
 

@@ -29,8 +29,8 @@ function CreateDefaultWorkList() {
             month: '02',
             year: '2023',
         },
-        complete: false,
-        priority: 2,
+        complete: true,
+        priority: 0,
     });
     work.create({
         title: 'Sort tasks by completion / dueDate / priority',
@@ -40,7 +40,7 @@ function CreateDefaultWorkList() {
             year: '2023',
         },
         complete: true,
-        priority: 2,
+        priority: 0,
     });
     work.create({
         title: 'Allow priority change of tasks',

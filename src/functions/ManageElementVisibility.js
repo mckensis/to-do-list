@@ -1,3 +1,5 @@
+import { DisplayAllTasks } from "./TaskFunctions";
+
 //Toggling an element between hidden and shown
 function Hide(element) {
     element.style.display = 'none';
@@ -30,15 +32,21 @@ function ManageElementVisibility(referrer, type) {
         if (referrer === taskSection) {
             Hide(taskForm);
             Show(taskButton);
+            DisplayAllTasks();
             Show(taskSection);
             return;
         }
     }
 
+    //TO-DO:
+    if (type === 'submit') {
+        //Display the new list
+        //Or display the list you just added a task to
+    }
+
     //Expands / collapses the list section
     if (type === 'expand / hide') {
         let button = this;
-        console.log(button, type, referrer);
         if (referrer.style.display !== 'none') {
             referrer.style.display = 'none';
             button.textContent = 'Expand';

@@ -25,21 +25,47 @@ function DisplayAllTasks() {
 }
 
 //Filter the task list depending on which list title was clicked
-function FilterTasks(list) {
+function FilterTasks(filter) {
     const container = document.querySelector('.task-container');
     EmptyContainer(container);
-    let sortedTasks = SortTasks(list.tasks);
- 
-    //Filter the tasks to the selected list
-    PopulateTasks(sortedTasks);
+    const list = LoadLocalStorage();
+
+    list.forEach(subList => {
+        if (subList.id === filter.id) {
+            const sortedTasks = SortTasks(subList.tasks);
+            //Filter the tasks to the selected list
+            PopulateTasks(sortedTasks);
+            return;
+        }
+    })
+    return false;
 }
 
 //Sorts tasks by completion, then due date, then urgency
 function SortTasks(tasks) {
     let temp = [...tasks];
-    let sortedTasks = temp.sort((taskOne, taskTwo) => {
+    let complete = [];
+    let incomplete = [];
+
+    temp.forEach(task => {
+        if (task.isComplete()) {
+            complete.push(task);
+        } else {
+            incomplete.push(task);
+        }
+    });
+
+    //Sort the complete tasks to have most recent at the top
+    let sortedComplete = complete.sort((taskOne, taskTwo) => {
+        return parseISO(taskTwo.dueDate) - parseISO(taskOne.dueDate) || taskTwo.priority - taskOne.priority;
+    });
+
+    //Sort the incomplete tasks to have nearest due date at the top
+    let sortedIncomplete = incomplete.sort((taskOne, taskTwo) => {
         return taskOne.complete - taskTwo.complete || parseISO(taskOne.dueDate) - parseISO(taskTwo.dueDate) || taskTwo.priority - taskOne.priority;
     });
+
+    let sortedTasks = [...sortedIncomplete, ...sortedComplete];
     return sortedTasks;
 }
 

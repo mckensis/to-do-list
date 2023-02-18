@@ -241,18 +241,22 @@ button.expand {
 
 /* Delete button for list item */
 .list-item > button {
+    appearance: none;
     position: absolute;
     top: 50%;
+    right: 1rem;
     transform-origin: center;
     transform: translateY(-50%);
-    right: 1rem;
+    width: 1.75rem;
+    height: 100%;
     border: none;
+    outline: none;
     background-color: transparent;
-    color: var(--palette-light);
-    font-size: 0.9rem;
+    background-image: url('./images/icons/trash-light.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
-
-
 
 /* Styles for highlighting and selecting a to-do list from the sidebar */
 .list-section li.active {
@@ -352,17 +356,31 @@ form input[type='date'] {
     color: red;
 }
 
+.task-section .task-delete {
+    background-image: url('./images/icons/trash.png');
+    outline: none;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    right: 0;
+}
+
 .task-section .task-item > p {
     pointer-events: none;
 }
 
 /* Task name */
-.task-item :nth-last-child(2) {
+.task-item :nth-last-child(3) {
     flex-grow: 2;
 }
 
 /* Task due */
-.task-item :nth-last-child(1) {
+.task-item :nth-last-child(2) {
     text-align: end;
 }
 
