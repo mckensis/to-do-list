@@ -1,6 +1,5 @@
 function NewListForm() {
     const form = document.createElement("form");
-
     const input = document.createElement("input");
     const submit = document.createElement("button");
     const cancel = document.createElement("button");
@@ -8,6 +7,8 @@ function NewListForm() {
 
     submit.type = "submit";
     cancel.type = "cancel";
+    submit.name = 'list-submit';
+    cancel.name = 'list-cancel';
     
     input.classList.add('add-list','input-field');
     submit.classList.add('add-list','confirm');
@@ -15,7 +16,7 @@ function NewListForm() {
     form.classList.add('add-list','form');
     label.classList.add('add-list','label');
 
-    input.name = "name";
+    input.name = "list-name";
     input.id = "list_name";
     input.type = "text";
     input.minLength = '1';
@@ -24,7 +25,6 @@ function NewListForm() {
     input.required = true;
     input.autocomplete = 'off';
 
-    
     submit.textContent = '\u2713';
     cancel.textContent = '\u03A7';
     label.textContent = "New List:";

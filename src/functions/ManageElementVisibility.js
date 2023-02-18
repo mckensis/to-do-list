@@ -1,4 +1,5 @@
-import { DisplayAllTasks } from "./TaskFunctions";
+import { ToggleActive } from "./ListFunctions";
+import { DisplayAllTasks, FilterTasks } from "./TaskFunctions";
 
 //Toggling an element between hidden and shown
 function Hide(element) {
@@ -10,7 +11,7 @@ function Show(element) {
 
 //Manages the different elements for each section when the + button is clicked
 //Can be passed in a type such as 'reset' and 'expand / hide'
-function ManageElementVisibility(referrer, type) {
+function ManageElementVisibility(referrer, type, list) {
     //List section elements
     const listSection = document.querySelector('.list-container');
     const listButton = document.querySelector('button.add-new.list');
@@ -38,10 +39,24 @@ function ManageElementVisibility(referrer, type) {
         }
     }
 
-    //TO-DO:
+    
     if (type === 'submit') {
+        //Display the new task within it's parent list
+        if (referrer === taskSection) {
+            let listItem = document.querySelector('.list-container').children[list.index + 1];
+            let filter = list.list;
+            Hide(taskForm);
+            Show(taskButton);
+            ToggleActive(listItem, filter);
+            FilterTasks(filter);
+            Show(taskSection);
+            return;
+        }
+        //TO-DO:
         //Display the new list
-        //Or display the list you just added a task to
+        if (referrer === listSection) {
+            return;
+        }
     }
 
     //Expands / collapses the list section

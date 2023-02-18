@@ -47,21 +47,21 @@ function Due() {
 function UrgentPriority() {
     const priority = document.createElement("option");
     priority.textContent = "Urgent";
-    priority.value = "high";
+    priority.value = "2";
     return priority;
 }
 
 function LowPriority() {
     const priority = document.createElement("option");
     priority.textContent = "Low";
-    priority.value = "low";
+    priority.value = "0";
     return priority;
 }
 
 function DefaultPriority() {
     const priority = document.createElement("option");
     priority.textContent = "Default";
-    priority.value = "medium";
+    priority.value = "1";
     priority.selected = true;
     return priority;
 }

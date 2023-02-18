@@ -131,12 +131,14 @@ button.add-new {
     background-color: rgba(0,0,0,0.15);
 }
 
-button.confirm {
-    background-color: var(--priority-default);
+button.add-task.confirm,
+button.add-list.confirm {
+    background-color: var(--priority-low);
 }
 
-button.cancel {
-    background-color: var(--priority-urgent);
+button.add-task.cancel,
+button.add-list.cancel {
+    background-color: var(--priority-high);
 }
 
 button.expand {
@@ -200,6 +202,7 @@ button.expand {
     font-size: 0.8rem;
     font-weight: 400;
     border: none;
+    gap: 0.5rem;
     border-radius: 2rem;
     background-color: rgba(0,0,0,0.15);
 }
@@ -217,7 +220,7 @@ button.expand {
 }
 
 .list-section form input:invalid {
-    border: 2px solid var(--priority-urgent);
+    border: 2px solid var(--priority-high);
 }
 
 .list-section form button {
@@ -228,6 +231,7 @@ button.expand {
     border: none;
     outline: none;
     color: var(--palette-light);
+    border-radius: 3rem;
 }
 
 .list-section .list-item {
@@ -331,6 +335,7 @@ form input[type='date'] {
     padding: 0.5rem;
     border-radius: 3rem;
     border: none;
+    color: var(--palette-light);
 }
 
 .task-section .task-item {

@@ -1,6 +1,8 @@
 import ManageElementVisibility from "./ManageElementVisibility";
 import EmptyContainer from "./EmptyContainer";
 import { TestForMultipleValidInputs } from './FormValidation';
+import { GetListFromLocalStorage, SaveLocalStorage } from "./LocalStorageHelpers";
+import format from "date-fns/format";
 
 //Updates the select element with options for each list name
 function UpdateOptionsList(select) {
@@ -25,18 +27,18 @@ function HandleSubmit(container, form, inputs, e) {
     e.stopImmediatePropagation();
 
     if (!TestForMultipleValidInputs(inputs)) {
-        console.log("failed");
         return;
     }
 
     //Empty the list in preparation of displaying the updated list
     EmptyContainer(container);
     
-    //Add the new list to localStorage and the display
-    //Add(input.value);
-    
+    //Add the new task to localStorage and the display
+    let index = form.querySelector('select.add-task.list').selectedIndex;
+    let activeList = Add(inputs, index);
     //Toggle the form and button back to the original state
-    ManageElementVisibility(container, 'reset');
+    //Display the list that a task was just added to
+    ManageElementVisibility(container, 'submit', activeList);
 }
 
 function HandleCancel(container, e) {
@@ -79,45 +81,61 @@ function AddNewTaskForm() {
     
 }
 
-//Adds the new list to local storage and updates the display
-function Add(value) {
+function ReturnLists(filter, index) {
     let storedList = GetListFromLocalStorage();
-    let newList = new List(value);
-    storedList.push(newList);
-    SaveLocalStorage(storedList);
-    DisplayLists(storedList);
+    let active = undefined;
+
+    //Remove the list from the array if it matches the index
+    storedList.forEach(list => {
+        if (list.title === filter && storedList.indexOf(list) === index) {
+            active = list;
+        }
+    })
+    return {active, storedList, index};
+}
+
+//Adds the new list to local storage and updates the display
+function Add(inputs, index) {
+
+    let list;
+    let title;
+    let due;
+    let priority = Number;
+
+    inputs.forEach(input => {
+        if (input.name === 'task-list') {
+            list = input.value;
+        }
+        if (input.name === 'task-title') {
+            title = input.value;
+        }
+        if (input.name === 'task-due') {
+            due = format(new Date(input.value), 'yyyy-MM-dd').split("-");
+        }
+        if (input.name === 'task-priority') {
+            priority = input.value;
+        }
+    });
+
+    let lists = ReturnLists(list, index);
+    lists.active.create({
+        title,
+        dueDate: {
+            year: due[0],
+            month: due[1],
+            day: due[2],
+        },
+        priority,        
+    });
+
+    lists.storedList.forEach(list => {
+        if (list.id === lists.active.id) {
+            list = lists.active;
+        }
+    });
+
+    SaveLocalStorage(lists.storedList);
+    return { list: lists.active, index: lists.index };
 }
 
 export default AddNewTaskForm;
-
-/*
-    form.addEventListener("submit", (e) => {
-        e.stopImmediatePropagation();
-        e.preventDefault();
-
-        const formData = new FormData(form);
-        const data = [...formData.entries()];
-
-        Add(data);
-        //UpdateDefault(lists);
-
-        Hide(form);
-        Show(button);
-        SetHeight(taskContainer, height);
-    })
-
-    form.addEventListener("submit", (e) => {
-        e.stopImmediatePropagation();
-        e.preventDefault();
-
-        const formData = new FormData(form);
-        const data = [...formData.entries()];
-
-        Add(data);
-        //UpdateDefault(lists);
-
-        Hide(form);
-        Show(button);
-        SetHeight(taskContainer, height);
-    })
-*/

@@ -33,7 +33,6 @@ function ToggleActive(item, list) {
 
         //Remove the active class and delete button for items which weren't clicked on 
         } else {
-
             listItem.classList.remove('active');
             if (listItem.querySelector('button')) {
                 let button = listItem.querySelector('button');
