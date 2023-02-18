@@ -4,7 +4,7 @@ import {v4 as uuidv4} from 'uuid';
 class Task {
     constructor(task) {
         this.title = task.title;
-        this.dueDate = format(new Date(`${task.dueDate.year}, ${task.dueDate.month}, ${task.dueDate.day}`), 'yyyy-MM-dd');
+        this.dueDate = task.dueDate;
         this.priority = task.priority;
         this.complete = task.complete || false;
         this.index = null;

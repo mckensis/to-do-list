@@ -15,11 +15,11 @@ function buildMainPage() {
     localStorage.clear();
     //Get the tasks from local storage
     let list = GetListFromLocalStorage();
-
+    
     //If they don't exist, then create the default lists & tasks
     if (!list) {
-        list = CreateDefaultList();
         //Save the list that was just created 
+        list = CreateDefaultList();
         SaveLocalStorage(list);
     }
 

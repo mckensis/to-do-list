@@ -153,12 +153,12 @@ function CreateDefaultShoppingList() {
 }
 
 function CreateDefaultList() {
-    const list = [];
+    let list = [];
 
     const work = CreateDefaultWorkList();
     const personal = CreateDefaultPersonalList();
     const shopping = CreateDefaultShoppingList();
-
+    
     list.push(work);
     list.push(personal);
     list.push(shopping);

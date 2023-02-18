@@ -98,6 +98,7 @@ function CreateTask(task, tasks) {
 
     const priorities = ['low', 'default', 'urgent'];
     const today = format(new Date(), 'yyyy-MM-dd');
+    
     let datefnsDate = formatDistance
         (parseISO(task.dueDate), parseISO(today), {addSuffix: true});
     
@@ -141,10 +142,10 @@ function CreateTask(task, tasks) {
         ToggleTaskCompletion.bind(completed, tasks, task, item, priority));
     
     item.addEventListener('click',
-        ChangeDueDateFormat.bind(item, due, datefnsDate, task));
-
-    //item.addEventListener('mouseover',
-    //ChangeDueDateFormat.bind(item, due, datefnsDate, task));
+        ChangeDueDateFormat.bind(item, due, datefnsDate, task))
+    
+        item.addEventListener('mouseover',
+    ChangeDueDateFormat.bind(item, due, datefnsDate, task));
     
     item.addEventListener('mouseleave', () => {
         due.textContent = `Due ${datefnsDate}`;
