@@ -441,6 +441,53 @@ button.task-priority.p2 {
     background-color: var(--priority-high);
 }
 
+/* Checkbox style */
+input[type=checkbox] {
+    -webkit-appearance: none;
+    -webkit-position: relative;
+    -webkit-width: 1rem;
+    -webkit-height: 1rem;
+    -webkit-outline: 1px solid black;
+    
+    appearance: none;
+    position: relative;
+    width: 1rem;
+    height: 1rem;
+    outline: 1px solid black;
+}
+
+input[type=checkbox]:checked {
+    -webkit-appearance: none;
+    -webkit-width: 1rem;
+    -webkit-height: 1rem;
+
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Checkbox checkmark */
+input[type=checkbox]:checked:after {
+    -webkit-appearance: none;
+    -webkit-content: '\10102';
+    -webkit-position: absolute;
+    -webkit-top: 0;
+    -webkit-left: 0;
+    -webkit-font-size: 2rem;
+    -webkit-color: var(--priority-high);
+    
+    appearance: none;
+    content: '\10102';
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-40%);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--priority-high);
+}
+
+/* Hover states */
 @media (hover) {
     button:hover,
     input:hover,
@@ -448,23 +495,26 @@ button.task-priority.p2 {
         cursor: pointer;
     }
 
-    .list-item > button:hover {
-        font-weight: 600;
+    .list-item {  
+        background: linear-gradient(to right, var(--palette-color-secondary-hover) 50%, white 50%);
+        background-size: 200% 100%;
+        background-position: top right;
+        transition: background 0.1s linear, color 0.25s ease;
     }
 
-    .list-item:not(.list-item.active) {
-        transition: background-color 0.5s ease;
+    .list-item:hover {
+        transition: background 0.25s linear;
+        background-position: top left;
     }
 
-    .list-item:hover:not(.list-item.active) {
-        cursor: pointer;
-        transition: background-color 0.5s ease;
-        background-color: var(--palette-color-secondary-hover);
+    .list-item.active {
+        transition: color 0.5s ease, background-color 0.1s linear;
+        background: none;
     }
 
     .task-item:hover:not(.task-item.completed) {
         background-color: var(--palette-color-primary-hover);
-    }    
+    }
 
     button.add-new {
         transition: background-color 0.5s ease, color 0.5s ease;
@@ -489,38 +539,39 @@ button.task-priority.p2 {
         transition: letter-spacing 0.5s ease, font-weight 0.2s ease;
     }
 
+    .list-item button.list-delete {
+        transition: transform 0.5s ease;
+    }
+
     .list-item button.list-delete:hover {
+        transition: transform 0.5s ease;
         transform: translateY(-50%) scale(1.2);
     }
 
+    .task-item button.task-delete {
+        transition: transform 0.5s ease;
+    }
+
     .task-item button.task-delete:hover {
+        transition: transform 0.5s ease;
         transform: scale(1.2);
     }
 
     .task-item button.task-priority:hover {
-        outline: 2px solid black;
+        transition: transform 0.5s ease;
     }
 
-    /* Change checked style ?*/
-    input[type=checkbox] {
-        -webkit-appearance: none;
-        -webkit-position: relative;
-        -webkit-width: 1rem;
-        -webkit-height: 1rem;
-        -webkit-outline: 1px solid black;
-        
-        appearance: none;
-        position: relative;
-        width: 1rem;
-        height: 1rem;
-        outline: 1px solid black;
+    .task-item button.task-priority:hover {
+        transform: scale(1.05);
+        transition: transform 0.1s ease;
     }
 
+    /* Checkbox */
     input[type=checkbox]:hover {
         -webkit-outline: 2px solid black;
         outline: 2px solid black;
     }
-
+    
     input[type=checkbox]:hover:after {
         -webkit-appearance: none;
         -webkit-content: '\10102';
@@ -531,7 +582,7 @@ button.task-priority.p2 {
         -webkit-color: var(--priority-high);
         -webkit-font-weight: 200;
         -webkit-opacity: 0.9;
-
+    
         appearance: none;
         content: '\10102';
         position: absolute;
@@ -544,40 +595,8 @@ button.task-priority.p2 {
         opacity: 0.9;
     }
 
-    input[type=checkbox]:checked {
-        -webkit-appearance: none;
-        -webkit-width: 1rem;
-        -webkit-height: 1rem;
-
-        appearance: none;
-        width: 1rem;
-        height: 1rem;
-    }
-
-    /* Checkbox checkmark */
-    input[type=checkbox]:checked:after {
-        -webkit-appearance: none;
-        -webkit-content: '\10102';
-        -webkit-position: absolute;
-        -webkit-top: 0;
-        -webkit-left: 0;
-        -webkit-font-size: 2rem;
-        -webkit-color: var(--priority-high);
-        
-        appearance: none;
-        content: '\10102';
-        position: absolute;
-        top: 0;
-        left: 0;
-        transform: translateY(-40%);
-        font-size: 2rem;
-        font-weight: 800;
-        color: var(--priority-high);
-    }
-
-    /* Scrollbar custom styles */
+    /* Scrollbar */
     ::-webkit-scrollbar {
-        cursor: pointer;
         width: 1rem;
     }
 
@@ -589,21 +608,18 @@ button.task-priority.p2 {
     }
 
     ::-webkit-scrollbar-thumb {
-        cursor: pointer;
         background-color: var(--palette-color-secondary);
-        border-bottom: 0.5rem solid transparent;
+        border-bottom: 0 solid transparent;
         border-left: 0 solid transparent;
         background-clip: padding-box;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        cursor: pointer;
         background-color: var(--palette-color-secondary-hover-dark);
     }
 
     ::-webkit-scrollbar-thumb:active {
-        cursor: pointer;
-        background-color: var(--palette-color-secondary-hover-medium);
+        background-color: var(--palette-color-secondary);
     }
 }
 
@@ -611,9 +627,7 @@ button.task-priority.p2 {
     body {
         place-content: center;
         grid-template-rows: max-content max-content;
-        grid-template-columns: 400px minmax(
-            max-content, 800px
-        );
+        grid-template-columns: 400px minmax(max-content, 800px);
     }
 
     header {
@@ -648,10 +662,9 @@ button.task-priority.p2 {
         display: none;
     }
 
-    /* Scrollbar custom styles */
+    /* Scrollbar */
     ::-webkit-scrollbar {
         width: 1.5rem;
-        background-color: transparent;
     }
 
     ::-webkit-scrollbar-track-piece {
@@ -662,17 +675,7 @@ button.task-priority.p2 {
     }
 
     ::-webkit-scrollbar-thumb {
-        background-color: var(--palette-color-secondary);
         border-bottom: 0.5rem solid transparent;
         border-left: 0.75rem solid transparent;
-        background-clip: padding-box;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background-color: var(--palette-color-secondary-hover-dark);
-    }
-
-    ::-webkit-scrollbar-thumb:active {
-        background-color: var(--palette-color-secondary-hover);
     }
 }

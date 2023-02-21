@@ -56,6 +56,7 @@ function ListSection() {
     return aside;
 }
 
+//Not currently enabled
 //Task sorting dropdown menu
 function TaskSort() {
     const label = document.createElement('label');
@@ -88,7 +89,7 @@ function TaskSection() {
     const list = document.createElement('ul');
     const message = document.createElement('p');
     const form = TaskForm();
-    const sort = TaskSort();
+    //const sort = TaskSort();
 
     section.classList.add("task-section");
     button.classList.add("add-new","task");
@@ -100,7 +101,7 @@ function TaskSection() {
     button.type = 'button';
     message.textContent = 'No Tasks Found!';
 
-    section.append(header, button, form, sort, list, message);
+    section.append(header, button, form, list, message);
 
     button.addEventListener('click', AddNewTaskForm);
 
