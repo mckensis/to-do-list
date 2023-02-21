@@ -4,7 +4,7 @@ import { CreateTask } from "../components/CreateTask";
 import { ToggleActive } from "./ListFunctions";
 import { parseISO } from "date-fns";
 
-//New function for displaying 'All Tasks'
+//Displaying 'All Tasks' on the DOM
 function DisplayAllTasks() {
     const container = document.querySelector('.task-container');
     const tasks = LoadLocalStorage();    
@@ -35,6 +35,7 @@ function FilterTasks(filter) {
             const sortedTasks = SortTasks(subList.tasks);
             //Filter the tasks to the selected list
             PopulateTasks(sortedTasks);
+            CheckForEmptyTaskList(container);
             return;
         }
     })

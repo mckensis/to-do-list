@@ -70,6 +70,7 @@ function CreateListItem(list) {
     const listItem = document.createElement("li");
     listItem.classList.add("list-item");
     listItem.textContent = list.title;
+    listItem.dataset.id = list.id;
 
     listItem.addEventListener("click", (e) => {
         //If we came here from the delete button then display the default list

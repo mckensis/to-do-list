@@ -99,43 +99,33 @@ function CreateTask(task, tasks) {
     const priorities = ['low', 'default', 'urgent'];
     const today = format(new Date(), 'yyyy-MM-dd');
     
-    let datefnsDate = formatDistance
-        (parseISO(task.dueDate), parseISO(today), {addSuffix: true});
-    
-    //Find out if the task is overdue
-    //Returns 1 if today's date is after the task due date
-    let comparedDates = compareAsc(parseISO(today), parseISO(task.dueDate));
-    if (comparedDates === 1) {
-        task.overdue = true;
-    }
-    
-    if (task.overdue && !task.complete) {
-        due.classList.add('overdue');
-    }
-
     item.classList.add('task-item');
     priority.classList.add('task-priority',`p${task.priority}`);
 
-    completed.type = "checkbox";
-    completed.checked = task.isComplete();
-    title.textContent = task.title;
-    priority.textContent = priorities[task.priority];
+    //Finds out if the task is overdue and not completed to style accordingly
+    if (compareAsc(parseISO(today), parseISO(task.dueDate)) === 1 && !task.complete) {
+        due.classList.add('overdue');
+    }
 
-    item.append(completed, priority, title, due, deleteBtn);
+    let datefnsDate = formatDistance
+    (parseISO(task.dueDate), parseISO(today), {addSuffix: true});
 
     if (datefnsDate === 'less than a minute ago') {
         datefnsDate = 'today';
     }
 
+    completed.type = "checkbox";
+    completed.checked = task.isComplete();
+    title.textContent = task.title;
+    priority.textContent = priorities[task.priority];
     due.textContent = `Due ${datefnsDate}`;
+    item.dataset.id = task.id;
 
     if (task.isComplete()) {
         item.classList.add('completed');
-    }
-
-    if (!task.isComplete()) {
+    } else {
         priority.addEventListener('click',
-        ChangePriority.bind(priority, priorities, task));
+            ChangePriority.bind(priority, priorities, task));
     }
     
     completed.addEventListener("change",
@@ -144,14 +134,16 @@ function CreateTask(task, tasks) {
     item.addEventListener('click',
         ChangeDueDateFormat.bind(item, due, datefnsDate, task))
     
-        item.addEventListener('mouseover',
-    ChangeDueDateFormat.bind(item, due, datefnsDate, task));
-    
+//        item.addEventListener('mouseover',
+//    ChangeDueDateFormat.bind(item, due, datefnsDate, task));
+
     item.addEventListener('mouseleave', () => {
         due.textContent = `Due ${datefnsDate}`;
     });
 
     deleteBtn.addEventListener('click', DeleteTask.bind(deleteBtn, task));
+
+    item.append(completed, priority, title, due, deleteBtn);
 
     return item;
 }

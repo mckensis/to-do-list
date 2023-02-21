@@ -17,10 +17,10 @@ function HandleSubmit(container, input, e) {
         EmptyContainer(container);
         
         //Add the new list to localStorage and the display
-        Add(input.value);
+        let list = Add(input.value);
         
         //Toggle the form and button back to the original state
-        ManageElementVisibility(container, 'reset');
+        ManageElementVisibility(container, 'submit', list);
 }
 
 function HandleCancel(container, e) {
@@ -54,6 +54,7 @@ function Add(value) {
     storedList.push(newList);
     SaveLocalStorage(storedList);
     DisplayLists(storedList);
+    return newList;
 }
 
 export default AddNewListForm;

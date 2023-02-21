@@ -1,10 +1,12 @@
 import { ToggleActive } from "./ListFunctions";
 import { DisplayAllTasks, FilterTasks } from "./TaskFunctions";
 
-//Toggling an element between hidden and shown
+//Hide the element
 function Hide(element) {
     element.style.display = 'none';
 }
+
+//Show the element
 function Show(element) {
     element.style.display = 'grid';
 }
@@ -52,9 +54,19 @@ function ManageElementVisibility(referrer, type, list) {
             Show(taskSection);
             return;
         }
-        //TO-DO:
         //Display the new list
         if (referrer === listSection) {
+            let children = document.querySelector('.list-container').children;
+            let listItem = children[children.length -1];
+            let filter = list;
+            Hide(listForm);
+            Show(listButton);
+            ToggleActive(listItem, filter);
+            FilterTasks(filter);
+            let button = document.querySelector('button.expand');
+            if (button.textContent === 'Expand' && button.style.display !== 'none') {
+                button.click();
+            }
             return;
         }
     }
