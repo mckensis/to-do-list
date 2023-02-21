@@ -23,7 +23,7 @@ function ToggleActive(item, list) {
 
         //For the list item which was clicked on
         if (listItem === item) {
-            ManageElementVisibility('list item');
+            ManageElementVisibility(container.parentElement, 'toggle');
             item.classList.add('active');
 
             //Create a delete button if it's not the 'All Tasks' list

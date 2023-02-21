@@ -24,8 +24,7 @@ function ManageElementVisibility(referrer, type, list) {
     const taskButton = document.querySelector('button.add-new.task');
     const taskForm = document.querySelector('.add-task.form');
 
-    //Reset the view back to default
-    //If the form is submitted or cancelled successfully
+    //When the new task or list form is cancelled
     if (type === 'reset') {
         if (referrer === listSection) {
             Hide(listForm);
@@ -41,7 +40,7 @@ function ManageElementVisibility(referrer, type, list) {
         }
     }
 
-    
+    //When the new task or list form is submitted 
     if (type === 'submit') {
         //Display the new task within it's parent list
         if (referrer === taskSection) {
@@ -71,7 +70,16 @@ function ManageElementVisibility(referrer, type, list) {
         }
     }
 
-    //Expands / collapses the list section
+    if (type === 'toggle') {
+        Hide(taskForm);
+        Show(taskButton);
+        Show(taskSection);
+        Hide(listForm);
+        Show(listButton);
+        Show(listSection);
+    }
+
+    //When the expand / hide button on the list section is clicked
     if (type === 'expand / hide') {
         let button = this;
         if (referrer.style.display !== 'none') {

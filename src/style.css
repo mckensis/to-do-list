@@ -45,15 +45,13 @@
     
     --palette-color-primary: #8783D1;
     --palette-color-primary-hover: rgb(135, 131, 209, 0.3);
+    --palette-color-primary-hover-medium: rgb(135, 131, 209, 0.5);
+    --palette-color-primary-hover-dark: rgb(135, 131, 209, 0.8);
 
     --palette-color-secondary: #048A81;
     --palette-color-secondary-hover: rgb(4, 138, 129, 0.3);
+    --palette-color-secondary-hover-medium: rgb(4, 138, 129, 0.5);
     --palette-color-secondary-hover-dark: rgb(4, 138, 129, 0.8);
-
-    /* Celadon green */
-    --green-color-extra-light: rgb(4, 138, 129, 0.1);
-    --green-color-light: rgb(4, 138, 129, 0.3);
-    --green-color-active: rgb(4, 138, 129, 0.6);
 
     --priority-low: #238823;
     --priority-default: #FFBF00;
@@ -131,6 +129,10 @@ button.add-new {
     background-color: rgba(0,0,0,0.15);
 }
 
+button.add-new.task {
+    color: var(--palette-color-primary);
+}
+
 button.add-task.confirm,
 button.add-list.confirm {
     background-color: var(--priority-low);
@@ -158,6 +160,7 @@ button.expand {
     font-size: 1.1rem;
     letter-spacing: 1rem;
     padding-top: 0.5rem;
+    padding-left: 1rem;
     text-transform: uppercase;
     transition: letter-spacing 0.5s ease, font-weight 0.5s ease;
     font-weight: 400;
@@ -204,7 +207,7 @@ button.expand {
     border: none;
     gap: 0.5rem;
     border-radius: 2rem;
-    background-color: rgba(0,0,0,0.15);
+    background-color: var(--palette-color-secondary-hover);
 }
 
 .list-section form input {
@@ -216,11 +219,19 @@ button.expand {
 }
 
 .list-section form input:valid {
-    border: 2px solid var(--priority-default);
+    outline: 2px solid var(--priority-low);
 }
 
 .list-section form input:invalid {
-    border: 2px solid var(--priority-high);
+    outline: 2px solid var(--priority-high);
+}
+
+.acceptable {
+    outline: 3px solid var(--priority-low);
+}
+
+.unacceptable {
+    outline: 3px solid var(--priority-high);
 }
 
 .list-section form button {
@@ -299,7 +310,7 @@ button.expand {
     font-size: 1.1rem;
     font-weight: 400;
     border-radius: 2rem;
-    background-color: rgba(0,0,0,0.15);
+    background-color: var(--palette-color-primary-hover-dark);
     grid-auto-rows: max-content;
     column-gap: 0.5rem;
     row-gap: 1rem;
@@ -350,13 +361,12 @@ form input[type='date'] {
     list-style: none;
     margin-bottom: 0.5rem;
     padding: 1rem;
-    background-color: var(--purple-color);
     border: 1px solid var(--palette-color-primary);
     border-radius: 1rem;
 }
 
 .task-section .task-item.completed {
-    opacity: 0.5;
+    opacity: 0.7;
 }
 
 .task-section .task-item .overdue  {
@@ -390,7 +400,8 @@ form input[type='date'] {
 
 /* Due date */
 .task-item :nth-child(4) {
-    grid-column: 1 / -1;
+    grid-column: 3;
+    grid-row: 1;
     text-align: right;
     font-size: 0.9rem;
 }
@@ -398,7 +409,6 @@ form input[type='date'] {
 /* Delete button */
 .task-item :nth-child(5) {
     grid-column: 3;
-    grid-row: 1;
     justify-self: end;
 }
  
@@ -431,32 +441,24 @@ button.task-priority.p2 {
     background-color: var(--priority-high);
 }
 
-/* Scrollbar custom styles */
-::-webkit-scrollbar {
-    background: transparent;
-    width: 1.25rem;
-}
-::-webkit-scrollbar-thumb {
-    border-bottom: 2rem solid transparent;
-    border-left: 0.5rem solid transparent;
-    background-color: var(--green-color);
-    background-clip: padding-box;
-}
-::-webkit-scrollbar-thumb:hover {
-    background-color: var(--green-color-hover);
-}
-::-webkit-scrollbar-thumb:active {
-    background-color: var(--green-color-active);
-}
-
 @media (hover) {
-    .list-item > button:hover {
+    button:hover,
+    input:hover,
+    select:hover {
         cursor: pointer;
+    }
+
+    .list-item > button:hover {
         font-weight: 600;
+    }
+
+    .list-item:not(.list-item.active) {
+        transition: background-color 0.5s ease;
     }
 
     .list-item:hover:not(.list-item.active) {
         cursor: pointer;
+        transition: background-color 0.5s ease;
         background-color: var(--palette-color-secondary-hover);
     }
 
@@ -464,23 +466,39 @@ button.task-priority.p2 {
         background-color: var(--palette-color-primary-hover);
     }    
 
-    button.add-new:hover {
-        cursor: pointer;
-        background-color: rgba(0,0,0,0.25);
+    button.add-new {
+        transition: background-color 0.5s ease, color 0.5s ease;
+    }
+    
+    button.add-new.list:hover {
+        transition: background-color 0.5s ease, color 0.5s ease;
+        background-color: var(--palette-color-secondary-hover-dark);
+        color: var(--palette-light);
+    }
+
+    button.add-new.task:hover {
+        transition: background-color 0.5s ease, color 0.5s ease;
+        background-color: var(--palette-color-primary-hover-dark);
+        color: var(--palette-light);
     }
 
     button.expand:hover {
-        cursor: pointer;
         background-color: var(--palette-color-secondary-hover-dark);
         letter-spacing: 1.3rem;
         font-weight: 600;
         transition: letter-spacing 0.5s ease, font-weight 0.2s ease;
     }
 
-    .task-item button:hover,
-    input:hover,
-    select:hover {
-        cursor: pointer;
+    .list-item button.list-delete:hover {
+        transform: translateY(-50%) scale(1.2);
+    }
+
+    .task-item button.task-delete:hover {
+        transform: scale(1.2);
+    }
+
+    .task-item button.task-priority:hover {
+        outline: 2px solid black;
     }
 
     /* Change checked style ?*/
@@ -493,43 +511,168 @@ button.task-priority.p2 {
         
         appearance: none;
         position: relative;
-        width: 1.25rem;
-        height: 1.25rem;
-        outline: 1px solid black;
-    }
-    input[type=checkbox]:checked {
-        -webkit-appearance: none;
-        -webkit-content: 'u';
-        -webkit-width: 1rem;
-        -webkit-height: 1rem;
-
-        appearance: none;
-        content: 'u';
         width: 1rem;
         height: 1rem;
+        outline: 1px solid black;
     }
-    input[type=checkbox]:checked:after {
+
+    input[type=checkbox]:hover {
+        -webkit-outline: 2px solid black;
+        outline: 2px solid black;
+    }
+
+    input[type=checkbox]:hover:after {
         -webkit-appearance: none;
-        -webkit-content: '\2714';
+        -webkit-content: '\10102';
         -webkit-position: absolute;
         -webkit-top: 0;
-        -webkit-transform-origin: center;
-        -webkit-transform: translateY(-75%);
+        -webkit-left: 0;
         -webkit-font-size: 2rem;
-        -webkit-color: red;
-        -webkit-width: 1rem;
-        -webkit-height: 1rem;
+        -webkit-color: var(--priority-high);
+        -webkit-font-weight: 200;
+        -webkit-opacity: 0.9;
 
         appearance: none;
-        content: '\2714';
+        content: '\10102';
         position: absolute;
         top: 0;
         left: 0;
-        transform-origin: center;
-        transform: translateY(-75%);
+        transform: translateY(-40%);
         font-size: 2rem;
-        color: red;
+        font-weight: 200;
+        color: var(--priority-high);
+        opacity: 0.9;
+    }
+
+    input[type=checkbox]:checked {
+        -webkit-appearance: none;
+        -webkit-width: 1rem;
+        -webkit-height: 1rem;
+
+        appearance: none;
         width: 1rem;
         height: 1rem;
+    }
+
+    /* Checkbox checkmark */
+    input[type=checkbox]:checked:after {
+        -webkit-appearance: none;
+        -webkit-content: '\10102';
+        -webkit-position: absolute;
+        -webkit-top: 0;
+        -webkit-left: 0;
+        -webkit-font-size: 2rem;
+        -webkit-color: var(--priority-high);
+        
+        appearance: none;
+        content: '\10102';
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateY(-40%);
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--priority-high);
+    }
+
+    /* Scrollbar custom styles */
+    ::-webkit-scrollbar {
+        cursor: pointer;
+        width: 1rem;
+    }
+
+    ::-webkit-scrollbar-track-piece {
+        -webkit-background: var(--palette-color-secondary-hover);
+        -webkit-background-color: var(--palette-color-secondary-hover);
+        background: var(--palette-color-secondary-hover);
+        background-color: var(--palette-color-secondary-hover);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        cursor: pointer;
+        background-color: var(--palette-color-secondary);
+        border-bottom: 0.5rem solid transparent;
+        border-left: 0 solid transparent;
+        background-clip: padding-box;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        cursor: pointer;
+        background-color: var(--palette-color-secondary-hover-dark);
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+        cursor: pointer;
+        background-color: var(--palette-color-secondary-hover-medium);
+    }
+}
+
+@media (min-width: 940px) {
+    body {
+        place-content: center;
+        grid-template-rows: max-content max-content;
+        grid-template-columns: 400px minmax(
+            max-content, 800px
+        );
+    }
+
+    header {
+        grid-column: 1 / -1;
+        width: 100%;
+        justify-self: center;
+    }
+
+    .list-section {
+        align-self: start;
+        position: sticky;
+        top: 1rem;
+        max-height: 80vh;
+    }
+
+    .task-section {
+        align-self: start;
+        position: sticky;
+        top: 1rem;
+        max-height: 80vh;
+    }
+
+    .list-container {
+        overflow-y: scroll;
+    }
+
+    .task-container {
+        overflow-y: scroll;
+    }
+
+    button.expand {
+        display: none;
+    }
+
+    /* Scrollbar custom styles */
+    ::-webkit-scrollbar {
+        width: 1.5rem;
+        background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-track-piece {
+        -webkit-background: none;
+        -webkit-background-color: none;
+        background: none;
+        background-color: none;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--palette-color-secondary);
+        border-bottom: 0.5rem solid transparent;
+        border-left: 0.75rem solid transparent;
+        background-clip: padding-box;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: var(--palette-color-secondary-hover-dark);
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+        background-color: var(--palette-color-secondary-hover);
     }
 }

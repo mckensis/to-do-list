@@ -18,7 +18,7 @@ function TestForValidInput(input) {
         input.setCustomValidity("Cannot be blank.");
     } else if (validityState.patternMismatch) {
         if (input.name === 'task-title') {
-            input.setCustomValidity("Can only contain letters, numbers, underscores, dashes, and spaces.");
+            input.setCustomValidity("Can only contain letters, numbers, spaces, and punctuation");
         } else {
             input.setCustomValidity("Can only contain letters, numbers, and spaces.");
         }

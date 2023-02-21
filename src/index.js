@@ -12,7 +12,7 @@ function buildMainPage() {
     // Create the DOM Layout (title, lists & tasks sections);
     CreateWebpage();
 
-    //localStorage.clear();
+    localStorage.clear();
     //Get the tasks from local storage
     let list = GetListFromLocalStorage();
     

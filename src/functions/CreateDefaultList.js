@@ -19,11 +19,11 @@ function CreateDefaultWorkList() {
             month: '02',
             year: '2023',
         },
-        complete: false,
+        complete: true,
         priority: 2,
     });
     work.create({
-        title: 'Do not allow priority change of completed tasks',
+        title: `Lock priority on completed tasks`,
         dueDate: {
             day: '17',
             month: '02',
@@ -33,7 +33,7 @@ function CreateDefaultWorkList() {
         priority: 0,
     });
     work.create({
-        title: 'Sort tasks by completion / dueDate / priority',
+        title: 'Sort tasks by completion, then due date, then priority',
         dueDate: {
             day: '15',
             month: '02',
@@ -43,9 +43,9 @@ function CreateDefaultWorkList() {
         priority: 0,
     });
     work.create({
-        title: 'Allow priority change of tasks',
+        title: 'Allow priority change of incomplete tasks',
         dueDate: {
-            day: '15',
+            day: '17',
             month: '02',
             year: '2023',
         },
@@ -55,12 +55,32 @@ function CreateDefaultWorkList() {
     work.create({
         title: 'Implement date-fns for due date',
         dueDate: {
-            day: '03',
+            day: '16',
             month: '02',
             year: '2023',
         },
         complete: true,
         priority: 0,
+    });
+    work.create({
+        title: 'Clicking task date toggles format',
+        dueDate: {
+            day: '17',
+            month: '02',
+            year: '2023',
+        },
+        complete: true,
+        priority: 0,
+    });
+    work.create({
+        title: 'Create basic lists for shopping etc',
+        dueDate: {
+            day: '25',
+            month: '02',
+            year: '2023',
+        },
+        complete: false,
+        priority: 1,
     });
 
     return work;
@@ -100,8 +120,8 @@ function CreateDefaultPersonalList() {
     personal.create({
         title: `Complete Donkey Kong Country 2 for the 1,000,000'th time`,
         dueDate: {
-            day: '16',
-            month: '02',
+            day: '31',
+            month: '03',
             year: '2023',
         },
         complete: false,
@@ -152,16 +172,23 @@ function CreateDefaultShoppingList() {
     return shopping;
 }
 
+function CreateEmptyList() {
+    const empty = new List('Empty');
+    return empty;
+}
+
 function CreateDefaultList() {
     let list = [];
 
     const work = CreateDefaultWorkList();
     const personal = CreateDefaultPersonalList();
     const shopping = CreateDefaultShoppingList();
+    const empty = CreateEmptyList();
     
     list.push(work);
     list.push(personal);
     list.push(shopping);
+    list.push(empty);
 
     return list;
 }

@@ -11,8 +11,8 @@ function Title() {
     input.required = true;
     
     input.minLength = '1';
-    input.maxLength = "15";
-    input.pattern = '^[a-zA-Z0-9-_ ]+';
+    input.maxLength = "60";
+    input.pattern = `^[a-zA-Z0-9-_'".,!?#() ]+`;
     input.required = true;
     input.autocomplete = 'off';
 
@@ -103,7 +103,7 @@ function TaskList() {
 function Submit() {
     const button = document.createElement("button");
     button.type = "submit";
-    button.textContent = "✓";
+    button.textContent = '\u2713';
     button.name = "task-submit";
     button.classList.add('add-task','confirm');
 
@@ -113,7 +113,7 @@ function Submit() {
 function Cancel() {
     const button = document.createElement("button");
     button.type = "cancel";
-    button.textContent = "❌";
+    button.textContent = '\u03A7';
     button.name = "task-cancel";
     button.classList.add('add-task','cancel');
 
