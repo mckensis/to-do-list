@@ -1,4 +1,4 @@
-import { ToggleActive } from "./ListFunctions";
+import { ToggleActiveList } from "./ListFunctions";
 import { DisplayAllTasks, FilterTasks } from "./TaskFunctions";
 
 //Hide the element
@@ -48,7 +48,7 @@ function ManageElementVisibility(referrer, type, list) {
             let filter = list.list;
             Hide(taskForm);
             Show(taskButton);
-            ToggleActive(listItem, filter);
+            ToggleActiveList(listItem, filter);
             FilterTasks(filter);
             Show(taskSection);
             return;
@@ -60,7 +60,7 @@ function ManageElementVisibility(referrer, type, list) {
             let filter = list;
             Hide(listForm);
             Show(listButton);
-            ToggleActive(listItem, filter);
+            ToggleActiveList(listItem, filter);
             FilterTasks(filter);
             let button = document.querySelector('button.expand');
             if (button.textContent === 'Expand' && button.style.display !== 'none') {

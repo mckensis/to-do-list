@@ -1,22 +1,12 @@
-import EmptyContainer from './EmptyContainer';
+import { CreateListDeleteButton, CreateListItem } from '../components/CreateListItem';
 import { GetListFromLocalStorage, SaveLocalStorage } from './LocalStorageHelpers';
 import ManageElementVisibility from './ManageElementVisibility';
-import { FilterTasks, DisplayAllTasks } from './TaskFunctions';
-
-function CreateDeleteButton(item, list) {
-    if (!item.querySelector('button')) {
-        //Create a delete button for the list
-        const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('list-delete');
-        item.append(deleteBtn);
-        deleteBtn.addEventListener('click', DeleteList.bind(item, list));
-    }
-}
+import EmptyContainer from './EmptyContainer';
 
 //Manage the active class on the list which was clicked on
 //TO DO: TIDY UP THIS FUNCTION
 //BREAK UP INTO SMALLER FUNCTIONS
-function ToggleActive(item, list) {
+function ToggleActiveList(item, list) {
     const container = Array.from(document.querySelector('.list-container').childNodes);
 
     container.forEach(listItem => {
@@ -28,7 +18,7 @@ function ToggleActive(item, list) {
 
             //Create a delete button if it's not the 'All Tasks' list
             if (item.textContent !== 'All Tasks') {
-                CreateDeleteButton(item, list);
+                CreateListDeleteButton(item, list);
             }
 
         //Remove the active class and delete button for items which weren't clicked on 
@@ -65,28 +55,6 @@ function DeleteList(list) {
     DisplayLists(storedList);
 }
 
-//Create an li on the DOM for each list name
-function CreateListItem(list) {
-    const listItem = document.createElement("li");
-    listItem.classList.add("list-item");
-    listItem.textContent = list.title;
-    listItem.dataset.id = list.id;
-
-    listItem.addEventListener("click", (e) => {
-        //If we came here from the delete button then display the default list
-        if (e.target === listItem.querySelector('button')) {
-            DisplayAllTasks();
-            return;
-        }
-        //Filter the displayed tasks
-        //Toggle the active class
-        ToggleActive(listItem, list);
-        FilterTasks(list);
-    });
-
-    return listItem;
-}
-
 //Handle populating the list container with each list name
 function DisplayLists(allLists) {
     const container = document.querySelector('.list-container');
@@ -98,4 +66,4 @@ function DisplayLists(allLists) {
     });
 }
 
-export { DisplayLists, CreateListItem, ToggleActive };
+export { DisplayLists, ToggleActiveList, DeleteList };
