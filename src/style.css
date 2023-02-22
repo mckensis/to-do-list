@@ -503,11 +503,13 @@ input[type=checkbox]:checked:after {
     }
 
     .list-item:hover {
+        cursor: pointer;
         transition: background 0.25s linear;
         background-position: top left;
     }
 
     .list-item.active {
+        cursor: default;
         transition: color 0.5s ease, background-color 0.1s linear;
         background: none;
     }
