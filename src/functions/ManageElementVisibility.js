@@ -62,9 +62,8 @@ function ManageElementVisibility(referrer, type, list) {
             ToggleActiveList(listItem, filter);
             FilterTasks(filter);
             let button = document.querySelector('button.expand');
-            if (button.textContent === 'Expand' && button.style.display !== 'none') {
-                button.click();
-            }
+            referrer.style.display = 'grid';
+            button.textContent = 'Hide';
             return;
         }
     }
@@ -81,13 +80,13 @@ function ManageElementVisibility(referrer, type, list) {
     //When the expand / hide button on the list section is clicked
     if (type === 'expand / hide') {
         let button = this;
-        if (referrer.style.display !== 'none') {
-            referrer.style.display = 'none';
-            button.textContent = 'Expand';
+        if (referrer.style.display !== 'grid') {
+            referrer.style.display = 'grid';
+            button.textContent = 'Hide';
             return;
         } else {
-            button.textContent = 'Hide';
-            referrer.style.display = 'unset';
+            button.textContent = 'Expand';
+            referrer.style.display = 'none';
             return;
         }
     }
