@@ -1,5 +1,5 @@
 import { ToggleActiveList } from "./ListFunctions";
-import { DisplayAllTasks, FilterTasks } from "./TaskFunctions";
+import { CheckForEmptyTaskList, DisplayAllTasks, FilterTasks } from "./TaskFunctions";
 
 //Hide the element
 function Hide(element) {
@@ -23,6 +23,7 @@ function ManageElementVisibility(referrer, type, list) {
     const taskSection = document.querySelector('.task-container');
     const taskButton = document.querySelector('button.add-new.task');
     const taskForm = document.querySelector('.add-task.form');
+    const emptyTaskListMessage = document.querySelector('p.empty-list');
 
     //Expand / Collapse the list section when clicked
     if (type === 'expand / hide') {
@@ -43,41 +44,45 @@ function ManageElementVisibility(referrer, type, list) {
         if (referrer === listSection) {
             Hide(listForm);
             Show(listButton);
-            return;
         }
         if (referrer === taskSection) {
             Hide(taskForm);
             Show(taskButton);
-            Show(taskSection);
-            return;
         }
+        Show(taskSection);
+        CheckForEmptyTaskList(taskSection);
+        return;
     }
 
     //When the new task or list form is submitted 
     if (type === 'submit') {
-        //Display the new task within it's parent list
-        if (referrer === taskSection) {
-            let listItem = document.querySelector('.list-container').children[list.index + 1];
-            let filter = list.list;
-            Hide(taskForm);
-            Show(taskButton);
-            ToggleActiveList(listItem, filter);
-            FilterTasks(filter);
-            Show(taskSection);
-            return;
-        }
         //Display the new list
         if (referrer === listSection) {
             let children = document.querySelector('.list-container').children;
             let listItem = children[children.length -1];
             let filter = list;
+
             Hide(listForm);
             Show(listButton);
             ToggleActiveList(listItem, filter);
             FilterTasks(filter);
+
             let button = document.querySelector('button.expand');
             referrer.classList.remove('hidden');
             button.textContent = 'Hide';
+            return;
+        }
+
+        //Display the new task within it's parent list
+        if (referrer === taskSection) {
+            let listItem = document.querySelector('.list-container').children[list.index + 1];
+            let filter = list.list;
+
+            Hide(taskForm);
+            Show(taskButton);
+            ToggleActiveList(listItem, filter);
+            FilterTasks(filter);
+            Show(taskSection);
             return;
         }
     }
@@ -101,6 +106,7 @@ function ManageElementVisibility(referrer, type, list) {
             Show(taskSection);
             Show(taskButton);
             Hide(taskForm);
+            CheckForEmptyTaskList(taskSection);
             return;
         }
         if (referrer === taskSection) {
@@ -109,6 +115,7 @@ function ManageElementVisibility(referrer, type, list) {
             Hide(taskSection);
             Hide(taskButton);
             Show(taskForm);
+            Hide(emptyTaskListMessage);
             return;
         }
     }

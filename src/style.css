@@ -160,7 +160,6 @@ button.add-list.cancel {
 .list-section {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     position: relative;
     padding-bottom: 2rem;
     border-bottom: 0.5rem solid var(--palette-color-secondary);
@@ -238,7 +237,6 @@ button.add-list.cancel {
 }
 
 .task-section .empty-list {
-    display: none;
     list-style: none;
     text-align: center;
     margin-bottom: 0.5rem;
@@ -289,7 +287,6 @@ button.add-list.cancel {
 .task-section {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     position: relative;
     max-width: 800px;
 }
@@ -649,12 +646,12 @@ button.hidden,
     }
 
     .list-section {
-        align-self: start;
         position: sticky;
         top: 1rem;
+        min-height: 80vh;
         max-height: 80vh;
     }
-
+    
     .list-section .list-container,
     .list-section .list-container.hidden {
         display: grid;
@@ -664,11 +661,11 @@ button.hidden,
     .list-section button.expand {
         display: none;
     }
-
+    
     .task-section {
-        align-self: start;
         position: sticky;
         top: 1rem;
+        min-height: 80vh;
         max-height: 80vh;
     }
 

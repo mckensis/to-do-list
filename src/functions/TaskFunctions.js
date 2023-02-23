@@ -149,9 +149,9 @@ function SortTasks(tasks) {
 //Shows the 'No Tasks' message if the list is empty
 function CheckForEmptyTaskList(container) {
     if (container.children.length === 0) {
-        document.querySelector('.empty-list').style.display = 'unset';
+        document.querySelector('.empty-list').classList.remove('hidden');
     } else {
-        document.querySelector('.empty-list').style.display = 'none';
+        document.querySelector('.empty-list').classList.add('hidden');
     }
 }
 
@@ -166,6 +166,7 @@ function PopulateTasks(tasks) {
 
 export { ChangeTaskDueDateFormat,
          ChangeTaskPriorityLevel,
+         CheckForEmptyTaskList,
          DeleteTask,
          DisplayAllTasks,
          FilterTasks,
