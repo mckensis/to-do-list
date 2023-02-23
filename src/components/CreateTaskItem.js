@@ -14,6 +14,7 @@ function CreateTaskItemDeleteButton(listItem) {
 //Create an li for each task
 function CreateTaskItem(task, tasks) {
     const item = document.createElement("li");
+    const topDiv = document.createElement('div');
     const completed = document.createElement("input");
     const title = document.createElement("p");
     const due = document.createElement("p");
@@ -72,7 +73,8 @@ function CreateTaskItem(task, tasks) {
 
     deleteBtn.addEventListener('click', DeleteTask.bind(deleteBtn, task));
 
-    item.append(completed, priority, title, due, deleteBtn);
+    topDiv.append(completed, priority, due);
+    item.append(topDiv, title, deleteBtn);
 
     return item;
 }

@@ -350,12 +350,13 @@ form input[type='date'] {
 
 .task-section .task-item {
     display: grid;
-    grid-template-columns: repeat(2, max-content) 1fr;
-    grid-template-rows: repeat(3, max-content);
+    grid-template-columns: 1fr max-content;
+    grid-template-rows: repeat(2, max-content);
+    grid-auto-flow: row;
     position: relative;
     width: 100%;
     align-items: center;
-    column-gap: 0.75rem;
+    column-gap: 1.5rem;
     row-gap: 0.75rem;
     list-style: none;
     margin-bottom: 0.5rem;
@@ -387,28 +388,30 @@ form input[type='date'] {
     right: 1rem;
 }
 
-.task-section .task-item > p {
+.task-section .task-item p {
     pointer-events: none;
 }
 
-/* Task title */
-.task-item :nth-child(3) {
+/* Top section of the task i.e. completed, priority, due */
+.task-item div {
     grid-column: 1 / -1;
-    font-size: 1rem;
+    display: grid;
+    align-items: center;
+    grid-auto-flow: column;
+    gap: 0.75rem;
+    grid-template-columns: max-content max-content 1fr;
 }
 
 /* Due date */
-.task-item :nth-child(4) {
-    grid-column: 3;
-    grid-row: 1;
+.task-item div :nth-last-child(1) {
     text-align: right;
     font-size: 0.9rem;
 }
 
-/* Delete button */
-.task-item :nth-child(5) {
-    grid-column: 3;
-    justify-self: end;
+/* Priority styling for completed task */
+.task-item.completed .task-priority {
+    background-color: var(--box-shadow-color);
+    color: var(--palette-light);
 }
  
 .task-section button.task-priority {
@@ -443,47 +446,37 @@ button.task-priority.p2 {
 /* Checkbox style */
 input[type=checkbox] {
     -webkit-appearance: none;
+    -webkit-display: grid;
     -webkit-position: relative;
+    -webkit-place-content: center;
+    -webkit-font-size: 1.75rem;
     -webkit-width: 1rem;
     -webkit-height: 1rem;
     -webkit-outline: 1px solid black;
     
     appearance: none;
+    display: grid;
     position: relative;
+    place-content: center;
+    font-size: 1.75rem;
     width: 1rem;
     height: 1rem;
     outline: 1px solid black;
-}
-
-input[type=checkbox]:checked {
-    -webkit-appearance: none;
-    -webkit-width: 1rem;
-    -webkit-height: 1rem;
-
-    appearance: none;
-    width: 1rem;
-    height: 1rem;
 }
 
 /* Checkbox checkmark */
 input[type=checkbox]:checked:after {
     -webkit-appearance: none;
     -webkit-content: '\10102';
-    -webkit-position: absolute;
-    -webkit-top: 0;
-    -webkit-left: 0;
-    -webkit-font-size: 2rem;
     -webkit-color: var(--priority-high);
+    -webkit-transform-origin: center;
+    -webkit-transform: translateY(-8%);
     
     appearance: none;
     content: '\10102';
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translateY(-40%);
-    font-size: 2rem;
-    font-weight: 800;
     color: var(--priority-high);
+    transform-origin: center;
+    transform: translateY(-8%);
 }
 
 /* Hover states */
