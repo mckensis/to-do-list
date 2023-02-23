@@ -75,6 +75,7 @@ function ManageElementVisibility(referrer, type, list) {
         Hide(listForm);
         Show(listButton);
         Show(listSection);
+        return;
     }
 
     //When the expand / hide button on the list section is clicked
