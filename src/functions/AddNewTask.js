@@ -1,6 +1,6 @@
 import ManageElementVisibility from "./ManageElementVisibility";
 import EmptyContainer from "./EmptyContainer";
-import { TestForMultipleValidInputs } from './FormValidation';
+import { TestForMultipleValidInputs, TestChangingInput } from './FormValidation';
 import { GetListFromLocalStorage, SaveLocalStorage } from "./LocalStorageHelpers";
 import format from "date-fns/format";
 
@@ -88,7 +88,9 @@ function AddNewTaskForm() {
     //Toggle the form and button when + is clicked
     ManageElementVisibility(container, 'show form');
     ResetFormInputs({ title, due, priority });
-    
+
+    title.addEventListener('input', TestChangingInput.bind(title, title));
+
     submit.addEventListener("click", HandleSubmit.bind(submit, container, form, inputs));
     cancel.addEventListener("click", HandleCancel.bind(cancel, container, inputs));
     

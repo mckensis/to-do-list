@@ -1,4 +1,4 @@
-import { TestForValidInput } from './FormValidation';
+import { TestChangingInput, TestForValidInput } from './FormValidation';
 import { DisplayLists } from './ListFunctions';
 import { GetListFromLocalStorage, SaveLocalStorage } from './LocalStorageHelpers';
 import ManageElementVisibility from './ManageElementVisibility';
@@ -45,6 +45,8 @@ function AddNewListForm() {
     input.value = '';
     input.focus();
 
+
+    input.addEventListener('input', TestChangingInput.bind(input, input));
     submit.addEventListener("click", HandleSubmit.bind(submit, container, input));
     cancel.addEventListener("click", HandleCancel.bind(cancel, container, input));
 }

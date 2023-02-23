@@ -10,6 +10,16 @@ function TestForMultipleValidInputs(inputs) {
     return true;
 }
 
+function TestChangingInput(input) {
+    input.classList.add('acceptable');
+    input.classList.remove('unacceptable');
+    
+    if (!TestForValidInput(input)) {
+        input.classList.remove('acceptable');
+        input.classList.add('unacceptable');
+    }
+}
+
 //Tests an input for validity and reports / returns the validity state
 function TestForValidInput(input) {
     const validityState = input.validity;
@@ -39,4 +49,6 @@ function TestForValidInput(input) {
     return validityState.valid;
 }
 
-export { TestForValidInput, TestForMultipleValidInputs };
+export { TestChangingInput,
+         TestForMultipleValidInputs,
+         TestForValidInput }; 

@@ -112,11 +112,23 @@ h2 {
 
 /* Default form input styling */
 form .acceptable {
-    outline: 3px solid var(--priority-low);
+    border: 3px solid var(--priority-low);
 }
 
 form .unacceptable {
-    outline: 3px solid var(--priority-high);
+    appearance: none;
+    color: var(--priority-high);
+}
+
+form input:focus,
+form select:focus {
+    appearance: none;
+    outline: none;
+    border: 2px solid black;
+}
+
+form input:valid:not(input[type=date]) {
+    border: 2px solid var(--priority-low);
 }
 
 /* Default Button styles */
@@ -144,6 +156,11 @@ button.add-new {
 /* (+) task button */ 
 button.add-new.task {
     color: var(--palette-color-primary);
+}
+
+button.add-task,
+button.add-list {
+    font-size: 1rem;
 }
 
 button.add-task.confirm,
@@ -193,14 +210,11 @@ button.add-list.cancel {
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: max-content max-content 2rem 2rem;
-    align-self: center;
     place-items: center;
     place-content: center;
-    max-width: 30rem;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    width: 100%;
     height: 3.5rem;
+    width: 100%;
+    margin-bottom: 1rem;
     font-size: 0.8rem;
     font-weight: 400;
     border: none;
@@ -210,19 +224,13 @@ button.add-list.cancel {
 }
 
 .list-section form input {
+    appearance: none;
     font-size: 1rem;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
     padding: 0.25rem;
-    width: 8rem;
-}
-
-.list-section form input:valid {
-    outline: 2px solid var(--priority-low);
-}
-
-.list-section form input:invalid {
-    outline: 2px solid var(--priority-high);
+    width: 7.5rem;
+    border: 1px solid black;
 }
 
 .list-section form button {
@@ -233,17 +241,9 @@ button.add-list.cancel {
     border: none;
     outline: none;
     color: var(--palette-light);
-    border-radius: 3rem;
+    border-radius: 50%;
 }
 
-.task-section .empty-list {
-    list-style: none;
-    text-align: center;
-    margin-bottom: 0.5rem;
-    padding: 1rem;
-    font-size: 1.2rem;
-    place-items: center;
-}
 
 /* Default list item */
 .list-section .list-item {
@@ -291,6 +291,15 @@ button.add-list.cancel {
     max-width: 800px;
 }
 
+.task-section .empty-list {
+    list-style: none;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    font-size: 1.2rem;
+    place-items: center;
+}
+
 .task-section form {
     display: grid;
     place-self: center;
@@ -331,7 +340,7 @@ form input[type='date'] {
     font-size: 1.1rem;
     min-height: 2rem;
     padding: 0.25rem;
-    border-radius: 0;
+    border: 1px solid black;
 }
 
 .task-section form button {
@@ -658,7 +667,13 @@ button.hidden,
     .list-section .list-container.hidden {
         display: grid;
         overflow-y: scroll;
-        margin-left: 1rem;
+        margin-left: 1.25rem;
+    }
+
+    .list-section form {
+        padding: 1rem;
+        width: 80%;
+        align-self: center;
     }
 
     .list-section button.expand {
@@ -679,7 +694,7 @@ button.hidden,
 
     /* Scrollbar */
     ::-webkit-scrollbar {
-        width: 1.5rem;
+        width: 1.25rem;
     }
 
     ::-webkit-scrollbar-track-piece {
@@ -691,6 +706,6 @@ button.hidden,
 
     ::-webkit-scrollbar-thumb {
         border-bottom: 0.5rem solid transparent;
-        border-left: 0.75rem solid transparent;
+        border-left: 0.5rem solid transparent;
     }
 }
