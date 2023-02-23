@@ -37,7 +37,7 @@ function AddNewListForm() {
     const button = document.querySelector('.add-new.list');
 
     //Hide and show various elements when the form is opened
-    ManageElementVisibility(container);
+    ManageElementVisibility(container, 'show form');
 
     //Clear and focus the input
     input.value = '';

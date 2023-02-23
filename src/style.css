@@ -77,7 +77,7 @@ body {
     grid-auto-rows: max-content;
     gap: 1rem;
     padding: 1rem;
-    font-family: "Sarabun";
+    font-family: 'Sarabun', sans-serif;
 }
 
 header,
@@ -92,8 +92,8 @@ section {
 
 h1 {
     margin-top: 0.5rem;
-    font-family: 'Joseph Sophia';
-    font-weight: 500;
+    font-family: 'Joseph Sophia', cursive;
+    font-weight: 200;
     letter-spacing: 0.25rem;
     text-align: center;
     font-size: 3.5rem;
@@ -102,15 +102,29 @@ h1 {
 
 h2 {
     line-height: 2rem;
-    font-family: 'Joseph Sophia';
-    font-weight: 500;
+    font-family: 'Joseph Sophia', cursive;
+    font-weight: 200;
     letter-spacing: 0.1rem;
     text-align: center;
     font-size: 3.5rem;
     margin-bottom: 1rem;
 }
 
-/* Plus (+) button styles for new list/task */
+/* Default form input styling */
+form .acceptable {
+    outline: 3px solid var(--priority-low);
+}
+
+form .unacceptable {
+    outline: 3px solid var(--priority-high);
+}
+
+/* Default Button styles */
+button {
+    font-family: 'Sarabun', sans-serif;
+}
+
+/* (+) button */
 button.add-new {
     display: grid;
     align-self: center;
@@ -121,13 +135,13 @@ button.add-new {
     border-radius: 2rem;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-    font-family: "Sarabun";
     font-size: 2.3rem;
-    font-weight: 900;
+    font-weight: bolder;
     color: var(--palette-color-secondary);
     background-color: rgba(0,0,0,0.15);
 }
 
+/* (+) task button */ 
 button.add-new.task {
     color: var(--palette-color-primary);
 }
@@ -142,7 +156,18 @@ button.add-list.cancel {
     background-color: var(--priority-high);
 }
 
-button.expand {
+/* Aside list section styles */
+.list-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding-bottom: 2rem;
+    border-bottom: 0.5rem solid var(--palette-color-secondary);
+}
+
+/* Expand / Hide button */
+.list-section button.expand {
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -165,32 +190,8 @@ button.expand {
     font-weight: 400;
 }
 
-.empty-list {
-    display: none;
-    list-style: none;
-    text-align: center;
-    margin-bottom: 0.5rem;
-    padding: 1rem;
-    place-items: center;
-}
-
-.list-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    padding-bottom: 1.75rem;
-    border-bottom: 0.5rem solid var(--palette-color-secondary);
-}
-
-.list-section li {
-    width: 100%;
-    list-style: none;
-    text-align: center;
-}
-
 .list-section form {
-    display: none;
+    display: grid;
     grid-auto-flow: column;
     grid-template-columns: max-content max-content 2rem 2rem;
     align-self: center;
@@ -225,14 +226,6 @@ button.expand {
     outline: 2px solid var(--priority-high);
 }
 
-.acceptable {
-    outline: 3px solid var(--priority-low);
-}
-
-.unacceptable {
-    outline: 3px solid var(--priority-high);
-}
-
 .list-section form button {
     -webkit-appearance: none;
     appearance: none;
@@ -244,7 +237,21 @@ button.expand {
     border-radius: 3rem;
 }
 
+.task-section .empty-list {
+    display: none;
+    list-style: none;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    font-size: 1.2rem;
+    place-items: center;
+}
+
+/* Default list item */
 .list-section .list-item {
+    width: 100%;
+    list-style: none;
+    text-align: center;
     position: relative;
     margin-bottom: 0.5rem;
     padding: 1rem;
@@ -253,8 +260,15 @@ button.expand {
     font-size: 1.2rem;
 }
 
+/* Active list item */
+.list-section .list-item.active {
+    color: var(--palette-light);
+    background-color: var(--palette-color-secondary);
+    font-weight: 700;
+}
+
 /* Delete button for list item */
-.list-item > button {
+.list-section .list-delete {
     appearance: none;
     position: absolute;
     top: 50%;
@@ -272,13 +286,6 @@ button.expand {
     background-position: center;
 }
 
-/* Styles for highlighting and selecting a to-do list from the sidebar */
-.list-section li.active {
-    color: var(--palette-light);
-    background-color: var(--palette-color-secondary);
-    font-weight: bold;
-}
-
 .task-section {
     display: flex;
     flex-direction: column;
@@ -287,18 +294,8 @@ button.expand {
     max-width: 800px;
 }
 
-.task-section .sort-tasks {
-    position: absolute;
-    top: 0.75rem;
-    place-self: end;
-    display: grid;
-    gap: 0.25rem;
-    margin-bottom: 1rem;
-    margin-right: 1rem;
-}
-
 .task-section form {
-    display: none;
+    display: grid;
     place-self: center;
     grid-auto-flow: row;
     grid-template-columns: 1fr 1fr;
@@ -351,7 +348,7 @@ form input[type='date'] {
 
 .task-section .task-item {
     display: grid;
-    grid-template-columns: minmax(300px, 100%) max-content;
+    grid-template-columns: 1fr max-content;
     grid-template-rows: repeat(2, max-content);
     grid-auto-flow: row;
     position: relative;
@@ -372,6 +369,7 @@ form input[type='date'] {
 
 .task-section .task-item .overdue  {
     color: red;
+    font-weight: 400;
 }
 
 .task-section .task-delete {
@@ -410,48 +408,49 @@ form input[type='date'] {
     font-size: 0.9rem;
 }
 
-/* Priority styling for completed task */
-.task-item.completed .task-priority {
-    background-color: var(--box-shadow-color);
-    color: var(--palette-light);
-}
- 
-.task-section button.task-priority {
+/* Default priority button */
+.task-section .task-item button.task-priority {
     appearance: none;
     width: 5.5rem;
     padding: 0.5rem 0;
     border: none;
     font-size: 0.7rem;
     border-radius: 1rem;
-    font-weight: 200;
+    font-weight: 400;
     color: var(--palette-light);
     text-transform: uppercase;
     letter-spacing: 0.1rem;
 }
 
+/* Priority button on completed task */
+.task-section .task-item.completed button.task-priority {
+    background-color: var(--box-shadow-color);
+    color: var(--palette-light);
+}
+
 /* Low priority tasks */
-button.task-priority.p0 {
+.task-section button.task-priority.p0 {
     background-color: var(--priority-low);
 }
 
 /* Default priority tasks */
-button.task-priority.p1 {
+.task-section button.task-priority.p1 {
     color: black;
     background-color: var(--priority-default);
 }
 
 /* High priority tasks */
-button.task-priority.p2 {
+.task-section button.task-priority.p2 {
     background-color: var(--priority-high);
 }
 
 /* Checkbox style */
-input[type=checkbox] {
+.task-section .task-item input[type=checkbox] {
     -webkit-appearance: none;
     -webkit-display: grid;
     -webkit-position: relative;
     -webkit-place-content: center;
-    -webkit-font-size: 1.75rem;
+    -webkit-font-size: 1.8rem;
     -webkit-width: 1rem;
     -webkit-height: 1rem;
     -webkit-outline: 1px solid black;
@@ -460,25 +459,31 @@ input[type=checkbox] {
     display: grid;
     position: relative;
     place-content: center;
-    font-size: 1.75rem;
+    font-size: 1.8rem;
     width: 1rem;
     height: 1rem;
     outline: 1px solid black;
 }
 
 /* Checkbox checkmark */
-input[type=checkbox]:checked:after {
+.task-section .task-item input[type=checkbox]:checked:after {
     -webkit-appearance: none;
     -webkit-content: '\10102';
     -webkit-color: var(--priority-high);
     -webkit-transform-origin: center;
-    -webkit-transform: translateY(-8%);
+    -webkit-transform: translateY(-7.5%);
     
     appearance: none;
     content: '\10102';
     color: var(--priority-high);
     transform-origin: center;
-    transform: translateY(-8%);
+    transform: translateY(-7.5%);
+}
+
+form.hidden,
+button.hidden,
+.hidden {
+    display: none;
 }
 
 /* Hover states */
@@ -508,7 +513,7 @@ input[type=checkbox]:checked:after {
         background: none;
     }
 
-    .task-item:hover:not(.task-item.completed) {
+    .task-section .task-item:hover:not(.task-item.completed) {
         background-color: var(--palette-color-primary-hover);
     }
 
@@ -535,59 +540,68 @@ input[type=checkbox]:checked:after {
         transition: letter-spacing 0.5s ease, font-weight 0.2s ease;
     }
 
-    .list-item button.list-delete {
+    button.list-delete {
         transition: transform 0.5s ease;
     }
 
-    .list-item button.list-delete:hover {
+    button.list-delete:hover {
         transition: transform 0.5s ease;
         transform: translateY(-50%) scale(1.2);
     }
 
-    .task-item button.task-delete {
+    button.task-delete {
         transition: transform 0.5s ease;
     }
 
-    .task-item button.task-delete:hover {
+    button.task-delete:hover {
         transition: transform 0.5s ease;
         transform: scale(1.2);
     }
 
-    .task-item button.task-priority:hover {
-        transition: transform 0.5s ease;
+    button.task-priority {
+        transition: transform 0.25s ease;
     }
 
     .task-item button.task-priority:hover {
         transform: scale(1.05);
-        transition: transform 0.1s ease;
+        transition: transform 0.5s ease;
     }
 
-    /* Checkbox */
-    input[type=checkbox]:hover {
+    /* Checkbox style */
+    .task-section .task-item input[type=checkbox]:hover {
+        -webkit-appearance: none;
+        -webkit-display: grid;
+        -webkit-position: relative;
+        -webkit-place-content: center;
+        -webkit-font-size: 1.8rem;
+        -webkit-width: 1rem;
+        -webkit-height: 1rem;
         -webkit-outline: 2px solid black;
+        
+        appearance: none;
+        display: grid;
+        position: relative;
+        place-content: center;
+        font-size: 1.8rem;
+        width: 1rem;
+        height: 1rem;
         outline: 2px solid black;
     }
-    
-    input[type=checkbox]:hover:after {
+
+    /* Checkbox checkmark */
+    .task-section .task-item input[type=checkbox]:hover:after {
         -webkit-appearance: none;
         -webkit-content: '\10102';
-        -webkit-position: absolute;
-        -webkit-top: 0;
-        -webkit-left: 0;
-        -webkit-font-size: 2rem;
         -webkit-color: var(--priority-high);
-        -webkit-font-weight: 200;
+        -webkit-transform-origin: center;
+        -webkit-transform: translateY(-7.5%);
         -webkit-opacity: 0.9;
-    
+        
         appearance: none;
         content: '\10102';
-        position: absolute;
-        top: 0;
-        left: 0;
-        transform: translateY(-40%);
-        font-size: 2rem;
-        font-weight: 200;
         color: var(--priority-high);
+        transform-origin: center;
+        transform: translateY(-7.5%);
         opacity: 0.9;
     }
 
@@ -596,6 +610,7 @@ input[type=checkbox]:checked:after {
         width: 1rem;
     }
 
+    /* Scrollbar track */
     ::-webkit-scrollbar-track-piece {
         -webkit-background: var(--palette-color-secondary-hover);
         -webkit-background-color: var(--palette-color-secondary-hover);
@@ -603,6 +618,7 @@ input[type=checkbox]:checked:after {
         background-color: var(--palette-color-secondary-hover);
     }
 
+    /* Scrollbar moving thumb */
     ::-webkit-scrollbar-thumb {
         background-color: var(--palette-color-secondary);
         border-bottom: 0 solid transparent;
@@ -639,6 +655,16 @@ input[type=checkbox]:checked:after {
         max-height: 80vh;
     }
 
+    .list-section .list-container,
+    .list-section .list-container.hidden {
+        display: grid;
+        overflow-y: scroll;
+    }
+
+    .list-section button.expand {
+        display: none;
+    }
+
     .task-section {
         align-self: start;
         position: sticky;
@@ -646,17 +672,8 @@ input[type=checkbox]:checked:after {
         max-height: 80vh;
     }
 
-    .list-container {
-        display: grid;
+    .task-section .task-container {
         overflow-y: scroll;
-    }
-
-    .task-container {
-        overflow-y: scroll;
-    }
-
-    button.expand {
-        display: none;
     }
 
     /* Scrollbar */

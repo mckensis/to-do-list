@@ -13,7 +13,7 @@ function NewListForm() {
     input.classList.add('add-list','input-field');
     submit.classList.add('add-list','confirm');
     cancel.classList.add('add-list','cancel');
-    form.classList.add('add-list','form');
+    form.classList.add('add-list','form','hidden');
     label.classList.add('add-list','label');
 
     input.name = "list-name";

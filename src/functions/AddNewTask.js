@@ -77,7 +77,7 @@ function AddNewTaskForm() {
     UpdateOptionsList(select);
     
     //Toggle the form and button when + is clicked
-    ManageElementVisibility(container);
+    ManageElementVisibility(container, 'show form');
     ResetFormInputs({ title, due, priority });
 
     submit.addEventListener("click", HandleSubmit.bind(submit, container, form, inputs));

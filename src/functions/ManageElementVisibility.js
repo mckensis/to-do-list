@@ -3,12 +3,12 @@ import { DisplayAllTasks, FilterTasks } from "./TaskFunctions";
 
 //Hide the element
 function Hide(element) {
-    element.style.display = 'none';
+    element.classList.add('hidden');
 }
 
 //Show the element
 function Show(element) {
-    element.style.display = 'grid';
+    element.classList.remove('hidden');
 }
 
 //Manages the different elements for each section when the + button is clicked
@@ -24,7 +24,21 @@ function ManageElementVisibility(referrer, type, list) {
     const taskButton = document.querySelector('button.add-new.task');
     const taskForm = document.querySelector('.add-task.form');
 
-    //When the new task or list form is cancelled
+    //Expand / Collapse the list section when clicked
+    if (type === 'expand / hide') {
+        let button = this;
+        if (!referrer.classList.contains('hidden')) {
+            referrer.classList.add('hidden');
+            button.textContent = 'Expand';
+            return;
+        } else {
+            referrer.classList.remove('hidden');
+            button.textContent = 'Hide';
+            return;
+        }
+    }
+
+    //Reset the displays when a form is cancelled
     if (type === 'reset') {
         if (referrer === listSection) {
             Hide(listForm);
@@ -62,12 +76,13 @@ function ManageElementVisibility(referrer, type, list) {
             ToggleActiveList(listItem, filter);
             FilterTasks(filter);
             let button = document.querySelector('button.expand');
-            referrer.style.display = 'grid';
+            referrer.classList.remove('hidden');
             button.textContent = 'Hide';
             return;
         }
     }
 
+    //When toggling an active list
     if (type === 'toggle') {
         Hide(taskForm);
         Show(taskButton);
@@ -78,38 +93,24 @@ function ManageElementVisibility(referrer, type, list) {
         return;
     }
 
-    //When the expand / hide button on the list section is clicked
-    if (type === 'expand / hide') {
-        let button = this;
-        if (referrer.style.display !== 'grid') {
-            referrer.style.display = 'grid';
-            button.textContent = 'Hide';
-            return;
-        } else {
-            button.textContent = 'Expand';
-            referrer.style.display = 'none';
+    //When displaying the new list or new task form
+    if (type === 'show form') {
+        if (referrer === listSection) {
+            Hide(listButton);
+            Show(listForm);
+            Show(taskSection);
+            Show(taskButton);
+            Hide(taskForm);
             return;
         }
-    }
-
-    //Reset the task section and hide some list elements
-    if (referrer === listSection) {
-        Hide(listButton);
-        Show(listForm);
-        Show(taskSection);
-        Show(taskButton);
-        Hide(taskForm);
-        return;
-    }
-    
-    //Reset the list section and hide some task elements
-    if (referrer === taskSection) {
-        Show(listButton);
-        Hide(listForm);
-        Hide(taskSection);
-        Hide(taskButton);
-        Show(taskForm);
-        return;
+        if (referrer === taskSection) {
+            Show(listButton);
+            Hide(listForm);
+            Hide(taskSection);
+            Hide(taskButton);
+            Show(taskForm);
+            return;
+        }
     }
 }
 

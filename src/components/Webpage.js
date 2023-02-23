@@ -3,7 +3,6 @@ import ListForm from './ListForm';
 import AddNewListForm from '../functions/AddNewList';
 import AddNewTaskForm from '../functions/AddNewTask';
 import ManageElementVisibility from '../functions/ManageElementVisibility';
-import { FilterTasks } from '../functions/TaskFunctions';
 import { DisplayAllTasks } from '../functions/TaskFunctions';
 
 // Creates the header section of the page
@@ -48,35 +47,15 @@ function ListSection() {
         aside.style.borderBottomColor = 'var(--palette-color-secondary)';});
     
     expand.addEventListener('click', ManageElementVisibility.bind(expand, list, 'expand / hide'));
+    
     button.addEventListener('click', AddNewListForm);
+    
     allTasks.addEventListener('click', DisplayAllTasks.bind(list, allTasks));
+    
     list.append(allTasks);
     aside.append(header, button, form, list, expand);
 
     return aside;
-}
-
-//Not currently enabled
-//Task sorting dropdown menu
-function TaskSort() {
-    const label = document.createElement('label');
-    const sort = document.createElement('select');
-    const priority = new Option('Priority', 'priority');
-    const due = new Option('Due Date', 'due');
-
-    label.textContent = 'Sort tasks by:';
-    label.classList.add('sort-tasks');
-
-    sort.append(priority, due);
-    label.append(sort);
-
-    sort.addEventListener('change', () => {
-        console.log("sort needs set up");
-        //TO-DO:
-        //SET UP SORTING OF TASKS
-    })
-    
-    return label;
 }
 
 //Creates the bottom right section of the page,
@@ -89,7 +68,6 @@ function TaskSection() {
     const list = document.createElement('ul');
     const message = document.createElement('p');
     const form = TaskForm();
-    //const sort = TaskSort();
 
     section.classList.add("task-section");
     button.classList.add("add-new","task");
