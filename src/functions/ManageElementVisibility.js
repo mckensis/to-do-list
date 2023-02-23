@@ -34,7 +34,6 @@ function ManageElementVisibility(referrer, type, list) {
         if (referrer === taskSection) {
             Hide(taskForm);
             Show(taskButton);
-            DisplayAllTasks();
             Show(taskSection);
             return;
         }
