@@ -22,11 +22,12 @@
 
 ## Screenshots
 
-![Screenshot 1](./screenshots/to-do-list-01.jpg)
-![Screenshot 2](./screenshots/to-do-list-02.jpg)
-![Screenshot 3](./screenshots/to-do-list-03.jpg)
-![Screenshot 4](./screenshots/to-do-list-04.jpg)
-![Screenshot 5](./screenshots/to-do-list-05.jpg)
+![Screenshot 1](./src/screenshots/to-do-list-01.jpg)
+![Screenshot 1](./src/screenshots/to-do-list-01.jpg)
+![Screenshot 2](./src/screenshots/to-do-list-02.jpg)
+![Screenshot 3](./src/screenshots/to-do-list-03.jpg)
+![Screenshot 4](./src/screenshots/to-do-list-04.jpg)
+![Screenshot 5](./src/screenshots/to-do-list-05.jpg)
 
 ## Future Improvements
 
