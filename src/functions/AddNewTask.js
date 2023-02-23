@@ -43,18 +43,27 @@ function HandleSubmit(container, form, inputs, e) {
     //Toggle the form and button back to the original state
     //Display the list that a task was just added to
     ManageElementVisibility(container, 'submit', activeList);
+    HandleBlur(inputs);
 }
 
-function HandleCancel(container, e) {
+//Helps hide the keyboard on mobile
+function HandleBlur(inputs) {
+    inputs.forEach(input => {
+        input.blur();
+    })
+    return;
+}
+
+function HandleCancel(container, inputs, e) {
     e.preventDefault();
     ManageElementVisibility(container, 'reset');
+    HandleBlur(inputs);
 }
 
 function ResetFormInputs(inputs) {
     inputs.title.value = '';
     inputs.due.value = inputs.due.min;
     inputs.priority.selectedIndex = 1;
-    inputs.title.focus();
 }
 
 function AddNewTaskForm() {
@@ -79,10 +88,11 @@ function AddNewTaskForm() {
     //Toggle the form and button when + is clicked
     ManageElementVisibility(container, 'show form');
     ResetFormInputs({ title, due, priority });
-
-    submit.addEventListener("click", HandleSubmit.bind(submit, container, form, inputs));
-    cancel.addEventListener("click", HandleCancel.bind(cancel, container));
     
+    submit.addEventListener("click", HandleSubmit.bind(submit, container, form, inputs));
+    cancel.addEventListener("click", HandleCancel.bind(cancel, container, inputs));
+    
+    title.focus();
 }
 
 function ReturnLists(filter, index) {

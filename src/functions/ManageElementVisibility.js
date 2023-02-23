@@ -29,11 +29,11 @@ function ManageElementVisibility(referrer, type, list) {
     if (type === 'expand / hide') {
         let button = this;
         if (!referrer.classList.contains('hidden')) {
-            referrer.classList.add('hidden');
+            Hide(referrer);
             button.textContent = 'Expand';
             return;
         } else {
-            referrer.classList.remove('hidden');
+            Show(referrer);
             button.textContent = 'Hide';
             return;
         }
@@ -66,25 +66,23 @@ function ManageElementVisibility(referrer, type, list) {
             Show(listButton);
             ToggleActiveList(listItem, filter);
             FilterTasks(filter);
-
-            let button = document.querySelector('button.expand');
-            referrer.classList.remove('hidden');
-            button.textContent = 'Hide';
-            return;
+            Show(referrer);
         }
 
         //Display the new task within it's parent list
         if (referrer === taskSection) {
             let listItem = document.querySelector('.list-container').children[list.index + 1];
             let filter = list.list;
-
             Hide(taskForm);
             Show(taskButton);
             ToggleActiveList(listItem, filter);
             FilterTasks(filter);
             Show(taskSection);
-            return;
+            Show(listSection);
         }
+        let button = document.querySelector('button.expand');
+        button.textContent = 'Hide';
+        return;
     }
 
     //When toggling an active list

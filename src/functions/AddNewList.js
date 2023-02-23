@@ -21,11 +21,13 @@ function HandleSubmit(container, input, e) {
         
         //Toggle the form and button back to the original state
         ManageElementVisibility(container, 'submit', list);
+        input.blur();
 }
 
-function HandleCancel(container, e) {
+function HandleCancel(container, input, e) {
     e.preventDefault();
     ManageElementVisibility(container, 'reset');
+    input.blur();
 }
 
 function AddNewListForm() {
@@ -44,7 +46,7 @@ function AddNewListForm() {
     input.focus();
 
     submit.addEventListener("click", HandleSubmit.bind(submit, container, input));
-    cancel.addEventListener("click", HandleCancel.bind(cancel, container));
+    cancel.addEventListener("click", HandleCancel.bind(cancel, container, input));
 }
 
 //Adds the new list to local storage and updates the display
