@@ -284,6 +284,7 @@ button.expand {
     flex-direction: column;
     justify-content: center;
     position: relative;
+    max-width: 800px;
 }
 
 .task-section .sort-tasks {
@@ -350,7 +351,7 @@ form input[type='date'] {
 
 .task-section .task-item {
     display: grid;
-    grid-template-columns: 1fr max-content;
+    grid-template-columns: minmax(300px, 100%) max-content;
     grid-template-rows: repeat(2, max-content);
     grid-auto-flow: row;
     position: relative;
@@ -379,6 +380,7 @@ form input[type='date'] {
     height: 100%;
     background-color: transparent;
     border: none;
+    align-self: end;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

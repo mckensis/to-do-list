@@ -11,6 +11,7 @@
 - Change the priority level of a task
 - View lists at the top/left (mobile/desktop)
 - View tasks at the bottom/right (mobile/desktop)
+- Uses localstorage to store user's lists and tasks between sessions
 
 ## How to Use
 
