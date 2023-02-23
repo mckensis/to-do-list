@@ -648,6 +648,8 @@ button.hidden,
     .list-section {
         position: sticky;
         top: 1rem;
+        padding-right: 0;
+        padding-left: 0rem;
         min-height: 80vh;
         max-height: 80vh;
     }
@@ -656,6 +658,7 @@ button.hidden,
     .list-section .list-container.hidden {
         display: grid;
         overflow-y: scroll;
+        margin-left: 1rem;
     }
 
     .list-section button.expand {
@@ -665,6 +668,7 @@ button.hidden,
     .task-section {
         position: sticky;
         top: 1rem;
+        padding-right: 0;
         min-height: 80vh;
         max-height: 80vh;
     }
