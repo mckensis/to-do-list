@@ -17,7 +17,11 @@ function UpdateOptionsList(select) {
         if (list.textContent === 'All Tasks') {
             return;
         }
+        //The default list will be the currently active list, if any
         const option = new Option(list.textContent, list.textContent);
+        if (list.classList.contains('active')) {
+            option.selected = true;
+        }
         select.add(option);
     });
 }
