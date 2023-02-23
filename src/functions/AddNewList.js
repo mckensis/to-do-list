@@ -45,7 +45,6 @@ function AddNewListForm() {
     input.value = '';
     input.focus();
 
-
     input.addEventListener('input', TestChangingInput.bind(input, input));
     submit.addEventListener("click", HandleSubmit.bind(submit, container, input));
     cancel.addEventListener("click", HandleCancel.bind(cancel, container, input));
