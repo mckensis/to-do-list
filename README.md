@@ -24,7 +24,6 @@
 ## Screenshots
 
 ![Screenshot 1](./src/screenshots/to-do-list-01.jpg)
-![Screenshot 1](./src/screenshots/to-do-list-01.jpg)
 ![Screenshot 2](./src/screenshots/to-do-list-02.jpg)
 ![Screenshot 3](./src/screenshots/to-do-list-03.jpg)
 ![Screenshot 4](./src/screenshots/to-do-list-04.jpg)
