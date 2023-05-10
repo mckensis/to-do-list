@@ -4,6 +4,34 @@ import { DisplayLists } from './functions/ListFunctions';
 import { DisplayAllTasks } from './functions/TaskFunctions';
 import CreateDefaultList from './functions/CreateDefaultList';
 import { GetListFromLocalStorage, SaveLocalStorage } from './functions/LocalStorageHelpers';
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  limit,
+  onSnapshot,
+  setDoc,
+  updateDoc,
+  doc,
+  serverTimestamp,
+} from 'firebase/firestore';
+import { initFirebaseAuth } from './functions/firebaseFunctions';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCXH5hvMo3mmNdxLskD6lrhiEe_JwS3mac",
+  authDomain: "to-do-list-5cce5.firebaseapp.com",
+  projectId: "to-do-list-5cce5",
+  storageBucket: "to-do-list-5cce5.appspot.com",
+  messagingSenderId: "491867481385",
+  appId: "1:491867481385:web:289498864aa4ebccf30338",
+  measurementId: "G-4F78PK05EP"
+};
 
 // import data from './data.json';
 window.addEventListener('load', setUpPage);
@@ -28,3 +56,8 @@ function setUpPage() {
     //Why is this broken on mobile?
     DisplayAllTasks();
 }
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+initFirebaseAuth();

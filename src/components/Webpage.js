@@ -4,15 +4,27 @@ import AddNewListForm from '../functions/AddNewList';
 import AddNewTaskForm from '../functions/AddNewTask';
 import ManageElementVisibility from '../functions/ManageElementVisibility';
 import { DisplayAllTasks } from '../functions/TaskFunctions';
+import { signIn, signOutUser } from '../functions/firebaseFunctions';
+import { getAuth, signOut } from 'firebase/auth';
 
 // Creates the header section of the page
 function Header() {
     const header = document.createElement('header');
     const title = document.createElement('h1');
+    const signInButton = document.createElement('button');
+    const signOutButton = document.createElement('button');
+    
+    signInButton.classList.add('sign-in');
+    signOutButton.classList.add('sign-out');
 
     title.textContent = 'Do the thing!';
+    signInButton.textContent = 'Sign In';
+    signOutButton.textContent = 'Sign Out';
 
-    header.append(title);
+    header.append(title, signInButton, signOutButton);
+
+    signInButton.addEventListener('click', () => signIn());
+    signOutButton.addEventListener('click', () => signOutUser());
 
     return header;
 }
