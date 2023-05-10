@@ -288,7 +288,6 @@ button.add-list.cancel {
     display: flex;
     flex-direction: column;
     position: relative;
-    max-width: 800px;
     padding-left: 1rem;
     padding-right: 1rem;
 }
@@ -476,16 +475,14 @@ form input[type='date'] {
 /* Checkbox checkmark */
 .task-section .task-item input[type=checkbox]:checked:after {
     -webkit-appearance: none;
-    -webkit-content: '\10102';
+    -webkit-content: '\2713';
     -webkit-color: var(--priority-high);
     -webkit-transform-origin: center;
-    -webkit-transform: translateY(-7.5%);
     
     appearance: none;
-    content: '\10102';
+    content: '\2713';
     color: var(--priority-high);
     transform-origin: center;
-    transform: translateY(-7.5%);
 }
 
 form.hidden,
@@ -576,7 +573,7 @@ button.hidden,
     }
 
     /* Checkbox style */
-    .task-section .task-item input[type=checkbox]:hover {
+    input[type=checkbox]:hover {
         -webkit-appearance: none;
         -webkit-display: grid;
         -webkit-position: relative;
@@ -597,20 +594,15 @@ button.hidden,
     }
 
     /* Checkbox checkmark */
-    .task-section .task-item input[type=checkbox]:hover:after {
+    input[type=checkbox]:not(:checked):hover:after {
         -webkit-appearance: none;
-        -webkit-content: '\10102';
-        -webkit-color: var(--priority-high);
         -webkit-transform-origin: center;
-        -webkit-transform: translateY(-7.5%);
-        -webkit-opacity: 0.9;
-        
+
         appearance: none;
-        content: '\10102';
-        color: var(--priority-high);
         transform-origin: center;
-        transform: translateY(-7.5%);
-        opacity: 0.9;
+
+        content: '\2713';
+        color: var(--priority-high);
     }
 
     /* Scrollbar */
