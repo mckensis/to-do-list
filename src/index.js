@@ -6,13 +6,12 @@ import CreateDefaultList from './functions/CreateDefaultList';
 import { GetListFromLocalStorage, SaveLocalStorage } from './functions/LocalStorageHelpers';
 
 // import data from './data.json';
-window.addEventListener('load', buildMainPage);
+window.addEventListener('load', setUpPage);
 
-function buildMainPage() {
+function setUpPage() {
     // Create the DOM Layout (title, lists & tasks sections);
     CreateWebpage();
 
-    //localStorage.clear();
     //Get the tasks from local storage
     let list = GetListFromLocalStorage();
     
