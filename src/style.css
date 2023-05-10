@@ -639,7 +639,7 @@ button.hidden,
     body {
         place-content: center;
         grid-template-rows: max-content max-content;
-        grid-template-columns: 400px minmax(max-content, 800px);
+        grid-template-columns: 375px minmax(min-content, 800px);
     }
 
     header {
