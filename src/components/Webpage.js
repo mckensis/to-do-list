@@ -7,24 +7,39 @@ import { DisplayAllTasks } from '../functions/TaskFunctions';
 import { signIn, signOutUser } from '../functions/firebaseFunctions';
 import { getAuth, signOut } from 'firebase/auth';
 
+function userSection() {
+    const section = document.createElement('div');
+    const userNameP = document.createElement('p');
+    const userNameSpan = document.createElement('span');
+    const signInButton = document.createElement('button');
+    const signOutButton = document.createElement('button');
+    const userPhoto = document.createElement('img');
+
+    section.classList.add('user-section')
+    signInButton.classList.add('user','sign-in');
+    signOutButton.classList.add('user','sign-out');
+    userNameP.classList.add('user-name');
+
+    userNameP.textContent = 'Signed in as ';
+    signInButton.textContent = 'Sign In';
+    signOutButton.textContent = 'Sign Out';
+
+    userNameP.append(userNameSpan);
+    signInButton.addEventListener('click', () => signIn());
+    signOutButton.addEventListener('click', () => signOutUser());
+
+    section.append(userPhoto, userNameP, signInButton, signOutButton);
+    return section;
+}
+
 // Creates the header section of the page
 function Header() {
     const header = document.createElement('header');
     const title = document.createElement('h1');
-    const signInButton = document.createElement('button');
-    const signOutButton = document.createElement('button');
-    
-    signInButton.classList.add('sign-in');
-    signOutButton.classList.add('sign-out');
 
     title.textContent = 'Do the thing!';
-    signInButton.textContent = 'Sign In';
-    signOutButton.textContent = 'Sign Out';
 
-    header.append(title, signInButton, signOutButton);
-
-    signInButton.addEventListener('click', () => signIn());
-    signOutButton.addEventListener('click', () => signOutUser());
+    header.append(title, userSection());
 
     return header;
 }

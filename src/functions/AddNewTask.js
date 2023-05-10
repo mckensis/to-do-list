@@ -90,7 +90,6 @@ function AddNewTaskForm() {
     ResetFormInputs({ title, due, priority });
 
     title.addEventListener('input', TestChangingInput.bind(title, title));
-
     submit.addEventListener("click", HandleSubmit.bind(submit, container, form, inputs));
     cancel.addEventListener("click", HandleCancel.bind(cancel, container, inputs));
     
@@ -113,10 +112,10 @@ function ReturnLists(filter, index) {
 //Adds the new list to local storage and updates the display
 function Add(inputs, index) {
 
-    let list;
-    let title;
-    let due;
+    let list = String;
+    let title = String;
     let priority = Number;
+    let due;
 
     inputs.forEach(input => {
         if (input.name === 'task-list') {

@@ -4,24 +4,9 @@ import { DisplayLists } from './functions/ListFunctions';
 import { DisplayAllTasks } from './functions/TaskFunctions';
 import CreateDefaultList from './functions/CreateDefaultList';
 import { GetListFromLocalStorage, SaveLocalStorage } from './functions/LocalStorageHelpers';
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  query,
-  orderBy,
-  limit,
-  onSnapshot,
-  setDoc,
-  updateDoc,
-  doc,
-  serverTimestamp,
-} from 'firebase/firestore';
-import { initFirebaseAuth } from './functions/firebaseFunctions';
+import { getUserTasksFromFirestore, initFirebaseAuth } from './functions/firebaseFunctions';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXH5hvMo3mmNdxLskD6lrhiEe_JwS3mac",
@@ -41,7 +26,8 @@ function setUpPage() {
     CreateWebpage();
 
     //Get the tasks from local storage
-    let list = GetListFromLocalStorage();
+    // let list = GetListFromLocalStorage();
+    let list = getUserTasksFromFirestore();
     
     //If they don't exist, then create the default lists & tasks
     if (!list) {
@@ -52,12 +38,10 @@ function setUpPage() {
 
     //Display lists and all tasks
     DisplayLists(list);
-
-    //Why is this broken on mobile?
     DisplayAllTasks();
-}
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-initFirebaseAuth();
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    initFirebaseAuth();
+}

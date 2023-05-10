@@ -1,4 +1,6 @@
+import { getAuth } from "firebase/auth";
 import List from "../classes/List";
+import { isUserSignedIn } from "./firebaseFunctions";
 
 //Convert localstorage JSON back into tasks and lists
 function ConvertJSONIntoObjects(json) {

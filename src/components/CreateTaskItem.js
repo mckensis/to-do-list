@@ -61,10 +61,7 @@ function CreateTaskItem(task, tasks) {
     
     //Swap between date-fns date and actual task due date
     item.addEventListener('click',
-        ChangeTaskDueDateFormat.bind(item, due, datefnsDate, task))
-  
-    //Disabled for now
-    //item.addEventListener('mouseover', ChangeTaskDueDateFormat.bind(item, due, datefnsDate, task));
+        ChangeTaskDueDateFormat.bind(item, due, datefnsDate, task));
 
     //Due date will always return to date-fns date on mouseleave
     item.addEventListener('mouseleave', () => {

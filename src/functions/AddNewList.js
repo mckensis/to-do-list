@@ -4,6 +4,7 @@ import { GetListFromLocalStorage, SaveLocalStorage } from './LocalStorageHelpers
 import ManageElementVisibility from './ManageElementVisibility';
 import EmptyContainer from './EmptyContainer';
 import List from '../classes/List';
+import { saveList } from './firebaseFunctions';
 
 function HandleSubmit(container, input, e) {
         e.preventDefault();
@@ -12,13 +13,13 @@ function HandleSubmit(container, input, e) {
         if (!TestForValidInput(input)) {
             return;
         }
-        
+
         //Empty the list in preparation of displaying the updated list
         EmptyContainer(container);
         
         //Add the new list to localStorage and the display
         let list = Add(input.value);
-        
+        saveList(list);
         //Toggle the form and button back to the original state
         ManageElementVisibility(container, 'submit', list);
         input.blur();
@@ -54,9 +55,9 @@ function AddNewListForm() {
 function Add(value) {
     let storedList = GetListFromLocalStorage();
     let newList = new List(value);
-    storedList.push(newList);
-    SaveLocalStorage(storedList);
-    DisplayLists(storedList);
+    let updatedList = [...storedList, newList];
+    SaveLocalStorage(updatedList);
+    DisplayLists(updatedList);
     return newList;
 }
 
