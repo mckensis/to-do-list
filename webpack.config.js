@@ -5,8 +5,13 @@ module.exports = {
   entry: './src/index.js',
   devtool: 'eval-source-map',
   output: {
-    filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
+    chunkFilename: '[id].[chunkhash].js'
+  },
+  devServer: {
+    static: './dist',
+    port: 9000,
   },
   module: {
     rules: [
@@ -23,5 +28,8 @@ module.exports = {
         type: 'asset/resource',
       },
     ],
+  },
+  optimization: {
+    runtimeChunk: 'single',
   },
 };
