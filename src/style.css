@@ -285,6 +285,7 @@ button.user {
     border: 1px solid var(--palette-color-secondary);
     border-radius: 3rem;
     font-size: 1.2rem;
+    user-select: none;
 }
 
 /* Active list item */

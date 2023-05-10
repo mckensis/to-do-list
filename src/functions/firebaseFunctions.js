@@ -17,6 +17,8 @@ import {
   updateDoc,
   doc,
   serverTimestamp,
+  getDoc,
+  getDocs,
 } from 'firebase/firestore';
 
 // Signs-in Friendly Chat.
@@ -24,6 +26,7 @@ export async function signIn() {
   // Sign in Firebase using popup auth and Google as the identity provider.
   let provider = new GoogleAuthProvider();
   await signInWithPopup(getAuth(), provider);
+  await saveUser();
 }
 
 export async function signOutUser() {
@@ -47,7 +50,6 @@ export function getUserName() {
 }
 
 export function getUserUid() {
-  console.log(getAuth().currentUser);
   return getAuth().currentUser.uid;
 }
 
@@ -56,20 +58,43 @@ export function isUserSignedIn() {
   return !!getAuth().currentUser;
 }
 
-export function getUserTasksFromFirestore() {
+export function getUserListsFromFirestore() {
   if (!isUserSignedIn) return;
+  const lists = query(collection(getFirestore(), 'lists'), )
+}
+
+export async function saveUser() {
+  const db = getFirestore();
+  const userRef = doc(db, 'users', getUserUid());
+  let snapshot;
+
+  try {
+    snapshot = await getDoc(userRef);
+  } catch (error) {
+    console.error("Error retrieving user from Firestore.", error);
+  }
+
+  // Check if the user already exists in the store.
+  if (snapshot.exists()) return;
+
+  try {
+    await setDoc(userRef);
+    await setDoc(userRef, collection("lists"));
+  } catch (error) {
+    console.error('Error saving user to Firestore.', error);
+  }
 }
 
 // Saves a new message to Cloud Firestore.
 export async function saveList(list) {
-  // Add a new message entry to the Firebase database.
+  const db = getFirestore();
+  const data = {
+    list_id: list.id,
+    list_name: list.title,
+  };
   try {
-    await addDoc(collection(getFirestore(), 'lists'), {
-      owner_id: getUserUid(),
-      owner_name: getUserName(),
-      list_id: list.id,
-      list_name: list.title,
-    });
+    const userCollection = await getDoc(doc(db, "users", getUserUid()));
+    console.log(userCollection);
   }
   catch(error) {
     console.error('Error writing new message to Firebase Database', error);

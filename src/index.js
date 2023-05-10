@@ -6,7 +6,7 @@ import CreateDefaultList from './functions/CreateDefaultList';
 import { GetListFromLocalStorage, SaveLocalStorage } from './functions/LocalStorageHelpers';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getUserTasksFromFirestore, initFirebaseAuth } from './functions/firebaseFunctions';
+import { getUserListsFromFirestore, initFirebaseAuth } from './functions/firebaseFunctions';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXH5hvMo3mmNdxLskD6lrhiEe_JwS3mac",
@@ -26,8 +26,8 @@ function setUpPage() {
     CreateWebpage();
 
     //Get the tasks from local storage
-    // let list = GetListFromLocalStorage();
-    let list = getUserTasksFromFirestore();
+    let list = GetListFromLocalStorage();
+    // let list = getUserListsFromFirestore();
     
     //If they don't exist, then create the default lists & tasks
     if (!list) {
