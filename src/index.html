@@ -7,6 +7,91 @@
         <title>To-Do List</title>
     </head>
     <body>
-        <script src="./bundle.js"></script>
+        <header>
+            <h1>Do the thing!</h1>
+            <div class="user-section">
+                <img src="" alt="">
+                <p class="user-name" hidden>Signed in as <span></span>
+                </p>
+                <button class="user sign-in">Sign In</button>
+                <button class="user sign-out" hidden>Sign Out</button>
+            </div>
+        </header>
+        <aside class="list-section">
+            <h2>Lists</h2>
+            <form class="add-list hidden">
+                <label for="list-name">New List:</label>
+                <input class="add-list" type="text" name="list-name" id="list_name" minlength="1" maxlength="15" pattern="^[a-zA-Z0-9 ]+" required autocomplete="off">
+                <button type="submit" name="submit" class="add-list confirm">&#10003;</button>
+                <button type="cancel" name="list-cancel" class="add-list cancel">&#935;</button>
+            </form>
+            <button class="add-new list">+</button>
+            <ul class="list-container">
+                <li class="list-item active all-tasks-list" data-id="all">All Tasks</li>
+            </ul>
+            <button class="expand">Hide</button>
+        </aside>
+        
+        <main class="task-section">
+            <h2>Tasks</h2>
+            <!-- task name pattern = `^[a-zA-Z0-9-_'".,!?#() ]+`; -->
+            <!-- //due date minimum is today and maximum is 100 years from today
+                let minimumDate = new Date().toISOString().split("T")[0];
+                let maximumDate = add(new Date(), { years: 100, }).toISOString().split('T')[0];
+                input.min = minimumDate;
+                input.max = maximumDate;
+                input.value = input.min;
+            -->
+            <form class="add-task hidden">
+                <label for="task-name">Task Name</label>
+                <input class="add-task title" type="text" id="task-name" name="task-title" id="task-name" minlength="1" maxlength="60" required autocomplete="off">
+                <label for="task-due">Due</label>
+                <input class="add-task due" name="task-due" type="date" required>
+                <label for="task-priority">Priority</label>
+                <select class="add-task priority" name="task-priority" id="task-priority" required>
+                    <option value="2">Urgent</option>
+                    <option value="1" selected>Default</option>
+                    <option value="0">Low</option>
+                </select>
+                <label for="task-list">List</label>
+                <select class="add-task list" id="task-list" name="task-list" required>
+                <!--
+                    //Get the names of the lists to create options on the form
+                    //label.append(UpdateTaskListOptions(input)); 
+                -->
+                </select>
+                <button type="submit" name="task-submit" class="add-task confirm">\u2713</button>
+                <button type="cancel" name="task-cancel" class="add-task cancel">\u03A7</button>
+            </form>
+            <button class="add-new task">+</button>
+            <ul class="task-container">
+               <li class="empty-list" hidden>No Tasks Found!</li> 
+            </ul>
+        </main>
     </body>
 </html>
+
+<!-- Old event listeners to be imported into new layout
+
+    function ListSection() {
+        const form = ListForm();
+                
+        expand.addEventListener('mouseover', () => {
+            aside.style.borderBottomColor = 'var(--palette-color-secondary-hover-dark)';});
+        
+        expand.addEventListener('mouseleave', () => {
+            aside.style.borderBottomColor = 'var(--palette-color-secondary)';});
+        
+        expand.addEventListener('click', ManageElementVisibility.bind(expand, list, 'expand / hide'));
+        
+        button.addEventListener('click', AddNewListForm);
+        
+        allTasks.addEventListener('click', DisplayAllTasks.bind(list, allTasks));
+        
+        list.append(allTasks);
+    }
+    
+    function TaskSection() {
+        button.addEventListener('click', AddNewTaskForm);
+    }
+-->

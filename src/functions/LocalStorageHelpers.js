@@ -1,30 +1,29 @@
-import { getAuth } from "firebase/auth";
 import List from "../classes/List";
-import { isUserSignedIn } from "./firebaseFunctions";
 
 //Convert localstorage JSON back into tasks and lists
 function ConvertJSONIntoObjects(json) {
     let array = [];
-
     //Create each list
     json.forEach(list => {
-        let newList = new List(list.title, list.id);
+        let newList = new List({ title: list.title, id: list.id, owner: list.owner });
         //Create each task for the lists
-        list.tasks.forEach(task => {
-            let date = task.dueDate.split('-');
-            newList.create({ 
-                title: task.title,
-                dueDate: {
-                    day: date[2],
-                    month: date[1],
-                    year: date[0],
-                },
-                complete: task.complete,
-                priority: task.priority,
-                id: task.id,
-                overdue: task.overdue,
+        if (list.tasks && list.tasks.length > 0) {
+            list.tasks.forEach(task => {
+                let date = task.dueDate.split('-');
+                newList.create({ 
+                    title: task.title,
+                    dueDate: {
+                        day: date[2],
+                        month: date[1],
+                        year: date[0],
+                    },
+                    complete: task.complete,
+                    priority: task.priority,
+                    id: task.id,
+                    overdue: task.overdue,
+                });
             });
-        });
+        }
         array.push(newList);
     });
     return array;
@@ -75,9 +74,10 @@ function GetListFromLocalStorage() {
     }
 }
 
-export { SaveLocalStorage,
-         LoadLocalStorage,
-         CheckLocalStorage,
-         GetListFromLocalStorage,
-         UpdateLocalStorage,
+export {
+    SaveLocalStorage,
+    LoadLocalStorage,
+    CheckLocalStorage,
+    GetListFromLocalStorage,
+    UpdateLocalStorage,
 };

@@ -1,12 +1,13 @@
 import Task from "./Task";
 import format from "date-fns/format";
-import {v4 as uuidv4} from 'uuid';
+import {v4 as uuid} from 'uuid';
 
 class List {
-    constructor(title, id) {
+    constructor({ title, id, owner }) {
         this.title = title;
         this.tasks = [];
-        this.id = id || uuidv4();
+        this.id = id || uuid();
+        this.owner = owner || 'Aidan';
     }
 
     _store(item) {

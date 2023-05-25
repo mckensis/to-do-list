@@ -1,7 +1,7 @@
 import List from "../classes/List";
 
 function CreateDefaultWorkList() {
-    const work = new List('Work');
+    const work = new List({ title: 'Work'});
     work.create({
         title: 'Allow completion of tasks',
         dueDate: {
@@ -87,7 +87,7 @@ function CreateDefaultWorkList() {
 }
 
 function CreateDefaultPersonalList() {
-    const personal = new List('Personal');
+    const personal = new List({ title: 'Personal' });
     personal.create({
         title: 'Move flat',
         dueDate: {
@@ -132,7 +132,7 @@ function CreateDefaultPersonalList() {
 }
 
 function CreateDefaultShoppingList() {
-    const shopping = new List ('Shopping');
+    const shopping = new List ({ title: 'Shopping'});
     shopping.create({
         title: 'Broccoli',
         dueDate: {
@@ -173,7 +173,7 @@ function CreateDefaultShoppingList() {
 }
 
 function CreateEmptyList() {
-    const empty = new List('Empty');
+    const empty = new List({ title: 'Empty' });
     return empty;
 }
 

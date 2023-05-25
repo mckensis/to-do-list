@@ -17,13 +17,13 @@ function ManageElementVisibility(referrer, type, list) {
     //List section elements
     const listSection = document.querySelector('.list-container');
     const listButton = document.querySelector('button.add-new.list');
-    const listForm = document.querySelector('.add-list.form');
+    const listForm = document.querySelector('form.add-list');
 
     //Tasks section elements
     const taskSection = document.querySelector('.task-container');
     const taskButton = document.querySelector('button.add-new.task');
-    const taskForm = document.querySelector('.add-task.form');
-    const emptyTaskListMessage = document.querySelector('p.empty-list');
+    const taskForm = document.querySelector('form.add-task');
+    const emptyTaskListMessage = document.querySelector('.empty-list');
 
     //Expand / Collapse the list section when clicked
     if (type === 'expand / hide') {
@@ -98,22 +98,23 @@ function ManageElementVisibility(referrer, type, list) {
 
     //When displaying the new list or new task form
     if (type === 'show form') {
+        console.log(referrer);
         if (referrer === listSection) {
             Hide(listButton);
             Show(listForm);
-            Show(taskSection);
-            Show(taskButton);
-            Hide(taskForm);
-            CheckForEmptyTaskList(taskSection);
+            // Show(taskSection);
+            // Show(taskButton);
+            // Hide(taskForm);
+            // CheckForEmptyTaskList(taskSection);
             return;
         }
         if (referrer === taskSection) {
-            Show(listButton);
-            Hide(listForm);
-            Hide(taskSection);
-            Hide(taskButton);
-            Show(taskForm);
-            Hide(emptyTaskListMessage);
+            // Show(listButton);
+            // Hide(listForm);
+            // Hide(taskSection);
+            // Hide(taskButton);
+            // Show(taskForm);
+            // Hide(emptyTaskListMessage);
             return;
         }
     }

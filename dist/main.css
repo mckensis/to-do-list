@@ -1,40 +1,43 @@
+/*!*****************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/style.css ***!
+  \*****************************************************************/
 @font-face {
     font-family: "Joseph Sophia";
-    src: url('./fonts/Joseph Sophia/Joseph Sophia-Regular.woff2') format("woff2"),
-    url('./fonts/Joseph Sophia/Joseph Sophia-Regular.woff') format("woff");
+    src: url(e3919a53b606ad0274af.woff2) format("woff2"),
+    url(b762f2a81183224cfbab.woff) format("woff");
 }
 @font-face {
     font-family: "Sarabun";
-    src: url('./fonts/Sarabun/Sarabun-Bold.woff2') format('woff2'),
-    url('./fonts/Sarabun/Sarabun-Bold.woff') format('woff');
+    src: url(647963557e760cc73506.woff2) format('woff2'),
+    url(8c73426e656319a08c3f.woff) format('woff');
     font-weight: 700;
     font-style: normal;
 }
 @font-face {
     font-family: "Sarabun";
-    src: url('./fonts/Sarabun/Sarabun-Regular.woff2') format('woff2'),
-    url('./fonts/Sarabun/Sarabun-Regular.woff') format('woff');
+    src: url(f67badc0785eb8b13c26.woff2) format('woff2'),
+    url(d80888a613347bf0524a.woff) format('woff');
     font-weight: 400;
     font-style: normal;
 }
 @font-face {
     font-family: "Sarabun";
-    src: url('./fonts/Sarabun/Sarabun-Italic.woff2') format('woff2'),
-    url('./fonts/Sarabun//Sarabun-Italic.woff') format('woff');
+    src: url(0589a2839c34f33cc141.woff2) format('woff2'),
+    url(dfdf33f2e4d86ae10aee.woff) format('woff');
     font-weight: 400;
     font-style: italic;
 }
 @font-face {
     font-family: "Sarabun";
-    src: url('./fonts/Sarabun/Sarabun-ExtraLight.woff2') format('woff2'),
-    url('./fonts/Sarabun/Sarabun-ExtraLight.woff') format('woff');
+    src: url(c64539e5f656ddde65e5.woff2) format('woff2'),
+    url(126198027f020bf582bf.woff) format('woff');
     font-weight: 200;
     font-style: normal;
 }
 @font-face {
     font-family: "Sarabun";
-    src: url('./fonts/Sarabun/Sarabun-Thin.woff2') format('woff2'),
-    url('./fonts/Sarabun/Sarabun-Thin.woff') format('woff');
+    src: url(09ef3977d537d9be2285.woff2) format('woff2'),
+    url(4875d5cd79f2ef0135f5.woff) format('woff');
     font-weight: 100;
     font-style: normal;
 }
@@ -69,7 +72,7 @@
 }
 
 html {
-    background: url('./images/background.jpg');
+    background: url(67b6dd194d09703e2c91.jpg);
 }
 
 body {
@@ -309,7 +312,7 @@ button.user {
     border: none;
     outline: none;
     background-color: transparent;
-    background-image: url('./images/icons/trash-light.png');
+    background-image: url(e16baba4353139cce7a4.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -411,7 +414,7 @@ form input[type='date'] {
 }
 
 .task-section .task-delete {
-    background-image: url('./images/icons/trash.png');
+    background-image: url(19e488e150ce8063126d.png);
     outline: none;
     height: 100%;
     background-color: transparent;

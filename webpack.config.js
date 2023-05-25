@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = {
@@ -11,14 +12,34 @@ module.exports = {
     chunkFilename: '[id].[chunkhash].js'
   },
   devServer: {
-    static: './dist',
-    port: 9000,
+    static: './dist', // location of static assets
+    port: 9000, //port to serve on
+    server: 'http', // http, https, etc.
+    hot: true, // hot module loading
+    open: true, // open the page in browser
+    client: {
+      overlay: true, // error overlay on webpage
+    },
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: 1000,
+    }
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'To-Do List',
+      template: 'src/index.html'
+    }),
+    new MiniCssExtractPlugin({}),
+  ],
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          MiniCssExtractPlugin.loader, // output the css file as main.css
+          'css-loader'
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -33,9 +54,4 @@ module.exports = {
   optimization: {
     runtimeChunk: 'single',
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'To-Do List',
-    })
-  ],
 };

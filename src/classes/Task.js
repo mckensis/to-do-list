@@ -3,17 +3,19 @@ import {v4 as uuidv4} from 'uuid';
 
 class Task {
     constructor(task) {
+        this.owner = task.owner || null;
         this.title = task.title;
         this.dueDate = task.dueDate;
         this.priority = task.priority;
-        this.complete = task.complete || false;
+        this.complete = task.complete;
         this.index = null;
         this.overdue = task.overdue || false;
         this.id = task.id || uuidv4();
+        this.list = task.list;
     }
 
     isComplete() {
-        return this.complete;
+        return this.complete ? true : false;
     }
 
     changePriority() {
